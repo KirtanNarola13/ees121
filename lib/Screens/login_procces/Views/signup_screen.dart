@@ -33,25 +33,6 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: h / 30,
                       ),
-                      Center(
-                        child: Stack(
-                          alignment: const Alignment(1, 1.2),
-                          children: [
-                            CircleAvatar(
-                              radius: 85,
-                              backgroundColor: Colors.grey.shade300,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.edit,
-                                color: AppColors.appColor,
-                                size: 32,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       SizedBox(
                         height: h / 30,
                       ),
@@ -203,40 +184,6 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: h / 30,
                       ),
-                      TextFormField(
-                        onSaved: (String? val) {
-                          // MarksheetData.schoolNameController.text = val!;
-                        },
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                        // controller: MarksheetData.schoolNameController,
-                        decoration: InputDecoration(
-                          labelText: 'Location',
-                          labelStyle: TextStyle(
-                            color: AppColors.appColor,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.appColor,
-                              width: 5,
-                            ),
-                          ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Icon(
-                              Icons.location_on_rounded,
-                              color: AppColors.appColor,
-                            ), // icon is 48px widget.
-                          ),
-                        ),
-                      ),
                       SizedBox(
                         height: h / 30,
                       ),
@@ -296,6 +243,109 @@ class _SignUpState extends State<SignUp> {
                         height: h / 50,
                       ),
                     ],
+                  ),
+                  Container(
+                    height: h / 4,
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(color: AppColors.appColor, width: 1),
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Sign up with',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              height: h / 15,
+                              width: w / 7,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.appColor,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: const Image(
+                                image: AssetImage(
+                                    'lib/Screens/login_procces/Assets/google-logo.png'),
+                              ),
+                            ),
+                            SizedBox(
+                              width: w / 15,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              height: h / 15,
+                              width: w / 7,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.appColor,
+                                  width: 1,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: const Image(
+                                image: AssetImage(
+                                    'lib/Screens/login_procces/Assets/apple-logo.png'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account? ',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacementNamed('login');
+                          },
+                          child: Text(
+                            'Sign in',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: AppColors.appColor,
+                              decoration: TextDecoration.underline,
+                              decorationColor: AppColors.appColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

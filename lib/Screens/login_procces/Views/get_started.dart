@@ -39,7 +39,6 @@ class _GetStartedState extends State<GetStarted> {
                       const Text(
                         'Welcome to',
                         style: TextStyle(
-                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
                         ),
@@ -62,14 +61,12 @@ class _GetStartedState extends State<GetStarted> {
                       Text(
                         'our services it to help you to',
                         style: TextStyle(
-                          color: Colors.black,
                           fontSize: 20,
                         ),
                       ),
                       Text(
                         'do your work as quick as possible',
                         style: TextStyle(
-                          color: Colors.black,
                           fontSize: 20,
                         ),
                       ),
