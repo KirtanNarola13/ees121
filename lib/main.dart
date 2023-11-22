@@ -1,3 +1,5 @@
+import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+
 import 'package:ees121/Screens/login_procces/Views/get_started.dart';
 import 'package:ees121/Screens/login_procces/Views/login_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/signup_screen.dart';
@@ -12,7 +14,8 @@ void main() {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const GetStarted(),
+        '/': (context) => const NavBar(),
+        'getStarted': (context) => const GetStarted(),
         'login': (context) => const LoginPage(),
         'signup': (context) => const SignUp(),
       },

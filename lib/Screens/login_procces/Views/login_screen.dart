@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -146,19 +147,23 @@ class _LoginPageState extends State<LoginPage> {
                       GestureDetector(
                         onTap: () {
                           if (_eesKey.currentState!.validate()) {
-                            setState(() {
-                              Navigator.pushReplacementNamed(
-                                  context, 'contact_info');
-                              LoginSinUp.email =
-                                  LoginSinUp.emailController.text;
-                              log(LoginSinUp.email);
-                              LoginSinUp.password =
-                                  LoginSinUp.passwordController.text;
-                              log(LoginSinUp.password);
+                            if (LoginSinUp.email == LoginSinUp.email &&
+                                LoginSinUp.passwordController ==
+                                    LoginSinUp.password) {
+                              setState(() {
+                                Navigator.pushReplacementNamed(
+                                    context, 'contact_info');
 
-                              LoginSinUp.emailController.clear();
-                              LoginSinUp.passwordController.clear();
-                            });
+                                LoginSinUp.emailController.clear();
+                                LoginSinUp.passwordController.clear();
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Invalid Email or Password'),
+                                ),
+                              );
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
