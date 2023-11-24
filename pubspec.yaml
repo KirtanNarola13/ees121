@@ -66,7 +66,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - lib/Screens/login_procces/Assets/
+    - lib/Screens/All_Screens/Assets/
     - lib/Screens/All_Screens/home_screen/Assets/
+    - lib/Screens/All_Screens/Assets/service_category/
+    - lib/Screens/All_Screens/Assets/services/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

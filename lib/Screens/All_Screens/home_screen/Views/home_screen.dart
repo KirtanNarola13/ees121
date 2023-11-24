@@ -1,20 +1,16 @@
 import 'package:ees121/Colors/colors.dart';
+import 'package:ees121/Screens/All_Screens/Global/global.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  var scaffoldKey = GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    var scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -77,86 +73,62 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: h / 50,
               ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: h / 8,
-                        width: w / 4,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
+              // Inside the SingleChildScrollView for 'Popular Category'
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Row(
+                  children: AllServices.allService.map((e) {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: h / 7,
+                      width: w / 4,
+                      margin: const EdgeInsets.only(right: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.appColor,
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
                         ),
                       ),
-                      Container(
-                        height: h / 8,
-                        width: w / 4,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              child: Image.asset(
+                                e['icon'], // Use the 'icon' key from the map
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
+                          Expanded(
+                            flex: 2,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "${e['service']}",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      Container(
-                        height: h / 8,
-                        width: w / 4,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 8,
-                        width: w / 4,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 8,
-                        width: w / 4,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
+
               SizedBox(
                 height: h / 20,
               ),
@@ -172,10 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Row(
-                    children: [
-                      Container(
+                    children: AllServices.allService.map((e) {
+                      return Container(
                         height: h / 4.5,
-                        width: w / 2,
+                        width: w / 1.7,
                         margin: const EdgeInsets.only(right: 15),
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -185,65 +157,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: const BorderRadius.all(
                             Radius.circular(15),
                           ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
+                          image: DecorationImage(
+                            image: AssetImage(e['thumbnail']),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
                 ),
               ),
@@ -263,62 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Row(
                     children: [
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
                       Container(
                         height: h / 4.5,
                         width: w / 2,
@@ -353,62 +217,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Row(
                     children: [
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
                       Container(
                         height: h / 4.5,
                         width: w / 2,
