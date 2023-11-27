@@ -147,12 +147,13 @@ class _LoginPageState extends State<LoginPage> {
                       GestureDetector(
                         onTap: () {
                           if (_eesKey.currentState!.validate()) {
-                            if (LoginSinUp.email == LoginSinUp.email &&
-                                LoginSinUp.passwordController ==
+                            if (LoginSinUp.emailController.text ==
+                                    LoginSinUp.email &&
+                                LoginSinUp.passwordController.text ==
                                     LoginSinUp.password) {
                               setState(() {
                                 Navigator.pushReplacementNamed(
-                                    context, 'contact_info');
+                                    context, 'navbar');
 
                                 LoginSinUp.emailController.clear();
                                 LoginSinUp.passwordController.clear();

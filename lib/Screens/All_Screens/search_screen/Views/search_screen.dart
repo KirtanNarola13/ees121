@@ -1,3 +1,4 @@
+import 'package:ees121/Screens/All_Screens/Global/global.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
@@ -35,13 +36,15 @@ class _SearchScreenState extends State<SearchScreen> {
               // Use Expanded to fill the available space
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemCount: 25,
+                  crossAxisCount: 3,
+                ),
+                itemCount: AllServices
+                    .allService.length, // Use the length of your list
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     width: w / 3,
                     height: h / 8,
-                    margin: const EdgeInsets.all(8.0), // Add margin for spacing
+                    margin: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: AppColors.appColor,
@@ -51,6 +54,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         Radius.circular(15),
                       ),
                     ),
+                    // Access data from the list
+                    child: Image.asset(AllServices.allService[index]['icon']),
                   );
                 },
               ),

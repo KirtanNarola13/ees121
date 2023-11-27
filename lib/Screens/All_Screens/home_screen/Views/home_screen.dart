@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ees121/Colors/colors.dart';
 import 'package:ees121/Screens/All_Screens/Global/global.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +70,40 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: h / 50,
               ),
+              SizedBox(
+                height: h / 50,
+              ),
+              CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: true, // Enable auto-sliding
+                  aspectRatio: 16 / 8, // Adjust as needed
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: true,
+                ),
+                items: AllServices.allService.map((e) {
+                  return Container(
+                    height: h / 4.2,
+                    width: w / 1,
+                    margin: const EdgeInsets.only(right: 15),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.appColor,
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage(e['thumbnail']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                height: h / 20,
+              ),
               const Text(
                 'Popular Category',
                 style: TextStyle(fontSize: 22, letterSpacing: 1),
@@ -73,7 +111,6 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: h / 50,
               ),
-              // Inside the SingleChildScrollView for 'Popular Category'
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -128,111 +165,103 @@ class HomeScreen extends StatelessWidget {
                   }).toList(),
                 ),
               ),
-
               SizedBox(
                 height: h / 20,
               ),
               const Text(
-                'Popular Services',
+                'Top Rated Service',
                 style: TextStyle(fontSize: 22, letterSpacing: 1),
               ),
               SizedBox(
-                height: h / 50,
+                height: h / 20,
               ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Row(
-                    children: AllServices.allService.map((e) {
-                      return Container(
-                        height: h / 4.5,
-                        width: w / 1.7,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          image: DecorationImage(
-                            image: AssetImage(e['thumbnail']),
-                            fit: BoxFit.cover,
-                          ),
+              SingleChildScrollView(
+                child: Column(
+                  children: AllServices.allService.map((e) {
+                    return Container(
+                      height: h / 4,
+                      width: w / 1,
+                      margin: const EdgeInsets.only(right: 20, bottom: 50),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.appColor,
+                          width: 2,
                         ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: h / 20,
-              ),
-              const Text(
-                'Cleaning Service',
-                style: TextStyle(fontSize: 22, letterSpacing: 1),
-              ),
-              SizedBox(
-                height: h / 50,
-              ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: h / 20,
-              ),
-              const Text(
-                'Ac Service',
-                style: TextStyle(fontSize: 22, letterSpacing: 1),
-              ),
-              SizedBox(
-                height: h / 50,
-              ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: h / 4.5,
-                        width: w / 2,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Container(
+                            height: h / 4,
+                            width: w / 1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              image: DecorationImage(
+                                image: AssetImage(e['thumbnail']),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
+                          BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 0.2, sigmaY: 0.2),
+                            child: Container(
+                              alignment: Alignment(-0.8, 0.9),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.5),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                              ),
+                              child: Stack(
+                                alignment: Alignment(1, -1.001),
+                                children: [
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(),
+                                        Text(
+                                          "John Deo",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        SizedBox(),
+                                        Text(
+                                          "4.3 ⭐",
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                        SizedBox(),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    child: IconButton(
+                                      onPressed: () {
+                                        e['isSaved'] = !e['isSaved'];
+                                      },
+                                      icon: Icon(
+                                        (e['isSaved'] == true)
+                                            ? Iconsax.heart_remove
+                                            : Iconsax.heart,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
             ],

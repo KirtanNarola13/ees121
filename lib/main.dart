@@ -5,6 +5,7 @@ import 'package:ees121/Screens/login_procces/Views/login_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/signup_screen.dart';
 import 'package:ees121/Utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
@@ -14,10 +15,10 @@ void main() {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const NavBar(),
-        'getStarted': (context) => const GetStarted(),
+        '/': (context) => const GetStarted(),
         'login': (context) => const LoginPage(),
         'signup': (context) => const SignUp(),
+        'navbar': (context) => const NavBar(),
       },
     ),
   );
