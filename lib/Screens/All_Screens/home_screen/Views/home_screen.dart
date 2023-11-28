@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ees121/Colors/colors.dart';
 import 'package:ees121/Screens/All_Screens/Global/global.dart';
+import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             scaffoldKey.currentState?.openDrawer();
           },
           icon: Image.asset(
-            'lib/Screens/All_Screens/home_screen/Assets/application.png',
+            'lib/Screens/All_Screens/home_screen/Assets/paragraph.png',
             height: h / 13,
             width: w / 13,
           ),
@@ -177,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                     return Column(
                       children: [
                         Container(
-                          height: h / 4.5,
+                          height: h / 3,
                           width: w / 1,
                           margin: const EdgeInsets.only(right: 20, bottom: 15),
                           decoration: BoxDecoration(
@@ -188,22 +192,36 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(15),
                             ),
-                          ),
-                          child: Container(
-                            height: h / 4,
-                            width: w / 1,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              image: DecorationImage(
-                                image: AssetImage(e['thumbnail']),
-                                fit: BoxFit.cover,
-                              ),
+                            image: DecorationImage(
+                              image: AssetImage(e['thumbnail']),
+                              fit: BoxFit.cover,
                             ),
                           ),
+                          child: Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  e['isSaved'] = !e['isSaved'];
+                                  log(e['isSaved'].toString());
+                                  Provider.of<HomeProvider>(context,
+                                          listen: true)
+                                      .addToSaved(e);
+                                },
+                                splashColor: Colors.black,
+                                color: AppColors.appColor,
+                                icon: Icon(
+                                  (e['isSaved'] == true)
+                                      ? Icons.bookmark_outlined
+                                      : Icons.bookmark_border,
+                                  color: AppColors.appColor,
+                                  size: 32,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(

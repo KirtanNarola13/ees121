@@ -1,3 +1,4 @@
+import 'package:ees121/Screens/All_Screens/saved_screen/Global/global.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
@@ -11,7 +12,7 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen> {
   @override
-  final List<String> entries = <String>['A', 'B', 'C', 'd', 'e', 'f'];
+  List savedService = SavedService.savedService;
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -34,8 +35,8 @@ class _SavedScreenState extends State<SavedScreen> {
             Expanded(
               // Wrap the ListView.builder with Expanded
               child: ListView.builder(
-                itemCount: entries.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemCount: savedService.length,
+                itemBuilder: (context, i) {
                   return Container(
                     height: h / 4,
                     margin: EdgeInsets.only(bottom: 15, right: 15),
