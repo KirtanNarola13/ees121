@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:ees121/Screens/All_Screens/detail_screen/Views/detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+import 'package:ees121/Screens/Splash_screen/Views/splash_screen.dart';
 import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
 import 'package:ees121/Screens/drawer_options/team_screen/Views/team_screen.dart';
 import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
@@ -35,7 +36,8 @@ void main() {
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => const GetStarted(),
+          '/': (context) => const SplashScreen(),
+          'get_started': (context) => const GetStarted(),
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
           'navbar': (context) => const NavBar(),

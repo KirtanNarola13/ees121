@@ -80,6 +80,7 @@ flutter:
     - lib/Screens/All_Screens/detail_screen/Assets/
     - android/app/src/main/res/
     - lib/Screens/All_Screens/referral_screen/Assets/
+    - lib/Screens/Splash_screen/Assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
