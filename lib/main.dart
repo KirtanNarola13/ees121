@@ -1,28 +1,50 @@
+import 'dart:js';
+
+import 'package:ees121/Screens/All_Screens/detail_screen/Views/detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
+import 'package:ees121/Screens/drawer_options/team_screen/Views/team_screen.dart';
+import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
+import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/get_started.dart';
 import 'package:ees121/Screens/login_procces/Views/login_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/signup_screen.dart';
 import 'package:ees121/Utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
+import 'Screens/drawer_options/wallet_screen/Views/wallet_screen.dart';
+
 void main() {
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
   runApp(
     MultiProvider(
       providers: [
         ListenableProvider<HomeProvider>(create: (context) => HomeProvider()),
+        ListenableProvider<WorkProvider>(create: (context) => WorkProvider()),
       ],
       child: MaterialApp(
+        title: "EES121",
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routes: {
-          'getStarted': (context) => const GetStarted(),
+          '/': (context) => const GetStarted(),
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
-          '/': (context) => const NavBar(),
+          'navbar': (context) => const NavBar(),
+          'detail_screen': (context) => const DetailScreen(),
+          'wallet_screen': (context) => const WalletScreen(),
+          'team_screen': (context) => const TeamScreen(),
+          'work_screen': (context) => const WorkScreen(),
+          'customer_care_screen': (context) => CustomerCare(),
+          'profile_screen': (context) => const ProfileScreen(),
         },
       ),
     ),

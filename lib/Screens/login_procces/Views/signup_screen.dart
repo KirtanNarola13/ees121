@@ -184,6 +184,9 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: h / 50,
+                  ),
                   Column(
                     children: [
                       GestureDetector(
@@ -221,7 +224,7 @@ class _SignUpState extends State<SignUp> {
                         child: Container(
                           alignment: Alignment.center,
                           margin: const EdgeInsets.all(5),
-                          width: w / 0.7,
+                          width: w / 1.5,
                           height: h / 13,
                           decoration: BoxDecoration(
                             color: AppColors.appColor,
@@ -232,7 +235,7 @@ class _SignUpState extends State<SignUp> {
                           child: const Text('Sign Up',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 28,
+                                fontSize: 22,
                               )),
                         ),
                       ),
@@ -261,7 +264,7 @@ class _SignUpState extends State<SignUp> {
                         const Text(
                           'Sign up with',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                         Row(
@@ -327,7 +330,7 @@ class _SignUpState extends State<SignUp> {
                         const Text(
                           'Already have an account? ',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                         GestureDetector(
@@ -337,7 +340,7 @@ class _SignUpState extends State<SignUp> {
                           child: Text(
                             'Sign in',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: AppColors.appColor,
                               decoration: TextDecoration.underline,
                               decorationColor: AppColors.appColor,

@@ -23,12 +23,12 @@ class _SearchScreenState extends State<SearchScreen> {
               .start, // Ensure widgets are aligned to the start
           children: [
             SizedBox(
-              height: h / 20,
+              height: h / 15,
             ),
             Text(
               'What service are you looking for?',
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 28,
                 letterSpacing: 2,
               ),
             ),
@@ -45,6 +45,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     width: w / 3,
                     height: h / 8,
                     margin: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(
+                      top: 5,
+                      right: 5,
+                      left: 5,
+                    ),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: AppColors.appColor,

@@ -34,11 +34,15 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  custom_navigation_bar: ^0.8.2
-  iconsax: ^0.0.8
-  carousel_slider: ^4.0.0
-  provider: ^5.0.0
+  cupertino_icons:
+  custom_navigation_bar:
+  iconsax:
+  carousel_slider:
+  provider:
+  firebase_core:
+  google_sign_in:
+  url_launcher:
+
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +54,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -72,6 +77,9 @@ flutter:
     - lib/Screens/All_Screens/home_screen/Assets/
     - lib/Screens/All_Screens/Assets/service_category/
     - lib/Screens/All_Screens/Assets/services/
+    - lib/Screens/All_Screens/detail_screen/Assets/
+    - android/app/src/main/res/
+    - lib/Screens/All_Screens/referral_screen/Assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

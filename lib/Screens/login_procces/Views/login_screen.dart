@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ees121/Screens/login_procces/Global/global.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../Colors/colors.dart';
 
@@ -18,6 +19,22 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    // Google SignIn
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    //
+    Future<void> _signInWithGoogle() async {
+      try {
+        await _googleSignIn.signIn();
+        log("${_googleSignIn.currentUser?.displayName}");
+        log("${_googleSignIn.currentUser?.email}");
+        log("${_googleSignIn.currentUser?.photoUrl}");
+        log("${_googleSignIn.currentUser?.id}");
+      } catch (error) {
+        log("Error signing in with Google: $error");
+      }
+    }
+
+    //
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -32,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SafeArea(
               child: Container(
-                height: h / 5,
+                height: h / 4.5,
                 padding: const EdgeInsets.only(left: 20, top: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,13 +57,13 @@ class _LoginPageState extends State<LoginPage> {
                     const Text(
                       'Login to you',
                       style: TextStyle(
-                        fontSize: 47,
+                        fontSize: 37,
                       ),
                     ),
                     Text(
                       'Account',
                       style: TextStyle(
-                        fontSize: 47,
+                        fontSize: 37,
                         color: AppColors.appColor,
                         fontWeight: FontWeight.bold,
                       ),
@@ -176,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                           alignment: Alignment.center,
                           margin: const EdgeInsets.all(5),
-                          width: w / 0.7,
+                          width: w / 1.5,
                           height: h / 13,
                           decoration: BoxDecoration(
                             color: AppColors.appColor,
@@ -187,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text('Sign In',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 28,
+                                fontSize: 22,
                               )),
                         ),
                       ),
@@ -216,31 +233,36 @@ class _LoginPageState extends State<LoginPage> {
                   const Text(
                     'Sign in with',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                          top: 20,
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        height: h / 15,
-                        width: w / 7,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 1,
+                      GestureDetector(
+                        onTap: () {
+                          _signInWithGoogle();
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: 20,
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(10),
+                          padding: const EdgeInsets.all(10),
+                          height: h / 15,
+                          width: w / 7,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.appColor,
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
                           ),
-                        ),
-                        child: const Image(
-                          image: AssetImage(
-                              'lib/Screens/login_procces/Assets/google-logo.png'),
+                          child: const Image(
+                            image: AssetImage(
+                                'lib/Screens/login_procces/Assets/google-logo.png'),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -279,7 +301,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Text(
                     'Dont have an account? ',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                   GestureDetector(
@@ -289,7 +311,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Sign up',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         color: AppColors.appColor,
                         decoration: TextDecoration.underline,
                         decorationColor: AppColors.appColor,

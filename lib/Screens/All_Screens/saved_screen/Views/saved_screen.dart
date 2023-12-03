@@ -23,12 +23,12 @@ class _SavedScreenState extends State<SavedScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: h / 20,
+              height: h / 15,
             ),
             Text(
               'Saved Services',
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 28,
                 letterSpacing: 2,
               ),
             ),
