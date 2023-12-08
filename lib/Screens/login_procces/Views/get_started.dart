@@ -96,7 +96,7 @@ class _GetStartedState extends State<GetStarted> {
                 child: const Text('Get Started',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 24,
                     )),
               ),
             ),
