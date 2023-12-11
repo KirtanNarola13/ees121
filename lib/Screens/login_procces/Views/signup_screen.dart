@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Global/global.dart';
 
@@ -192,7 +193,7 @@ class _SignUpState extends State<SignUp> {
                       GestureDetector(
                         onTap: () {
                           if (_eesKey.currentState!.validate()) {
-                            setState(() {
+                            setState(() async {
                               LoginSinUp.username =
                                   LoginSinUp.usernameController.text;
                               log(LoginSinUp.username);
@@ -212,6 +213,11 @@ class _SignUpState extends State<SignUp> {
                               LoginSinUp.numberController.clear();
                               Navigator.of(context)
                                   .pushReplacementNamed('navbar');
+                              // Share Preferences
+                              SharedPreferences preferences =
+                                  await SharedPreferences.getInstance();
+
+                              preferences.setBool('isSignUp', true);
                             });
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

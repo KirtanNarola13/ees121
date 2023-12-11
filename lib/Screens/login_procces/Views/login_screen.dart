@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:ees121/Screens/login_procces/Global/global.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../Colors/colors.dart';
 
@@ -168,12 +169,18 @@ class _LoginPageState extends State<LoginPage> {
                                     LoginSinUp.email &&
                                 LoginSinUp.passwordController.text ==
                                     LoginSinUp.password) {
-                              setState(() {
+                              setState(() async {
                                 Navigator.pushReplacementNamed(
                                     context, 'navbar');
 
                                 LoginSinUp.emailController.clear();
                                 LoginSinUp.passwordController.clear();
+                                // Share Preferences
+
+                                SharedPreferences preferences =
+                                    await SharedPreferences.getInstance();
+
+                                preferences.setBool('isLogin', true);
                               });
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(

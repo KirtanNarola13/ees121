@@ -10,7 +10,7 @@ class CategoryProvider extends ChangeNotifier {
   String error = '';
   CategoryApi catrgoryApi = CategoryApi(data: []);
   //
-  getDataFromApi() async {
+  getCategoryFromApi() async {
     try {
       Response response = await http.get(Uri.parse(apiEndpoint));
       if (response.statusCode == 200) {

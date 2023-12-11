@@ -1,5 +1,6 @@
 import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
@@ -79,7 +80,11 @@ class _GetStartedState extends State<GetStarted> {
           Expanded(
             flex: 1,
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+
+                preferences.setBool('isVisited', true);
                 Navigator.of(context).pushReplacementNamed('login');
               },
               child: Container(

@@ -14,15 +14,16 @@ import 'package:ees121/Utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
 import 'Screens/drawer_options/wallet_screen/Views/wallet_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  //
   runApp(
     MultiProvider(
       providers: [
@@ -38,10 +39,11 @@ void main() {
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routes: {
-          'getstarted': (context) => const GetStarted(),
+          '/': (context) => const SplashScreen(),
+          'get_started': (context) => const GetStarted(),
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
-          '/': (context) => const NavBar(),
+          'navbar': (context) => const NavBar(),
           'detail_screen': (context) => const DetailScreen(),
           'wallet_screen': (context) => const WalletScreen(),
           'team_screen': (context) => const TeamScreen(),
