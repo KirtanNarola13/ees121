@@ -244,27 +244,6 @@ class _SignUpState extends State<SignUp> {
                         onTap: () {
                           if (_eesKey.currentState!.validate()) {
                             setState(() async {
-                              LoginSinUp.fullName =
-                                  LoginSinUp.fullNameController.text;
-                              log(LoginSinUp.fullName);
-                              LoginSinUp.email =
-                                  LoginSinUp.emailController.text;
-                              log(LoginSinUp.email);
-                              LoginSinUp.password =
-                                  LoginSinUp.passwordController.text;
-                              log(LoginSinUp.password);
-                              LoginSinUp.number =
-                                  LoginSinUp.numberController.text;
-                              log(LoginSinUp.number);
-                              LoginSinUp.conformPassword =
-                                  LoginSinUp.conformPasswordController.text;
-                              log(LoginSinUp.conformPassword);
-
-                              LoginSinUp.fullNameController.clear();
-                              LoginSinUp.emailController.clear();
-                              LoginSinUp.passwordController.clear();
-                              LoginSinUp.conformPasswordController.clear();
-                              LoginSinUp.numberController.clear();
                               Navigator.of(context)
                                   .pushReplacementNamed('navbar');
                               // Share Preferences

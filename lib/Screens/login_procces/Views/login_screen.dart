@@ -56,20 +56,20 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
 
-    // Google SignIn
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-    //
-    Future<void> _signInWithGoogle() async {
-      try {
-        await _googleSignIn.signIn();
-        log("${_googleSignIn.currentUser?.displayName}");
-        log("${_googleSignIn.currentUser?.email}");
-        log("${_googleSignIn.currentUser?.photoUrl}");
-        log("${_googleSignIn.currentUser?.id}");
-      } catch (error) {
-        log("Error signing in with Google: $error");
-      }
-    }
+    // // Google SignIn
+    // final GoogleSignIn _googleSignIn = GoogleSignIn();
+    // //
+    // Future<void> _signInWithGoogle() async {
+    //   try {
+    //     await _googleSignIn.signIn();
+    //     log("${_googleSignIn.currentUser?.displayName}");
+    //     log("${_googleSignIn.currentUser?.email}");
+    //     log("${_googleSignIn.currentUser?.photoUrl}");
+    //     log("${_googleSignIn.currentUser?.id}");
+    //   } catch (error) {
+    //     log("Error signing in with Google: $error");
+    //   }
+    // }
 
     //
     return GestureDetector(
@@ -223,7 +223,8 @@ class _LoginPageState extends State<LoginPage> {
                                 await SharedPreferences.getInstance();
 
                             preferences.setBool('isLogin', true);
-                            login(LoginSinUp.number, LoginSinUp.password);
+                            login(LoginSinUp.numberController.text,
+                                LoginSinUp.passwordController.text);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -256,58 +257,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              height: h / 4,
-              margin: const EdgeInsets.only(
-                left: 20,
-                right: 20,
-              ),
-              padding: const EdgeInsets.only(
-                top: 20,
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: AppColors.appColor, width: 1),
-                ),
-              ),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  const Text(
-                    'Sign in with',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _signInWithGoogle();
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      height: h / 15,
-                      width: w / 7,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.appColor,
-                          width: 1,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: const Image(
-                        image: AssetImage(
-                            'lib/Screens/login_procces/Assets/google-logo.png'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -318,9 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacementNamed('signup');
-                    },
+                    onTap: () {},
                     child: Text(
                       'Sign up',
                       style: TextStyle(

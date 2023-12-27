@@ -7,11 +7,6 @@ class LoginSinUp {
   static TextEditingController numberController = TextEditingController();
   static TextEditingController conformPasswordController =
       TextEditingController();
-  static String fullName = '';
-  static String email = '';
-  static String password = '';
-  static String conformPassword = '';
-  static String number = '';
 }
 
 class PasswordVisible {
