@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:iconsax/iconsax.dart';
 import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:ees121/Colors/colors.dart';
@@ -7,10 +10,34 @@ import 'package:ees121/Screens/All_Screens/Global/global.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import '../../search_screen/provider/search_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Set up a periodic timer to fetch data every second
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      Provider.of<CategoryProvider>(context, listen: false)
+          .getCategoryFromApi();
+    });
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed
+    _timer.cancel();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -18,12 +45,11 @@ class HomeScreen extends StatelessWidget {
 
     // API
     final provider = Provider.of<CategoryProvider>(context);
-    provider.getCategoryFromApi();
 
     // Generate unique random indices for each category
     List<int> randomIndices = List.generate(
-      provider.catrgoryApi.data.length,
-      (index) => Random().nextInt(provider.catrgoryApi.data.length),
+      provider.categoryApi.data.length,
+      (index) => Random().nextInt(provider.categoryApi.data.length),
     );
 
     return Scaffold(
@@ -93,15 +119,15 @@ class HomeScreen extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.work),
+                  Icon(Iconsax.share),
                   SizedBox(
                     width: 20,
                   ),
-                  Text('Work'),
+                  Text('Referral'),
                 ],
               ),
               onTap: () {
-                Navigator.pushNamed(context, 'work_screen');
+                Navigator.pushNamed(context, 'referral_screen');
               },
             ),
             ListTile(
@@ -170,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                   enlargeCenterPage: true,
                   enableInfiniteScroll: true,
                 ),
-                items: AllServices.allService.map((e) {
+                items: provider.categoryApi.data.map((e) {
                   return Container(
                     height: h / 4.2,
                     width: w / 1,
@@ -184,7 +210,7 @@ class HomeScreen extends StatelessWidget {
                         Radius.circular(15),
                       ),
                       image: DecorationImage(
-                        image: AssetImage(e['thumbnail']),
+                        image: NetworkImage(CategoryProvider.imgPoint + e.img),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -209,7 +235,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: provider.catrgoryApi.data.length,
+                itemCount: provider.categoryApi.data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
@@ -233,6 +259,11 @@ class HomeScreen extends StatelessWidget {
                             flex: 5,
                             child: Container(
                               padding: EdgeInsets.all(5),
+                              child: Image(
+                                  image: NetworkImage(
+                                      CategoryProvider.imgPoint +
+                                          provider.categoryApi
+                                              .data[randomIndices[index]].img)),
                             ),
                           ),
                           Expanded(
@@ -243,10 +274,9 @@ class HomeScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(5),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  provider
-                                      .catrgoryApi
-                                      .data[randomIndices[index]]
-                                      .name, // Assuming 'name' is a key in your category data
+                                  provider.categoryApi
+                                      .data[randomIndices[index]].name,
+                                  // Assuming 'name' is a key in your category data
                                   style: TextStyle(
                                     fontSize: 15,
                                   ),

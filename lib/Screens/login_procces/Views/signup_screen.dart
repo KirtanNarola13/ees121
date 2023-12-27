@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:ees121/Colors/colors.dart';
+import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Global/global.dart';
@@ -33,14 +35,11 @@ class _SignUpState extends State<SignUp> {
                   Column(
                     children: [
                       SizedBox(
-                        height: h / 30,
-                      ),
-                      SizedBox(
-                        height: h / 30,
+                        height: h / 25,
                       ),
                       TextFormField(
                         onSaved: (String? val) {
-                          LoginSinUp.usernameController.text = val!;
+                          LoginSinUp.fullNameController.text = val!;
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -48,9 +47,10 @@ class _SignUpState extends State<SignUp> {
                           }
                           return null;
                         },
-                        controller: LoginSinUp.usernameController,
+                        keyboardType: TextInputType.text,
+                        controller: LoginSinUp.fullNameController,
                         decoration: InputDecoration(
-                          labelText: 'Username',
+                          labelText: 'Full Name',
                           labelStyle: TextStyle(
                             color: AppColors.appColor,
                           ),
@@ -85,6 +85,7 @@ class _SignUpState extends State<SignUp> {
                           }
                           return null;
                         },
+                        keyboardType: TextInputType.emailAddress,
                         controller: LoginSinUp.emailController,
                         decoration: InputDecoration(
                           labelText: 'Email',
@@ -114,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       TextFormField(
                         onSaved: (String? val) {
-                          LoginSinUp.passwordController.text = val!;
+                          LoginSinUp.numberController.text = val!;
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -122,6 +123,40 @@ class _SignUpState extends State<SignUp> {
                           }
                           return null;
                         },
+                        keyboardType: TextInputType.phone,
+                        controller: LoginSinUp.numberController,
+                        decoration: InputDecoration(
+                          labelText: 'Phone Number',
+                          labelStyle: TextStyle(
+                            color: AppColors.appColor,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                            borderSide: BorderSide(
+                              color: AppColors.appColor,
+                              width: 5,
+                            ),
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Icon(
+                              Icons.phone,
+                              color: AppColors.appColor,
+                            ), // icon is 48px widget.
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: h / 30,
+                      ),
+                      TextFormField(
+                        onSaved: (String? val) {
+                          LoginSinUp.passwordController.text = val!;
+                        },
+                        validator: (val) =>
+                            val!.length < 6 ? 'Password too short.' : null,
                         controller: LoginSinUp.passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
@@ -151,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       TextFormField(
                         onSaved: (String? val) {
-                          LoginSinUp.numberController.text = val!;
+                          LoginSinUp.conformPasswordController.text = val!;
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -159,9 +194,13 @@ class _SignUpState extends State<SignUp> {
                           }
                           return null;
                         },
-                        controller: LoginSinUp.numberController,
+                        obscureText:
+                            Provider.of<PasswordProvider>(context, listen: true)
+                                .password
+                                .obscureText,
+                        controller: LoginSinUp.conformPasswordController,
                         decoration: InputDecoration(
-                          labelText: 'Phone Number',
+                          labelText: 'Conform Password',
                           labelStyle: TextStyle(
                             color: AppColors.appColor,
                           ),
@@ -176,8 +215,19 @@ class _SignUpState extends State<SignUp> {
                           ),
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(0.0),
-                            child: Icon(
-                              Icons.phone,
+                            child: IconButton(
+                              onPressed: () {
+                                Provider.of<PasswordProvider>(context,
+                                        listen: false)
+                                    .toggle();
+                              },
+                              icon: Provider.of<PasswordProvider>(context)
+                                      .password
+                                      .obscureText
+                                  ? Icon(
+                                      Icons.visibility,
+                                    )
+                                  : Icon(Icons.visibility_off),
                               color: AppColors.appColor,
                             ), // icon is 48px widget.
                           ),
@@ -194,9 +244,9 @@ class _SignUpState extends State<SignUp> {
                         onTap: () {
                           if (_eesKey.currentState!.validate()) {
                             setState(() async {
-                              LoginSinUp.username =
-                                  LoginSinUp.usernameController.text;
-                              log(LoginSinUp.username);
+                              LoginSinUp.fullName =
+                                  LoginSinUp.fullNameController.text;
+                              log(LoginSinUp.fullName);
                               LoginSinUp.email =
                                   LoginSinUp.emailController.text;
                               log(LoginSinUp.email);
@@ -206,10 +256,14 @@ class _SignUpState extends State<SignUp> {
                               LoginSinUp.number =
                                   LoginSinUp.numberController.text;
                               log(LoginSinUp.number);
+                              LoginSinUp.conformPassword =
+                                  LoginSinUp.conformPasswordController.text;
+                              log(LoginSinUp.conformPassword);
 
-                              LoginSinUp.usernameController.clear();
+                              LoginSinUp.fullNameController.clear();
                               LoginSinUp.emailController.clear();
                               LoginSinUp.passwordController.clear();
+                              LoginSinUp.conformPasswordController.clear();
                               LoginSinUp.numberController.clear();
                               Navigator.of(context)
                                   .pushReplacementNamed('navbar');
@@ -273,55 +327,28 @@ class _SignUpState extends State<SignUp> {
                             fontSize: 18,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                top: 20,
+                        Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                              top: 20,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            height: h / 15,
+                            width: w / 7,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.appColor,
+                                width: 1,
                               ),
-                              padding: const EdgeInsets.all(10),
-                              height: h / 15,
-                              width: w / 7,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.appColor,
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: const Image(
-                                image: AssetImage(
-                                    'lib/Screens/login_procces/Assets/google-logo.png'),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(10),
                               ),
                             ),
-                            SizedBox(
-                              width: w / 15,
+                            child: const Image(
+                              image: AssetImage(
+                                  'lib/Screens/login_procces/Assets/google-logo.png'),
                             ),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                top: 20,
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              height: h / 15,
-                              width: w / 7,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.appColor,
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: const Image(
-                                image: AssetImage(
-                                    'lib/Screens/login_procces/Assets/apple-logo.png'),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),

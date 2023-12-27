@@ -18,15 +18,18 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     log('Re Built Ui');
-    final provider = Provider.of<CategoryProvider>(context);
-    provider.getCategoryFromApi();
-
     return Scaffold(
-      body: provider.isLoading
-          ? getLoadingUI()
-          : provider.error.isNotEmpty
-              ? getErrorUI(provider.error)
-              : getBodyUI(provider.catrgoryApi),
+      body: Consumer<CategoryProvider>(
+        builder: (context, provider, _) {
+          if (provider.state == CategoryProviderState.Loading) {
+            return getLoadingUI();
+          } else if (provider.error.isNotEmpty) {
+            return getErrorUI(provider.error);
+          } else {
+            return getBodyUI(provider.categoryApi);
+          }
+        },
+      ),
     );
   }
 
@@ -84,35 +87,43 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    right: 5,
-                    left: 5,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue, // Change this color if needed
-                      width: 1,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, 'category_detail_screen',
+                        arguments: index);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      right: 5,
+                      left: 5,
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(15),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color:
+                            AppColors.appColor, // Change this color if needed
+                        width: 1,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'lib/Screens/All_Screens/Assets/services/plumber.jpg',
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        catrgoryApi.data[index].name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.network(
+                          CategoryProvider.imgPoint +
+                              catrgoryApi.data[index].img,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          catrgoryApi.data[index].name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

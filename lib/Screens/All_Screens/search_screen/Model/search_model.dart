@@ -27,16 +27,18 @@ class CategoryApi {
 
 class Datum {
   final String name;
+  final String img;
 
   Datum({
     required this.name,
+    required this.img,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        name: json["name"],
-      );
+  factory Datum.fromJson(Map<String, dynamic> json) =>
+      Datum(name: json["name"], img: json["logofile"]);
 
   Map<String, dynamic> toJson() => {
         "name": name,
+        "logofile": img,
       };
 }

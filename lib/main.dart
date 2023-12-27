@@ -1,6 +1,8 @@
+import 'package:ees121/Screens/All_Screens/category_detail_screen/Views/category_detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/detail_screen/Views/detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
 import 'package:ees121/Screens/All_Screens/search_screen/provider/search_provider.dart';
 import 'package:ees121/Screens/Splash_screen/Views/splash_screen.dart';
 import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
@@ -10,6 +12,7 @@ import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart
 import 'package:ees121/Screens/login_procces/Views/get_started.dart';
 import 'package:ees121/Screens/login_procces/Views/login_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/signup_screen.dart';
+import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:ees121/Utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +34,8 @@ void main() async {
         ListenableProvider<WorkProvider>(create: (context) => WorkProvider()),
         ListenableProvider<CategoryProvider>(
             create: (context) => CategoryProvider()),
+        ListenableProvider<PasswordProvider>(
+            create: (context) => PasswordProvider()),
       ],
       child: MaterialApp(
         title: "EES121",
@@ -39,15 +44,16 @@ void main() async {
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => const SplashScreen(),
+          'splash': (context) => const SplashScreen(),
           'get_started': (context) => const GetStarted(),
-          'login': (context) => const LoginPage(),
+          '/': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
           'navbar': (context) => const NavBar(),
+          'category_detail_screen': (context) => const CategoryDetailScreen(),
           'detail_screen': (context) => const DetailScreen(),
           'wallet_screen': (context) => const WalletScreen(),
           'team_screen': (context) => const TeamScreen(),
-          'work_screen': (context) => const WorkScreen(),
+          'referral_screen': (context) => const ReferralScreen(),
           'customer_care_screen': (context) => CustomerCare(),
           'profile_screen': (context) => const ProfileScreen(),
         },

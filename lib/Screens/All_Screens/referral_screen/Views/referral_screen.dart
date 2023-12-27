@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../Colors/colors.dart';
 
 class ReferralScreen extends StatefulWidget {
   const ReferralScreen({super.key});
@@ -13,6 +16,26 @@ class _ReferralScreenState extends State<ReferralScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.keyboard_backspace,
+            color: AppColors.appColor,
+          ),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Referral",
+          style: TextStyle(
+            color: AppColors.appColor,
+            letterSpacing: 2,
+            fontSize: 18,
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

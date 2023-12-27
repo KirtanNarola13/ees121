@@ -3,6 +3,7 @@ import 'package:ees121/Screens/All_Screens/profile_screen/Views/profile_screen.d
 import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
 import 'package:ees121/Screens/All_Screens/saved_screen/Views/saved_screen.dart';
 import 'package:ees121/Screens/All_Screens/search_screen/Views/search_screen.dart';
+import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -33,7 +34,8 @@ class _NavBarState extends State<NavBar> {
           NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
           NavigationDestination(
               icon: Icon(Iconsax.search_normal_1), label: 'Category'),
-          NavigationDestination(icon: Icon(Iconsax.share), label: 'Referral'),
+          NavigationDestination(
+              icon: Icon(Icons.work_outline_sharp), label: 'Work'),
           NavigationDestination(icon: Icon(Iconsax.book_saved), label: 'Saved'),
           NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
         ],
@@ -49,7 +51,7 @@ class NavigationController {
   final screens = [
     HomeScreen(),
     SearchScreen(),
-    ReferralScreen(),
+    WorkScreen(),
     SavedScreen(),
     ProfileScreen(),
   ];
