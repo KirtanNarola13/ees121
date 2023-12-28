@@ -46,6 +46,7 @@ dependencies:
   flutter_spinkit:
   anim_search_bar:
   shared_preferences:
+  flutter_rating_bar:
 
 
 dev_dependencies:

@@ -49,10 +49,10 @@ class NavigationController {
   int selectedIndex = 0;
 
   final screens = [
-    HomeScreen(),
-    SearchScreen(),
-    WorkScreen(),
-    SavedScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const SearchScreen(),
+    const WorkScreen(),
+    const SavedScreen(),
+    const ProfileScreen(),
   ];
 }

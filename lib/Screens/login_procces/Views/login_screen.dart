@@ -27,27 +27,32 @@ class _LoginPageState extends State<LoginPage> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     // Replace with your actual API endpoint
-
     void login(String id, String password) async {
       try {
-        Response response = await post(
+        http.Response response = await http.post(
           Uri.parse('https://adminpanel.appsolution.online/ees121/api/user'),
-          body: {'loginid': id, 'loginpass': password}, // Fixed typo in keys
+          body: {'loginid': id, 'loginpass': password},
         );
 
-        // Log the HTTP response details
         log('Response Status Code: ${response.statusCode}');
         log('Response Body: ${response.body}');
 
         if (response.statusCode == 200) {
-          // Check if the response body is valid JSON
-          dynamic responseData = json.decode(response.body);
+          final Map<String, dynamic> responseData = json.decode(response.body);
 
-          // Assuming 'User.data' is a Map<String, dynamic> variable
-          User.data = responseData;
+          if (responseData['status'] == 'SUCCESS') {
+            // Assuming 'data' is the field containing the user profile
+            Map<String, dynamic> userData = responseData['data'];
 
-          log(User.data.toString());
-          log("Login");
+            // Assuming 'User.data' is a Map<String, dynamic> variable
+            User.data = userData['0'];
+
+            log(User.data.toString());
+            log("Login");
+            Navigator.pushReplacementNamed(context, 'navbar');
+          } else {
+            log('Login Failed: ${responseData['status']}');
+          }
         } else {
           log('Failed: ${response.statusCode}');
         }
@@ -55,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
         log('Error: $e');
       }
     }
-
     // // Google SignIn
     // final GoogleSignIn _googleSignIn = GoogleSignIn();
     // //

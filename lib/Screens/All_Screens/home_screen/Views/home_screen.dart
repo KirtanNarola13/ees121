@@ -1,17 +1,19 @@
 import 'dart:async';
 
+import 'package:ees121/Global/globalUser.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
-import 'dart:math';
+
 import 'package:provider/provider.dart';
 import 'package:ees121/Colors/colors.dart';
-import 'package:ees121/Screens/All_Screens/Global/global.dart';
-import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
+
 import '../../search_screen/provider/search_provider.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -25,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     // Set up a periodic timer to fetch data every second
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       Provider.of<CategoryProvider>(context, listen: false)
           .getCategoryFromApi();
     });
@@ -45,12 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // API
     final provider = Provider.of<CategoryProvider>(context);
+    // WBP
+    String webp = "https://api2.appsolution.online/files/";
 
     // Generate unique random indices for each category
-    List<int> randomIndices = List.generate(
-      provider.categoryApi.data.length,
-      (index) => Random().nextInt(provider.categoryApi.data.length),
-    );
+    // List<int> randomIndices = List.generate(
+    //   provider.categoryApi.data.length,
+    //   (index) => Random().nextInt(provider.categoryApi.data.length),
+    // );
 
     return Scaffold(
       key: scaffoldKey,
@@ -67,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           Stack(
-            alignment: Alignment(0.4, -0.6),
+            alignment: const Alignment(0.4, -0.6),
             children: [
               IconButton(
                 onPressed: () {},
@@ -103,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(),
             ),
             ListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.group),
                   SizedBox(
@@ -117,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Iconsax.share),
                   SizedBox(
@@ -131,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.call),
                   SizedBox(
@@ -145,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.wallet),
                   SizedBox(
@@ -161,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
               alignment: Alignment.bottomLeft,
               child: ListTile(
-                title: Row(
+                title: const Row(
                   children: [
                     Icon(Icons.logout),
                     SizedBox(
@@ -179,7 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-        margin: const EdgeInsets.only(left: 15),
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
@@ -188,6 +191,158 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               SizedBox(
                 height: h / 50,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                height: h / 3.2,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                  border: Border.all(color: AppColors.appColor),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                          border: Border(
+                              right: BorderSide(color: AppColors.appColor)),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              webp + User.data['selfifile'],
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Full Name',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Text(
+                                  User.data['fullname'],
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: AppColors.appColor.withOpacity(0.5),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Mobile Number',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Text(
+                                  User.data['mobile_no'],
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: AppColors.appColor.withOpacity(0.5),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Gmail',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                Text(
+                                  User.data['email'],
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: AppColors.appColor.withOpacity(0.5),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Provider Rating',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                RatingBar.builder(
+                                  initialRating: double.parse(
+                                      User.data['provider_avg_rating']),
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 10,
+                                  itemSize: 16,
+                                  ignoreGestures: true,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 1.5),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    print(rating);
+                                  },
+                                ),
+                              ],
+                            ),
+                            Divider(
+                              color: AppColors.appColor.withOpacity(0.5),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'User Rating',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                RatingBar.builder(
+                                  initialRating: double.parse(
+                                      User.data['user_avg_rating']),
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 10,
+                                  itemSize: 16,
+                                  ignoreGestures: true,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 1.5),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    print(rating);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: h / 10,
               ),
               CarouselSlider(
                 options: CarouselOptions(
@@ -209,8 +364,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
-                      image: DecorationImage(
-                        image: NetworkImage(CategoryProvider.imgPoint + e.img),
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                            'https://i.pinimg.com/originals/ee/d3/03/eed303679e96d27a96cd4850f4e3fb4c.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -220,78 +376,12 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: h / 20,
               ),
-              const Text(
-                'Popular Category',
-                style: TextStyle(fontSize: 22, letterSpacing: 1),
-              ),
+              // const Text(
+              //   'Popular Category',
+              //   style: TextStyle(fontSize: 22, letterSpacing: 1),
+              // ),
               SizedBox(
                 height: h / 50,
-              ),
-              GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
-                ),
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: provider.categoryApi.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      // Handle category tap
-                      // You can navigate to a new screen or perform other actions
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.appColor,
-                          width: 1,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              child: Image(
-                                  image: NetworkImage(
-                                      CategoryProvider.imgPoint +
-                                          provider.categoryApi
-                                              .data[randomIndices[index]].img)),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  provider.categoryApi
-                                      .data[randomIndices[index]].name,
-                                  // Assuming 'name' is a key in your category data
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: h / 20,
               ),
             ],
           ),
