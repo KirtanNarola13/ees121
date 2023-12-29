@@ -1,3 +1,4 @@
+import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -10,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-
+    String webp = "https://api2.appsolution.online/files/";
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -31,15 +32,23 @@ class ProfileScreen extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Stack(
-              alignment: Alignment(1, 0.9),
+              alignment: const Alignment(1, 0.9),
               children: [
-                CircleAvatar(
-                  radius: 150,
-                  backgroundColor: AppColors.appColor.withOpacity(0.8),
+                Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.appColor,
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        webp + User.data['selfifile'],
+                      ),
+                    ),
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.edit,
                     size: 32,
                   ),
@@ -62,17 +71,26 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    'John Deo',
-                    style: TextStyle(fontSize: 22),
+                    User.data['fullname'],
+                    style: const TextStyle(fontSize: 22),
                   ),
                 ),
                 Center(
-                  child: Text(
-                    '+91 88995 56565',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: AutofillHints.password,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        User.data['kycstatus'],
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: AutofillHints.password,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.verified_outlined,
+                        color: Colors.green,
+                      )
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -87,97 +105,112 @@ class ProfileScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.password,
-                              size: 25,
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'change_password');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Change\nPassword',
-                                style: TextStyle(fontSize: 10),
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Icons.password,
+                                size: 25,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Change\nPassword',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.perm_identity,
-                              size: 25,
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'address_screen');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'kyc',
-                                style: TextStyle(fontSize: 10),
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Icons.perm_identity,
+                                size: 25,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Address',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Iconsax.document,
-                              size: 25,
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'document_screen');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Document',
-                                style: TextStyle(fontSize: 10),
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Iconsax.document,
+                                size: 25,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Document',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -188,79 +221,89 @@ class ProfileScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Icons.work_outline,
-                              size: 25,
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'service_screen');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Service',
-                                style: TextStyle(fontSize: 10),
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Icons.work_outline,
+                                size: 25,
                               ),
                             ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Service',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'identity_screen');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                        ],
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Iconsax.card,
+                                size: 25,
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Identity',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         ),
                         border: Border.all(color: AppColors.appColor),
                       ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
+                      padding: const EdgeInsets.only(left: 5, right: 5),
                       height: h / 10,
                       width: w / 4.5,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Iconsax.card,
-                              size: 25,
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Identity',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Expanded(
@@ -273,7 +316,7 @@ class ProfileScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                'Renew\nservices',
+                                'Wallet',
                                 style: TextStyle(fontSize: 10),
                               ),
                             ),
@@ -300,11 +343,11 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      padding: EdgeInsets.all(7),
-      margin: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(7),
+      margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.appColor),
-        borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderRadius: const BorderRadius.all(Radius.circular(15)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -313,10 +356,10 @@ class ProfileScreen extends StatelessWidget {
             icon,
             size: 32,
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             label,
-            style: TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 14),
             textAlign: TextAlign.center,
           ),
         ],

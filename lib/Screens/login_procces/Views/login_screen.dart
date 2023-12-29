@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:ees121/Global/globalUser.dart';
 import 'package:ees121/Screens/login_procces/Global/global.dart';
+import 'package:ees121/Screens/login_procces/Model/userModel.dart';
 import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
 
             // Assuming 'User.data' is a Map<String, dynamic> variable
             User.data = userData['0'];
-
             log(User.data.toString());
             log("Login");
             Navigator.pushReplacementNamed(context, 'navbar');

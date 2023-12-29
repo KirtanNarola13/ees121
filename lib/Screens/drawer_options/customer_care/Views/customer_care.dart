@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:ees121/Screens/drawer_options/customer_care/Global/customer_care_global.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Colors/colors.dart';
@@ -14,17 +16,45 @@ class CustomerCare extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    // post api
+    // void sendRequest(String id, String password) async {
+    //   try {
+    //     http.Response response = await http.post(
+    //       Uri.parse('https://adminpanel.appsolution.online/ees121/api/user'),
+    //       body: {'loginid': id, 'loginpass': password},
+    //     );
+    //
+    //     log('Response Status Code: ${response.statusCode}');
+    //     log('Response Body: ${response.body}');
+    //
+    //     if (response.statusCode == 200) {
+    //       final Map<String, dynamic> responseData = json.decode(response.body);
+    //
+    //       if (responseData['status'] == 'SUCCESS') {
+    //         // Assuming 'data' is the field containing the user profile
+    //         Map<String, dynamic> userData = responseData['data'];
+    //
+    //         // Assuming 'User.data' is a Map<String, dynamic> variable
+    //         User.data = userData['0'];
+    //
+    //         log(User.data.toString());
+    //         log("Login");
+    //         Navigator.pushReplacementNamed(context, 'navbar');
+    //       } else {
+    //         log('Login Failed: ${responseData['status']}');
+    //       }
+    //     } else {
+    //       log('Failed: ${response.statusCode}');
+    //     }
+    //   } catch (e) {
+    //     log('Error: $e');
+    //   }
+    // }
+    //
+
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.keyboard_backspace,
-            color: AppColors.appColor,
-          ),
-        ),
         centerTitle: true,
         title: Text(
           "Customer care",

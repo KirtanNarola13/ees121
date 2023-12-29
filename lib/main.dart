@@ -2,20 +2,23 @@ import 'package:ees121/Screens/All_Screens/category_detail_screen/Views/category
 import 'package:ees121/Screens/All_Screens/detail_screen/Views/detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/address.dart';
+import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Document/Views/document.dart';
+import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Identity/View/identity_screen.dart';
+import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Service/View/service.dart';
+import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/change_password/Views/change_password.dart';
 import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
 import 'package:ees121/Screens/All_Screens/search_screen/provider/search_provider.dart';
 import 'package:ees121/Screens/Splash_screen/Views/splash_screen.dart';
 import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
 import 'package:ees121/Screens/drawer_options/team_screen/Views/team_screen.dart';
 import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
-import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/get_started.dart';
 import 'package:ees121/Screens/login_procces/Views/login_screen.dart';
 import 'package:ees121/Screens/login_procces/Views/signup_screen.dart';
 import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:ees121/Utils/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +59,11 @@ void main() async {
           'referral_screen': (context) => const ReferralScreen(),
           'customer_care_screen': (context) => CustomerCare(),
           'profile_screen': (context) => const ProfileScreen(),
+          'change_password': (context) => ChangePassword(),
+          'address_screen': (context) => const AddressScreen(),
+          'document_screen': (context) => const DocumentScreen(),
+          'service_screen': (context) => const ServiceScreen(),
+          'identity_screen': (context) => const IdentityScreen(),
         },
       ),
     ),

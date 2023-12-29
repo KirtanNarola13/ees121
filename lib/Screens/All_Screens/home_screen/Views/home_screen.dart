@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ees121/Global/globalUser.dart';
 
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -103,8 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              child: CircleAvatar(),
               decoration: BoxDecoration(),
+              child: CircleAvatar(),
             ),
             ListTile(
               title: const Row(
@@ -175,216 +176,185 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, 'login');
+                  Navigator.pushReplacementNamed(context, '/');
                 },
               ),
             ),
           ],
         ),
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: h / 50,
+      body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: h / 50,
+            ),
+            Container(
+              margin: const EdgeInsets.all(10),
+              height: h / 4,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                border: Border.all(color: AppColors.appColor),
               ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                height: h / 3.2,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        border: Border(
+                            right: BorderSide(color: AppColors.appColor)),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            webp + User.data['selfifile'],
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
                   ),
-                  border: Border.all(color: AppColors.appColor),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            User.data['fullname'],
+                            style: const TextStyle(fontSize: 22),
                           ),
-                          border: Border(
-                              right: BorderSide(color: AppColors.appColor)),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              webp + User.data['selfifile'],
-                            ),
-                            fit: BoxFit.cover,
+                          Divider(
+                            color: AppColors.appColor.withOpacity(0.5),
                           ),
-                        ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Provider Rating',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              RatingBar.builder(
+                                initialRating: double.parse(
+                                    User.data['provider_avg_rating']),
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 10,
+                                itemSize: 16,
+                                ignoreGestures: true,
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 1.5),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (double value) {},
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: AppColors.appColor.withOpacity(0.5),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'User Rating',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              RatingBar.builder(
+                                initialRating:
+                                    double.parse(User.data['user_avg_rating']),
+                                direction: Axis.horizontal,
+                                allowHalfRating: true,
+                                itemCount: 10,
+                                itemSize: 16,
+                                ignoreGestures: true,
+                                itemPadding:
+                                    const EdgeInsets.symmetric(horizontal: 1.5),
+                                itemBuilder: (context, _) => const Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                ),
+                                onRatingUpdate: (rating) {},
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: AppColors.appColor.withOpacity(0.5),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Transform.scale(
+                                  scale: 0.6,
+                                  child:
+                                      Switch(value: true, onChanged: (val) {})),
+                              const Text(
+                                'Available',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Full Name',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                Text(
-                                  User.data['fullname'],
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: AppColors.appColor.withOpacity(0.5),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Mobile Number',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                Text(
-                                  User.data['mobile_no'],
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: AppColors.appColor.withOpacity(0.5),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Gmail',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                Text(
-                                  User.data['email'],
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: AppColors.appColor.withOpacity(0.5),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Provider Rating',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                RatingBar.builder(
-                                  initialRating: double.parse(
-                                      User.data['provider_avg_rating']),
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 10,
-                                  itemSize: 16,
-                                  ignoreGestures: true,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 1.5),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
-                                ),
-                              ],
-                            ),
-                            Divider(
-                              color: AppColors.appColor.withOpacity(0.5),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'User Rating',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                RatingBar.builder(
-                                  initialRating: double.parse(
-                                      User.data['user_avg_rating']),
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 10,
-                                  itemSize: 16,
-                                  ignoreGestures: true,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 1.5),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: h / 10,
+            ),
+            CarouselSlider(
+              options: CarouselOptions(
+                autoPlay: true,
+                aspectRatio: 16 / 8,
+                enlargeCenterPage: true,
+                enableInfiniteScroll: true,
+              ),
+              items: provider.categoryApi.data.map((e) {
+                return Container(
+                  height: h / 4.2,
+                  width: w / 1,
+                  margin: const EdgeInsets.only(right: 15),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.appColor,
+                      width: 2,
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: h / 10,
-              ),
-              CarouselSlider(
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 16 / 8,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: true,
-                ),
-                items: provider.categoryApi.data.map((e) {
-                  return Container(
-                    height: h / 4.2,
-                    width: w / 1,
-                    margin: const EdgeInsets.only(right: 15),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.appColor,
-                        width: 2,
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://i.pinimg.com/originals/ee/d3/03/eed303679e96d27a96cd4850f4e3fb4c.jpg'),
-                        fit: BoxFit.cover,
-                      ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15),
                     ),
-                  );
-                }).toList(),
-              ),
-              SizedBox(
-                height: h / 20,
-              ),
-              // const Text(
-              //   'Popular Category',
-              //   style: TextStyle(fontSize: 22, letterSpacing: 1),
-              // ),
-              SizedBox(
-                height: h / 50,
-              ),
-            ],
-          ),
+                    image: const DecorationImage(
+                      image: NetworkImage(
+                          'https://i.pinimg.com/originals/ee/d3/03/eed303679e96d27a96cd4850f4e3fb4c.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            SizedBox(
+              height: h / 20,
+            ),
+            // const Text(
+            //   'Popular Category',
+            //   style: TextStyle(fontSize: 22, letterSpacing: 1),
+            // ),
+            SizedBox(
+              height: h / 50,
+            ),
+          ],
         ),
       ),
     );
