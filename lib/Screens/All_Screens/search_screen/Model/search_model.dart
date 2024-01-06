@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final categoryApi = categoryApiFromJson(jsonString);
-
 import 'dart:convert';
 
 CategoryApi categoryApiFromJson(String str) =>
@@ -14,7 +10,12 @@ class CategoryApi {
 
   CategoryApi({
     required this.data,
-  });
+  }) {
+    // Sort the data list by name in a case-insensitive manner
+    data.sort((a, b) {
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+  }
 
   factory CategoryApi.fromJson(Map<String, dynamic> json) => CategoryApi(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),

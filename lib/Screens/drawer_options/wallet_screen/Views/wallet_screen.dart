@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 import '../Global/wallet_global.dart';
 
 class WalletScreen extends StatelessWidget {
@@ -32,197 +33,41 @@ class WalletScreen extends StatelessWidget {
         ),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: h / 20,
+            height: h / 7,
           ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Team reference income :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Work reward income :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Yearly work reward income :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'KYC fees :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Accumulated total :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Withdrawal total :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: AppColors.appColor, width: 1),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Available balance :',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-                Text(
-                  '00.0',
-                  style: WalletGlobal.walletTextStyle,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: h / 20,
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            padding: EdgeInsets.all(10),
-            height: h / 12,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
-              ),
-              border: Border.all(
-                color: AppColors.appColor,
-              ),
-            ),
-            child: Align(
+          Expanded(
+            child: Container(
               alignment: Alignment.center,
-              child: Text(
-                'Bank details & Pan card details not updated',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.red,
-                ),
+              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.appColor, width: 1),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Balance :',
+                    style: WalletGlobal.walletTextStyle,
+                  ),
+                  SizedBox(
+                    height: h / 35,
+                  ),
+                  Text(
+                    User.data['walletbalance'],
+                    style: WalletGlobal.balanceTextStyle,
+                  ),
+                  SizedBox(
+                    height: h / 50,
+                  ),
+                ],
               ),
             ),
           ),
+          const Expanded(flex: 2, child: SizedBox()),
         ],
       ),
     );

@@ -1,5 +1,3 @@
-import 'package:ees121/Screens/All_Screens/category_detail_screen/Views/category_detail_screen.dart';
-import 'package:ees121/Screens/All_Screens/detail_screen/Views/detail_screen.dart';
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/address.dart';
@@ -8,6 +6,7 @@ import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Id
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Service/View/service.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/change_password/Views/change_password.dart';
 import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
+import 'package:ees121/Screens/All_Screens/search_screen/Category_two/category_two.dart';
 import 'package:ees121/Screens/All_Screens/search_screen/provider/search_provider.dart';
 import 'package:ees121/Screens/Splash_screen/Views/splash_screen.dart';
 import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
@@ -22,7 +21,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Screens/All_Screens/category_detail_screen/Views/category_detail_screen.dart';
 import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
+import 'Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
 import 'Screens/drawer_options/wallet_screen/Views/wallet_screen.dart';
 
 void main() async {
@@ -39,6 +40,8 @@ void main() async {
             create: (context) => CategoryProvider()),
         ListenableProvider<PasswordProvider>(
             create: (context) => PasswordProvider()),
+        ListenableProvider<CategoryTwoProvider>(
+            create: (context) => CategoryTwoProvider()),
       ],
       child: MaterialApp(
         title: "EES121",
@@ -47,13 +50,14 @@ void main() async {
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         routes: {
-          'splash': (context) => const SplashScreen(),
+          '/': (context) => const SplashScreen(),
           'get_started': (context) => const GetStarted(),
-          '/': (context) => const LoginPage(),
+          'login': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
           'navbar': (context) => const NavBar(),
-          'category_detail_screen': (context) => const CategoryDetailScreen(),
-          'detail_screen': (context) => const DetailScreen(),
+          // 'category_detail_screen': (context) => const CategoryDetailScreen(),
+          // 'detail_screen': (context) => const DetailScreen(),
+          'category_two': (context) => const Categorytwo(),
           'wallet_screen': (context) => const WalletScreen(),
           'team_screen': (context) => const TeamScreen(),
           'referral_screen': (context) => const ReferralScreen(),

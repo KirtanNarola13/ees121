@@ -13,14 +13,10 @@ class SplashScreen extends StatelessWidget {
       SharedPreferences preferences = await SharedPreferences.getInstance();
 
       bool isIntroVisited = preferences.getBool("isVisited") ?? false;
-      bool isEesLogin = preferences.getBool('isLogin') ?? false;
-      bool isEesSignUp = preferences.getBool('isSignUp') ?? false;
+      // bool isEesLogin = preferences.getBool('isLogin') ?? false;
+      // bool isEesSignUp = preferences.getBool('isSignUp') ?? false;
 
-      String routeName = (isIntroVisited)
-          ? (isEesLogin || isEesSignUp)
-              ? 'navbar'
-              : 'login'
-          : 'get_started';
+      String routeName = (isIntroVisited) ? 'login' : 'get_started';
 
       Navigator.pushReplacementNamed(context, routeName);
     }

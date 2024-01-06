@@ -4,6 +4,9 @@ import '../../../../Colors/colors.dart';
 
 class WalletGlobal {
   static TextStyle walletTextStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 30,
+  );
+  static TextStyle balanceTextStyle = TextStyle(
+    fontSize: 28,
   );
 }

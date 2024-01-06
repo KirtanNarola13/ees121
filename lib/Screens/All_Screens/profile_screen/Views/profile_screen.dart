@@ -31,29 +31,18 @@ class ProfileScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: Stack(
-              alignment: const Alignment(1, 0.9),
-              children: [
-                Container(
-                  height: 300,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.appColor,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        webp + User.data['selfifile'],
-                      ),
-                    ),
+            child: Container(
+              height: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    webp + User.data['selfifile'],
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.edit,
-                    size: 32,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           Expanded(
@@ -293,35 +282,40 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(15),
-                        ),
-                        border: Border.all(color: AppColors.appColor),
-                      ),
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      height: h / 10,
-                      width: w / 4.5,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Icon(
-                              Iconsax.money_2,
-                              size: 25,
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, 'wallet_screen');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Wallet',
-                                style: TextStyle(fontSize: 10),
+                          border: Border.all(color: AppColors.appColor),
+                        ),
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        height: h / 10,
+                        width: w / 4.5,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Icon(
+                                Iconsax.money_2,
+                                size: 25,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Wallet',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

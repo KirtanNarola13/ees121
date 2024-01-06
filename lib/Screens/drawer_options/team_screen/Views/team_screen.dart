@@ -35,31 +35,6 @@ class TeamScreen extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "0 Verified",
-                      style: TeamGlobal.titleStyle,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "0 Pending",
-                      style: TeamGlobal.titleStyle,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
             child: Container(
               padding: EdgeInsets.only(
                 left: 10,

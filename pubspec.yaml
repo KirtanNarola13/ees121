@@ -39,12 +39,10 @@ dependencies:
   iconsax:
   carousel_slider:
   provider:
-  firebase_core:
   google_sign_in:
   url_launcher:
   http:
   flutter_spinkit:
-  anim_search_bar:
   shared_preferences:
   flutter_rating_bar:
 
@@ -82,11 +80,11 @@ flutter:
     - lib/Screens/All_Screens/home_screen/Assets/
     - lib/Screens/All_Screens/Assets/service_category/
     - lib/Screens/All_Screens/Assets/services/
-    - lib/Screens/All_Screens/detail_screen/Assets/
     - android/app/src/main/res/
     - lib/Screens/All_Screens/referral_screen/Assets/
     - lib/Screens/Splash_screen/Assets/
     - lib/Screens/All_Screens/profile_screen/Views/Profile_Vewis/change_password/Assets/
+    - lib/Screens/drawer_options/customer_care/Assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

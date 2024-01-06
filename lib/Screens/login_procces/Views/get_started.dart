@@ -89,7 +89,7 @@ class _GetStartedState extends State<GetStarted> {
               },
               child: Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
                 width: w / 1.3,
                 height: h / 100,
                 decoration: BoxDecoration(

@@ -1,9 +1,15 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'package:ees121/Screens/All_Screens/category_detail_screen/Model/category_detail_model.dart';
+import 'package:ees121/Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
+import '../../category_detail_screen/Global/category_detail_screen_global.dart';
 import '../Model/search_model.dart';
 import '../provider/search_provider.dart';
 
@@ -17,20 +23,25 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
+    //
+
+    //
+    Provider.of<CategoryProvider>(context).getCategoryFromApi();
+    //
+
+//
     log('Re Built Ui');
-    return Scaffold(
-      body: Consumer<CategoryProvider>(
-        builder: (context, provider, _) {
-          if (provider.state == CategoryProviderState.Loading) {
-            return getLoadingUI();
-          } else if (provider.error.isNotEmpty) {
-            return getErrorUI(provider.error);
-          } else {
-            return getBodyUI(provider.categoryApi);
-          }
-        },
-      ),
-    );
+    return Scaffold(body: Consumer<CategoryProvider>(
+      builder: (context, provider, _) {
+        if (provider.state == CategoryProviderState.Error) {
+          return getErrorUI(provider.error);
+        } else if (provider.state == CategoryProviderState.Loaded) {
+          return getBodyUI(provider.categoryApi);
+        } else {
+          return getLoadingUI();
+        }
+      },
+    ));
   }
 
   Widget getLoadingUI() {
@@ -56,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget getBodyUI(CategoryApi catrgoryApi) {
     return Container(
-      margin: EdgeInsets.only(left: 10),
+      margin: const EdgeInsets.only(left: 10),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -64,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
               height: MediaQuery.of(context).size.height / 15,
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Text(
               'What service are you looking for?',
               style: TextStyle(
@@ -73,13 +84,13 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 20,
             ),
           ),
           SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3, // Adjust as needed
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
@@ -89,7 +100,12 @@ class _SearchScreenState extends State<SearchScreen> {
               (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'category_detail_screen',
+                    // launchUrl(Uri.parse('https://ees121.com/login'),
+                    //     mode: LaunchMode.inAppWebView);
+                    // CategoryProviderListModel(
+                    //     categoryname: catrgoryApi.data[index].name);
+                    // categoryName = catrgoryApi.data[index].name;
+                    Navigator.pushNamed(context, 'category_two',
                         arguments: index);
                   },
                   child: Container(
@@ -120,7 +136,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Text(
                           catrgoryApi.data[index].name,
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 10),
+                          style: const TextStyle(fontSize: 10),
                         ),
                       ],
                     ),

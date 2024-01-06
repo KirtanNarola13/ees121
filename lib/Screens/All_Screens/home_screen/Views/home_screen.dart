@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ees121/Global/globalUser.dart';
@@ -20,26 +21,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Set up a periodic timer to fetch data every second
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      Provider.of<CategoryProvider>(context, listen: false)
-          .getCategoryFromApi();
-    });
-  }
-
-  @override
-  void dispose() {
-    // Cancel the timer when the widget is disposed
-    _timer.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -47,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var scaffoldKey = GlobalKey<ScaffoldState>();
 
     // API
-    final provider = Provider.of<CategoryProvider>(context);
     // WBP
     String webp = "https://api2.appsolution.online/files/";
 
@@ -103,9 +83,33 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(),
-              child: CircleAvatar(),
+            DrawerHeader(
+              decoration: const BoxDecoration(),
+              child: Container(
+                height: 300,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      webp + User.data['selfifile'],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text('Profile'),
+                ],
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, 'profile_screen');
+              },
             ),
             ListTile(
               title: const Row(
@@ -176,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, '/');
+                  Navigator.pushReplacementNamed(context, 'login');
                 },
               ),
             ),
@@ -189,12 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: h / 50,
-            ),
             Container(
               margin: const EdgeInsets.all(10),
-              height: h / 4,
+              height: h / 3,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(15),
@@ -296,12 +297,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Transform.scale(
-                                  scale: 0.6,
-                                  child:
-                                      Switch(value: true, onChanged: (val) {})),
-                              const Text(
-                                'Available',
-                                style: TextStyle(fontSize: 16),
+                                scale: 0.6,
+                                child: Switch(
+                                  value: (User.data['isavailable'] == 1)
+                                      ? true
+                                      : false,
+                                  onChanged: (val) {},
+                                ),
+                              ),
+                              Text(
+                                (User.data['isavailable'] == 1)
+                                    ? 'Available'
+                                    : 'Not Available',
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -313,16 +321,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: h / 10,
+              height: h / 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                'Popular Offers',
+                style: TextStyle(fontSize: 22, letterSpacing: 1),
+              ),
+            ),
+            SizedBox(
+              height: h / 40,
             ),
             CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
                 aspectRatio: 16 / 8,
+                height: h / 3,
                 enlargeCenterPage: true,
                 enableInfiniteScroll: true,
               ),
-              items: provider.categoryApi.data.map((e) {
+              items: User.offer.map((e) {
                 return Container(
                   height: h / 4.2,
                   width: w / 1,
@@ -335,9 +354,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(15),
                     ),
-                    image: const DecorationImage(
+                    image: DecorationImage(
                       image: NetworkImage(
-                          'https://i.pinimg.com/originals/ee/d3/03/eed303679e96d27a96cd4850f4e3fb4c.jpg'),
+                          'https://api2.appsolution.online/files/' +
+                              e['offer_file']),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -347,13 +367,67 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: h / 20,
             ),
-            // const Text(
-            //   'Popular Category',
-            //   style: TextStyle(fontSize: 22, letterSpacing: 1),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 10),
+            //   child: Text(
+            //     'Popular Category',
+            //     style: TextStyle(fontSize: 22, letterSpacing: 1),
+            //   ),
             // ),
-            SizedBox(
-              height: h / 50,
-            ),
+            // SizedBox(
+            //   height: h / 50,
+            // ),
+            // GridView.builder(
+            //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            //       maxCrossAxisExtent: 3),
+            //   itemBuilder: (context, index) {
+            //     return GestureDetector(
+            //       onTap: () {
+            //         Navigator.pushNamed(context, 'category_detail_screen',
+            //             arguments: index);
+            //       },
+            //       child: Container(
+            //         margin: const EdgeInsets.all(8.0),
+            //         padding: const EdgeInsets.only(
+            //           top: 5,
+            //           right: 5,
+            //           left: 5,
+            //         ),
+            //         decoration: BoxDecoration(
+            //           border: Border.all(
+            //             color:
+            //                 AppColors.appColor, // Change this color if needed
+            //             width: 1,
+            //           ),
+            //           borderRadius: const BorderRadius.all(
+            //             Radius.circular(15),
+            //           ),
+            //         ),
+            //         child: Column(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Image.network(
+            //               CategoryProvider.imgPoint +
+            //                   Provider.of<CategoryProvider>(context)
+            //                       .categoryApi
+            //                       .data[index]
+            //                       .img,
+            //             ),
+            //             const SizedBox(height: 8),
+            //             Text(
+            //               Provider.of<CategoryProvider>(context)
+            //                   .categoryApi
+            //                   .data[index]
+            //                   .name,
+            //               textAlign: TextAlign.center,
+            //               style: const TextStyle(fontSize: 10),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     );
+            //   },
+            // )
           ],
         ),
       ),

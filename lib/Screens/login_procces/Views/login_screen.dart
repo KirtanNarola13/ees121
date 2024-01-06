@@ -1,21 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:ees121/Colors/colors.dart';
 import 'package:ees121/Global/globalUser.dart';
 import 'package:ees121/Screens/login_procces/Global/global.dart';
-import 'package:ees121/Screens/login_procces/Model/userModel.dart';
 import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../Colors/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -23,10 +20,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _eesKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
     // Replace with your actual API endpoint
     void login(String id, String password) async {
       try {
@@ -47,6 +46,8 @@ class _LoginPageState extends State<LoginPage> {
 
             // Assuming 'User.data' is a Map<String, dynamic> variable
             User.data = userData['0'];
+            User.offer = userData['offers'];
+            log(User.offer.toString());
             log(User.data.toString());
             log("Login");
             Navigator.pushReplacementNamed(context, 'navbar');
@@ -60,22 +61,7 @@ class _LoginPageState extends State<LoginPage> {
         log('Error: $e');
       }
     }
-    // // Google SignIn
-    // final GoogleSignIn _googleSignIn = GoogleSignIn();
-    // //
-    // Future<void> _signInWithGoogle() async {
-    //   try {
-    //     await _googleSignIn.signIn();
-    //     log("${_googleSignIn.currentUser?.displayName}");
-    //     log("${_googleSignIn.currentUser?.email}");
-    //     log("${_googleSignIn.currentUser?.photoUrl}");
-    //     log("${_googleSignIn.currentUser?.id}");
-    //   } catch (error) {
-    //     log("Error signing in with Google: $error");
-    //   }
-    // }
 
-    //
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -95,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Login to you',
                       style: TextStyle(
                         fontSize: 37,
@@ -105,7 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                       'Account',
                       style: TextStyle(
                         fontSize: 37,
-                        color: AppColors.appColor,
+                        color:
+                            AppColors.appColor, // Change to your desired color
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -143,9 +130,10 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Phone',
                           labelStyle: TextStyle(
-                            color: AppColors.appColor,
+                            color: AppColors
+                                .appColor, // Change to your desired color
                           ),
-                          border: const OutlineInputBorder(
+                          border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
@@ -155,11 +143,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           prefixIcon: Padding(
-                            padding: const EdgeInsets.all(0.0),
+                            padding: EdgeInsets.all(0.0),
                             child: Icon(
                               Icons.phone,
-                              color: AppColors.appColor,
-                            ), // icon is 48px widget.
+                              color: AppColors
+                                  .appColor, // Change to your desired color
+                            ),
                           ),
                         ),
                       ),
@@ -180,14 +169,16 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           labelStyle: TextStyle(
-                            color: AppColors.appColor,
+                            color: AppColors
+                                .appColor, // Change to your desired color
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
+                            borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
                             borderSide: BorderSide(
-                              color: AppColors.appColor,
+                              color: AppColors
+                                  .appColor, // Change to your desired color
                               width: 5,
                             ),
                           ),
@@ -202,12 +193,13 @@ class _LoginPageState extends State<LoginPage> {
                               icon: Provider.of<PasswordProvider>(context)
                                       .password
                                       .obscureText
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.visibility,
                                     )
-                                  : Icon(Icons.visibility_off),
-                              color: AppColors.appColor,
-                            ), // icon is 48px widget.
+                                  : const Icon(Icons.visibility_off),
+                              color: AppColors
+                                  .appColor, // Change to your desired color
+                            ),
                           ),
                         ),
                         obscureText:
@@ -222,7 +214,6 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () async {
                           if (_eesKey.currentState!.validate()) {
                             // Share Preferences
-
                             SharedPreferences preferences =
                                 await SharedPreferences.getInstance();
 
@@ -243,8 +234,9 @@ class _LoginPageState extends State<LoginPage> {
                           width: w / 1.5,
                           height: h / 13,
                           decoration: BoxDecoration(
-                            color: AppColors.appColor,
-                            borderRadius: const BorderRadius.all(
+                            color: AppColors
+                                .appColor, // Change to your desired color
+                            borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),
@@ -265,20 +257,26 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Dont have an account? ',
+                    'Don\'t have an account? ',
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      launchUrl(
+                          Uri.parse('https://ees121.com/join/EES1655090049348'),
+                          mode: LaunchMode.inAppWebView);
+                    },
                     child: Text(
                       'Sign up',
                       style: TextStyle(
                         fontSize: 16,
-                        color: AppColors.appColor,
+                        color:
+                            AppColors.appColor, // Change to your desired color
                         decoration: TextDecoration.underline,
-                        decorationColor: AppColors.appColor,
+                        decorationColor:
+                            AppColors.appColor, // Change to your desired color
                       ),
                     ),
                   ),
