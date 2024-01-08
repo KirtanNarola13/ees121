@@ -29,18 +29,41 @@ class CategoryTwoApi {
 class CategoryUser {
   final String fullname;
   final String selfifile;
+  final String category;
+  final String company;
+  final String userAverageRating;
+  final String providerAverageRating;
 
   CategoryUser({
     required this.fullname,
     required this.selfifile,
+    required this.category,
+    required this.company,
+    required this.userAverageRating,
+    required this.providerAverageRating,
   });
 
   factory CategoryUser.fromJson(Map<String, dynamic> json) => CategoryUser(
-      fullname: (json["fullname"] == null) ? "" : json["fullname"],
-      selfifile: (json["selfifile"] == null) ? "noimg.png" : json["selfifile"]);
+        fullname: (json["fullname"] == null) ? "" : json["fullname"],
+        selfifile:
+            (json["selfifile"] == null) ? "noimg.png" : json["selfifile"],
+        category: (json["category"] == null) ? "" : json["category"],
+        company: (json["organization_name"] == null)
+            ? ""
+            : json["organization_name"],
+        userAverageRating:
+            (json["user_avg_rating"] == null) ? 0 : json["user_avg_rating"],
+        providerAverageRating: (json["provider_avg_rating"] == null)
+            ? 0
+            : json["provider_avg_rating"],
+      );
 
   Map<String, dynamic> toJson() => {
         "fullname": fullname,
         "selfifile": selfifile,
+        "category": category,
+        "organization_name": company,
+        "user_avg_rating": userAverageRating,
+        "provider_avg_rating": providerAverageRating,
       };
 }

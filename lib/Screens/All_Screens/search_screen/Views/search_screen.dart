@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import '../../../../Colors/colors.dart';
 import '../../../../Global/globalUser.dart';
 import '../../category_detail_screen/Global/category_detail_screen_global.dart';
+import '../Global/category_global.dart';
 import '../Model/search_model.dart';
 import '../provider/search_provider.dart';
 
@@ -22,6 +23,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   @override
+  @override
   Widget build(BuildContext context) {
     //
 
@@ -30,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     //
 
 //
-    log('Re Built Ui');
+
     return Scaffold(body: Consumer<CategoryProvider>(
       builder: (context, provider, _) {
         if (provider.state == CategoryProviderState.Error) {
@@ -100,13 +102,18 @@ class _SearchScreenState extends State<SearchScreen> {
               (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    // launchUrl(Uri.parse('https://ees121.com/login'),
-                    //     mode: LaunchMode.inAppWebView);
-                    // CategoryProviderListModel(
-                    //     categoryname: catrgoryApi.data[index].name);
-                    // categoryName = catrgoryApi.data[index].name;
-                    Navigator.pushNamed(context, 'category_two',
-                        arguments: index);
+                    // Update the Name.name variable with the selected category name
+
+                    // Navigate to the detail screen
+                    Navigator.pushNamed(
+                      context,
+                      'category_two',
+                      arguments:
+                          Provider.of<CategoryProvider>(context, listen: false)
+                              .categoryApi
+                              .data[index]
+                              .name,
+                    );
                   },
                   child: Container(
                     margin: const EdgeInsets.all(8.0),

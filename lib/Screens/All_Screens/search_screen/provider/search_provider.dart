@@ -22,14 +22,13 @@ class CategoryProvider extends ChangeNotifier {
 
   Future<void> getCategoryFromApi() async {
     try {
-      log('Fetching category data...');
+      // log('Fetching category data...');
       final http.Response response = await http.get(Uri.parse(apiEndpoint));
-      log('API Response: ${response.body}');
 
       if (response.statusCode == 200) {
         _categoryApi = categoryApiFromJson(response.body);
         _state = CategoryProviderState.Loaded;
-        log('Category data loaded successfully.');
+        // log('Category data loaded successfully.');
       } else {
         _error = response.statusCode.toString();
         _state = CategoryProviderState.Error;

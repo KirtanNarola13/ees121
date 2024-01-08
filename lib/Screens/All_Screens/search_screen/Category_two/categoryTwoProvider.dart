@@ -13,16 +13,11 @@ import '../../../../Global/globalUser.dart';
 enum CategoryTwoProviderState { Loading, Loaded, Error }
 
 class CategoryTwoProvider extends ChangeNotifier {
-  static final apiEndpoint =
-      'https://adminpanel.appsolution.online/ees121/api/categoryuser?category=${Name.name}&city=${User.data['cur_city']}';
   static const imgPoint = 'https://api2.appsolution.online/files/';
-  // static const apiEndpoint =
-  //     'https://adminpanel.appsolution.online/ees121/api/categorylist';
-  // static const imgPoint =
-  //     'https://adminpanel.appsolution.online/ees121/files/categoryimages/';
 
   CategoryTwoProviderState _state = CategoryTwoProviderState.Loading;
   String _error = '';
+
   CategoryTwoApi _categoryTwoApi = CategoryTwoApi(data: []);
 
   CategoryTwoProviderState get state => _state;
@@ -31,24 +26,37 @@ class CategoryTwoProvider extends ChangeNotifier {
 
   Future<void> getCategoryTwoFromApi() async {
     try {
-      log('Fetching category data...');
-      final http.Response response = await http.get(Uri.parse(apiEndpoint));
-      //   log('API Response: ${response.body}');
+      if (Name.name != null) {
+        log('Fetching category data for ${Name.name}...');
+        final http.Response response = await http.get(Uri.parse(
+            'https://adminpanel.appsolution.online/ees121/api/categoryuser?category=${Name.name?.replaceAll(' ', '%20')}&city=${User.data['cur_city']}'));
+        log('API Response Status Code: ${response.statusCode}');
 
-      if (response.statusCode == 200) {
-        log('Fetching statusCode 200...');
-        log(categoryTwoApi.data.toString());
-        // log(response.body);
-        _categoryTwoApi = categoryTwoApiFromJson(response.body);
-        log('Fetching statusCode 200 -001...');
-        _state = CategoryTwoProviderState.Loaded;
-        // log(categoryTwoApi.data.toString());
-        log('Category data loaded successfully.');
+        if (response.statusCode == 200) {
+          log('Fetching statusCode 200...');
+
+          // Clear old data before adding new data
+          _categoryTwoApi.data.clear();
+          // Parse the response body into CategoryTwoApi model
+          _categoryTwoApi = categoryTwoApiFromJson(response.body);
+
+          // Check if the parsed data is not null and not empty
+          if (_categoryTwoApi != null && _categoryTwoApi.data.isNotEmpty) {
+            log('Category provider data loaded successfully.');
+            log('Parsed Data: ${response.body}');
+            _state = CategoryTwoProviderState.Loaded;
+          } else {
+            log('Error: Parsed data is null or empty.');
+            _state = CategoryTwoProviderState.Error;
+            _error = 'Error: Parsed data is null or empty.';
+          }
+        } else {
+          _error = response.statusCode.toString();
+          _state = CategoryTwoProviderState.Error;
+          log('Error loading category data: $_error');
+        }
       } else {
-        log('Fetching statusCode else...');
-        _error = response.statusCode.toString();
-        _state = CategoryTwoProviderState.Error;
-        log('else Error loading category data: $_error');
+        log('Skipping fetch as category name has not changed.');
       }
     } catch (e) {
       _error = "catch";

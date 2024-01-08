@@ -2,14 +2,16 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ees121/Colors/colors.dart';
-import 'package:ees121/Global/globalUser.dart';
-import 'package:ees121/Screens/login_procces/Global/global.dart';
-import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../Global/globalUser.dart';
+import '../Global/global.dart';
+import '../provider/passwordProvider.dart';
+
+// Import other dependencies and files as needed
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,9 +28,10 @@ class _LoginPageState extends State<LoginPage> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    // Replace with your actual API endpoint
     void login(String id, String password) async {
       try {
+        Provider.of<PasswordProvider>(context, listen: false).showLoading();
+
         http.Response response = await http.post(
           Uri.parse('https://adminpanel.appsolution.online/ees121/api/user'),
           body: {'loginid': id, 'loginpass': password},
@@ -41,10 +44,8 @@ class _LoginPageState extends State<LoginPage> {
           final Map<String, dynamic> responseData = json.decode(response.body);
 
           if (responseData['status'] == 'SUCCESS') {
-            // Assuming 'data' is the field containing the user profile
             Map<String, dynamic> userData = responseData['data'];
 
-            // Assuming 'User.data' is a Map<String, dynamic> variable
             User.data = userData['0'];
             User.offer = userData['offers'];
             log(User.offer.toString());
@@ -53,12 +54,29 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushReplacementNamed(context, 'navbar');
           } else {
             log('Login Failed: ${responseData['status']}');
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Invalid phone or password'),
+              ),
+            );
           }
         } else {
           log('Failed: ${response.statusCode}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Invalid phone or password'),
+            ),
+          );
         }
       } catch (e) {
         log('Error: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+          ),
+        );
+      } finally {
+        Provider.of<PasswordProvider>(context, listen: false).hideLoading();
       }
     }
 
@@ -81,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Login to you',
                       style: TextStyle(
                         fontSize: 37,
@@ -125,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                           return null;
                         },
+                        maxLength: 10,
                         controller: LoginSinUp.numberController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
@@ -133,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: AppColors
                                 .appColor, // Change to your desired color
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
                             ),
@@ -143,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           prefixIcon: Padding(
-                            padding: EdgeInsets.all(0.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Icon(
                               Icons.phone,
                               color: AppColors
@@ -173,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                                 .appColor, // Change to your desired color
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
                             borderSide: BorderSide(
@@ -212,12 +231,10 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: () async {
+                          FocusScope.of(context).unfocus();
                           if (_eesKey.currentState!.validate()) {
-                            // Share Preferences
-                            SharedPreferences preferences =
-                                await SharedPreferences.getInstance();
-
-                            preferences.setBool('isLogin', true);
+                            // SharedPreferences preferences = await SharedPreferences.getInstance();
+                            // preferences.setBool('isLogin', true);
                             login(LoginSinUp.numberController.text,
                                 LoginSinUp.passwordController.text);
                           } else {
@@ -228,23 +245,32 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           }
                         },
-                        child: Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.all(5),
-                          width: w / 1.5,
-                          height: h / 13,
-                          decoration: BoxDecoration(
-                            color: AppColors
-                                .appColor, // Change to your desired color
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                          ),
-                          child: const Text('Sign In',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                              )),
+                        child: Consumer<PasswordProvider>(
+                          builder: (context, passwordProvider, child) {
+                            return Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.all(5),
+                              width: w / 1.5,
+                              height: h / 13,
+                              decoration: BoxDecoration(
+                                color: AppColors
+                                    .appColor, // Change to your desired color
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: passwordProvider.isLoading
+                                  ? const CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    )
+                                  : const Text('Sign In',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                      )),
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -264,6 +290,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      // Assuming 'launchUrl' is a function to handle URL launching
+                      // Make sure to implement or replace this function with the correct one
                       launchUrl(
                           Uri.parse('https://ees121.com/join/EES1655090049348'),
                           mode: LaunchMode.inAppWebView);
