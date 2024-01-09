@@ -48,8 +48,10 @@ class _LoginPageState extends State<LoginPage> {
 
             User.data = userData['0'];
             User.offer = userData['offers'];
+            User.team = userData['team'];
             log(User.offer.toString());
             log(User.data.toString());
+            log(User.team.toString());
             log("Login");
             Navigator.pushReplacementNamed(context, 'navbar');
           } else {

@@ -45,6 +45,7 @@ dependencies:
   flutter_spinkit:
   shared_preferences:
   flutter_rating_bar:
+  share_plus:
 
 
 dev_dependencies:

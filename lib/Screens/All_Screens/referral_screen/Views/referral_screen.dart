@@ -1,5 +1,7 @@
+import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../Colors/colors.dart';
 
@@ -15,6 +17,7 @@ class _ReferralScreenState extends State<ReferralScreen> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    String referralLink = "https://ees121.com/join/";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -50,13 +53,51 @@ class _ReferralScreenState extends State<ReferralScreen> {
               ),
             ),
           ),
-          Expanded(
+          Text(
+            "Share And Earn",
+            style: TextStyle(
+              fontSize: 22,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
             child: Text(
-              "Share And Earn",
+              referralLink + User.data['userid'],
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 18,
+                color: AppColors.appColor,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.appColor,
               ),
             ),
+          ),
+          SizedBox(
+            height: h / 50,
+          ),
+          GestureDetector(
+            onTap: () {
+              Share.share(referralLink + User.data['userid']);
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.all(5),
+              width: w / 3,
+              height: h / 16,
+              decoration: BoxDecoration(
+                color: AppColors.appColor, // Change to your desired color
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              child: const Text('Share',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                  )),
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
           ),
         ],
       ),

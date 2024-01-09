@@ -64,7 +64,13 @@ class _CategorytwoState extends State<Categorytwo> {
           if (provider.state == CategoryTwoProviderState.Loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (provider.state == CategoryTwoProviderState.Error) {
-            return Text('Error: ${provider.error}');
+            return Center(
+                child: Text(
+              "There is no any provider",
+              style: TextStyle(
+                fontSize: 22,
+              ),
+            ));
           } else {
             return ListView.builder(
               itemCount: provider.categoryTwoApi.data.length,
