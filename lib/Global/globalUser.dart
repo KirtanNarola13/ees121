@@ -3,4 +3,9 @@ class User {
   static Map<String, dynamic> data = {};
   static List offer = [];
   static List team = [];
+  static List contactSupport = [];
+  static List workSent = [];
+  static List workReceived = [];
+  static List myOffers = [];
+  static List notifications = [];
 }

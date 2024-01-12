@@ -264,26 +264,97 @@ class CustomerCare extends StatelessWidget {
             )
           : Container(
               padding: const EdgeInsets.all(20),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage(
-                        'lib/Screens/drawer_options/customer_care/Assets/customer_care.png'),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "We have received your ticket and are currently reviewing it. Our team will contact you soon.",
-                      style: TextStyle(
-                        fontSize: 22,
-                        letterSpacing: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: User.contactSupport
+                    .map(
+                      (e) => Container(
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.only(bottom: 20),
+                        height: h / 4,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: AppColors.appColor)),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text("Requested Date :"),
+                                  SizedBox(
+                                    width: w / 30,
+                                  ),
+                                  Text("${e['requestdate']}"),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text("Name :"),
+                                  SizedBox(
+                                    width: w / 30,
+                                  ),
+                                  Text("${e['contact_name']}"),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text("Email :"),
+                                  SizedBox(
+                                    width: w / 30,
+                                  ),
+                                  Text("${e['contact_email']}"),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text("Number :"),
+                                  SizedBox(
+                                    width: w / 30,
+                                  ),
+                                  Text("${e['contact_no']}"),
+                                ],
+                              ),
+                            ),
+                            Divider(),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Text("Message :"),
+                                  SizedBox(
+                                    width: w / 30,
+                                  ),
+                                  Text("${e['message']}"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
+                    )
+                    .toList(),
               ),
             ),
     );
   }
 }
+
+//Align(
+//                     alignment: Alignment.center,
+//                     child: Text(
+//                       "We have received your ticket and are currently reviewing it. Our team will contact you soon.",
+//                       style: TextStyle(
+//                         fontSize: 22,
+//                         letterSpacing: 3,
+//                       ),
+//                     ),
+//                   ),

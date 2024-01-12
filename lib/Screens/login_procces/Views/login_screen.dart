@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Global/globalUser.dart';
@@ -48,10 +48,20 @@ class _LoginPageState extends State<LoginPage> {
 
             User.data = userData['0'];
             User.offer = userData['offers'];
+            User.myOffers = userData['myoffers'];
             User.team = userData['team'];
+            User.contactSupport = userData['contactsupport'];
+            User.workSent = userData['worksent'];
+            User.workReceived = userData['workreceived'];
+            User.notifications = userData['notifications'];
             log(User.offer.toString());
+            log(User.myOffers.toString());
             log(User.data.toString());
             log(User.team.toString());
+            log(User.contactSupport.toString());
+            log(User.workSent.toString());
+            log(User.workReceived.toString());
+            log(User.notifications.toString());
             log("Login");
             Navigator.pushReplacementNamed(context, 'navbar');
           } else {

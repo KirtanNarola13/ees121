@@ -1,16 +1,8 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:ees121/Screens/All_Screens/category_detail_screen/Model/category_detail_model.dart';
-import 'package:ees121/Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
+
 import '../../../../Colors/colors.dart';
-import '../../../../Global/globalUser.dart';
-import '../../category_detail_screen/Global/category_detail_screen_global.dart';
-import '../Global/category_global.dart';
 import '../Model/search_model.dart';
 import '../provider/search_provider.dart';
 
@@ -117,11 +109,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   },
                   child: Container(
                     margin: const EdgeInsets.all(8.0),
-                    padding: const EdgeInsets.only(
-                      top: 5,
-                      right: 5,
-                      left: 5,
-                    ),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color:
@@ -135,15 +122,32 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network(
-                          CategoryProvider.imgPoint +
-                              catrgoryApi.data[index].img,
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  CategoryProvider.imgPoint +
+                                      catrgoryApi.data[index].img,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          catrgoryApi.data[index].name,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              catrgoryApi.data[index].name,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(fontSize: 10),
+                            ),
+                          ),
                         ),
                       ],
                     ),

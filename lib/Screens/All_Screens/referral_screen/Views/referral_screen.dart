@@ -1,6 +1,5 @@
 import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../Colors/colors.dart';
@@ -89,11 +88,14 @@ class _ReferralScreenState extends State<ReferralScreen> {
                   Radius.circular(10),
                 ),
               ),
-              child: const Text('Share',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                  )),
+              child: const Text(
+                'Share',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           Expanded(

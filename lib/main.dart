@@ -1,5 +1,6 @@
 import 'package:ees121/Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'package:ees121/Screens/All_Screens/nav_bar/nav_bar.dart';
+import 'package:ees121/Screens/All_Screens/nonotification_screen/Views/notification_screen.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/address.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Document/Views/document.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Identity/View/identity_screen.dart';
@@ -21,7 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Screens/All_Screens/category_detail_screen/Views/category_detail_screen.dart';
 import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
 import 'Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
 import 'Screens/drawer_options/wallet_screen/Views/wallet_screen.dart';
@@ -68,6 +68,7 @@ void main() async {
           'document_screen': (context) => const DocumentScreen(),
           'service_screen': (context) => const ServiceScreen(),
           'identity_screen': (context) => const IdentityScreen(),
+          'notification_screen': (context) => const NotificationScreen(),
         },
       ),
     ),

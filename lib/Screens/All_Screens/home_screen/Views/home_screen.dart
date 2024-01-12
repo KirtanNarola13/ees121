@@ -1,17 +1,9 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ees121/Colors/colors.dart';
 import 'package:ees121/Global/globalUser.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
-
-import 'package:provider/provider.dart';
-import 'package:ees121/Colors/colors.dart';
-
-import '../../search_screen/provider/search_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: const Alignment(0.4, -0.6),
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, 'notification_screen');
+                },
                 icon: Image.asset(
                   'lib/Screens/All_Screens/home_screen/Assets/notification.png',
                   height: h / 13,
