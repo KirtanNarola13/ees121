@@ -14,11 +14,11 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  @override
+  final _searchKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     //
-
+    TextEditingController searchController = TextEditingController();
     //
     Provider.of<CategoryProvider>(context).getCategoryFromApi();
     //
@@ -30,7 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
         if (provider.state == CategoryProviderState.Error) {
           return getErrorUI(provider.error);
         } else if (provider.state == CategoryProviderState.Loaded) {
-          return getBodyUI(provider.categoryApi);
+          return getBodyUI(provider.categoryApi, searchController);
         } else {
           return getLoadingUI();
         }
@@ -59,7 +59,13 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget getBodyUI(CategoryApi catrgoryApi) {
+  Widget getBodyUI(
+      CategoryApi catrgoryApi, TextEditingController searchController) {
+    List filteredItems = catrgoryApi.data
+        .where((item) =>
+            item.name.toLowerCase() == searchController.text.toLowerCase())
+        .toList();
+
     return Container(
       margin: const EdgeInsets.only(left: 10),
       child: CustomScrollView(
@@ -69,92 +75,114 @@ class _SearchScreenState extends State<SearchScreen> {
               height: MediaQuery.of(context).size.height / 15,
             ),
           ),
-          const SliverToBoxAdapter(
-            child: Text(
-              'What service are you looking for?',
-              style: TextStyle(
-                fontSize: 28,
-                letterSpacing: 2,
+          SliverToBoxAdapter(
+            child: TextFormField(
+              onChanged: (String? val) {
+                searchController.text = val!;
+              },
+              controller: searchController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                hintText: "Search category",
+                labelStyle: TextStyle(
+                  color: AppColors.appColor,
+                ),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  borderSide: BorderSide(
+                    color: Colors.deepPurple,
+                    width: 5,
+                  ),
+                ),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Icon(
+                    Icons.search,
+                    color: AppColors.appColor,
+                  ),
+                ),
               ),
             ),
           ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: SizedBox(
-              height: 20,
+              height: MediaQuery.of(context).size.height / 30,
             ),
           ),
           SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, // Adjust as needed
+              crossAxisCount: 3,
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,
-              childAspectRatio: 0.8, // Adjust as needed
+              childAspectRatio: 0.8,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    // Update the Name.name variable with the selected category name
-
-                    // Navigate to the detail screen
-                    Navigator.pushNamed(
-                      context,
-                      'category_two',
-                      arguments:
-                          Provider.of<CategoryProvider>(context, listen: false)
-                              .categoryApi
-                              .data[index]
-                              .name,
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color:
-                            AppColors.appColor, // Change this color if needed
-                        width: 1,
+                if (filteredItems.isNotEmpty) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        'category_two',
+                        arguments: Provider.of<CategoryProvider>(context,
+                                listen: false)
+                            .categoryApi
+                            .data[index]
+                            .name,
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.appColor,
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                              ),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  CategoryProvider.imgPoint +
-                                      catrgoryApi.data[index].img,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
                                 ),
-                                fit: BoxFit.cover,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    CategoryProvider.imgPoint +
+                                        filteredItems[index].img,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              catrgoryApi.data[index].name,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 10),
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                filteredItems[index].name,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 10),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  return Container(); // Empty container when no match is found
+                }
               },
-              childCount: catrgoryApi.data.length,
+              childCount: filteredItems.length,
             ),
           ),
         ],

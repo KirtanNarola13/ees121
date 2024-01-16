@@ -41,31 +41,45 @@ class _LoginPageState extends State<LoginPage> {
         log('Response Body: ${response.body}');
 
         if (response.statusCode == 200) {
-          final Map<String, dynamic> responseData = json.decode(response.body);
+          final Map responseData = json.decode(response.body);
 
           if (responseData['status'] == 'SUCCESS') {
-            Map<String, dynamic> userData = responseData['data'];
+            Map userData = responseData['data'];
 
-            User.data = userData['0'];
+            User.data = userData['loginuser'];
+
             User.offer = userData['offers'];
+
             User.myOffers = userData['myoffers'];
+
             User.team = userData['team'];
-            User.contactSupport = userData['contactsupport'];
+
+            if (userData['contactsupport'] == "") {
+              log(userData['contactsupport']);
+            } else {
+              User.contactSupport = userData['contactsupport'];
+            }
+
             User.workSent = userData['worksent'];
+
             User.workReceived = userData['workreceived'];
+
             User.notifications = userData['notifications'];
-            log(User.offer.toString());
-            log(User.myOffers.toString());
+
+            // log(User.offer.toString());
+            // log(User.myOffers.toString());
             log(User.data.toString());
-            log(User.team.toString());
-            log(User.contactSupport.toString());
-            log(User.workSent.toString());
-            log(User.workReceived.toString());
-            log(User.notifications.toString());
+            // log(User.team.toString());
+            // log(User.contactSupport.toString());
+            // log(User.workSent.toString());
+            // log(User.workReceived.toString());
+            // log(User.notifications.toString());
+
             log("Login");
             Navigator.pushReplacementNamed(context, 'navbar');
           } else {
             log('Login Failed: ${responseData['status']}');
+
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Invalid phone or password'),
