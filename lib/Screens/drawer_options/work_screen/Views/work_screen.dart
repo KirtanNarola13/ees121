@@ -2,9 +2,11 @@
 
 import 'package:ees121/Screens/drawer_options/work_screen/Global/work_global.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 
 class WorkScreen extends StatelessWidget {
   const WorkScreen({Key? key});
@@ -13,6 +15,9 @@ class WorkScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    //
+    String webp = "https://api2.appsolution.online/files/";
+    //
 
     return Scaffold(
       appBar: AppBar(
@@ -42,13 +47,13 @@ class WorkScreen extends StatelessWidget {
                         return Container(
                           alignment: Alignment.center,
                           height: h / 15,
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(5),
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: workProvider.work?.isSent == false
                                 ? AppColors.appColor.withOpacity(0.5)
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(15),
                             ),
                             border: Border.all(
@@ -74,13 +79,13 @@ class WorkScreen extends StatelessWidget {
                         return Container(
                           alignment: Alignment.center,
                           height: h / 15,
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(5),
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                             color: workProvider.work?.isSent == true
                                 ? AppColors.appColor.withOpacity(0.5)
                                 : Colors.transparent,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(15),
                             ),
                             border: Border.all(
@@ -103,153 +108,237 @@ class WorkScreen extends StatelessWidget {
             child: Consumer<WorkProvider>(
               builder: (context, workProvider, child) {
                 return (workProvider.work?.isSent == true)
-                    ? Column(
-                        children: allReceived.map((e) {
-                          return Container(
-                            margin:
-                                EdgeInsets.only(left: 15, right: 15, top: 10),
-                            height: 250,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              border: Border.all(color: AppColors.appColor),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: AppColors.appColor),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(e['img']),
-                                        fit: BoxFit.cover,
+                    ? SingleChildScrollView(
+                        child: Column(
+                          children: User.workReceived.map((e) {
+                            return Container(
+                              margin: const EdgeInsets.only(
+                                  left: 15, right: 15, top: 20),
+                              height: 250,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                border: Border.all(color: AppColors.appColor),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.appColor),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              webp + e['selfifile']),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 4,
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        top: 5, bottom: 5, right: 10, left: 10),
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(e['name']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['category']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['company']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['address']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text('⭐⭐⭐⭐⭐'),
-                                      ],
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 5,
+                                          right: 10,
+                                          left: 10),
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(e['fullname']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(e['category']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(e['organization_name']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text('User rating'),
+                                          RatingBar.builder(
+                                            initialRating:
+                                                double.parse(e['user_rating']),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 16,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text('Provider rating'),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(
+                                                e['provider_rating']),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 16,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       )
-                    : Column(
-                        children: allSend.map((e) {
-                          return Container(
-                            margin:
-                                EdgeInsets.only(left: 15, right: 15, top: 10),
-                            height: 250,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              border: Border.all(color: AppColors.appColor),
-                            ),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: AppColors.appColor),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                      image: DecorationImage(
-                                        image: NetworkImage(e['img']),
-                                        fit: BoxFit.cover,
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: User.workSent.map((e) {
+                            return Container(
+                              margin: const EdgeInsets.only(
+                                  left: 15, right: 15, top: 20),
+                              height: 250,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                border: Border.all(color: AppColors.appColor),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.appColor),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              webp + e['selfifile']),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 4,
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        top: 5, bottom: 5, right: 10, left: 10),
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(e['name']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['category']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['company']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text(e['address']),
-                                        Divider(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                        ),
-                                        Text('⭐⭐⭐⭐⭐'),
-                                      ],
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 5,
+                                          right: 10,
+                                          left: 10),
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(e['fullname']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(e['category']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(e['organization_name']),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text('User rating'),
+                                          RatingBar.builder(
+                                            initialRating:
+                                                double.parse(e['user_rating']),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 16,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text('Provider rating'),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(
+                                                e['provider_rating']),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 16,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       );
               },
             ),

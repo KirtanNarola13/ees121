@@ -36,10 +36,10 @@ class _NavBarState extends State<NavBar> {
           NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
           NavigationDestination(
               icon: Icon(Iconsax.search_normal_1), label: 'Category'),
-          // NavigationDestination(
-          //     icon: Icon(Icons.work_outline_sharp), label: 'Work'),
           NavigationDestination(
               icon: Icon(Icons.help_center_outlined), label: 'Support'),
+          NavigationDestination(
+              icon: Icon(Icons.work_outline_sharp), label: 'Work'),
           NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
         ],
       ),
@@ -55,6 +55,7 @@ class NavigationController {
     const HomeScreen(),
     const SearchScreen(),
     CustomerCare(),
+    const WorkScreen(),
     const ProfileScreen(),
   ];
 }
