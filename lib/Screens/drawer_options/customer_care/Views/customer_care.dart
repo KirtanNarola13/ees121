@@ -75,7 +75,7 @@ class CustomerCare extends StatelessWidget {
           ),
         ),
       ),
-      body: (hasData == true)
+      body: (hasData == false)
           ? Container(
               padding: const EdgeInsets.all(10),
               alignment: Alignment.center,

@@ -1,23 +1,24 @@
-// work_screen.dart
-
-import 'package:ees121/Screens/drawer_options/work_screen/Global/work_global.dart';
+import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
-import '../../../../Colors/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../Global/globalUser.dart';
 
-class WorkScreen extends StatelessWidget {
+class WorkScreen extends StatefulWidget {
   const WorkScreen({Key? key});
 
+  @override
+  State<WorkScreen> createState() => _WorkScreenState();
+}
+
+class _WorkScreenState extends State<WorkScreen> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    //
     String webp = "https://api2.appsolution.online/files/";
-    //
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +47,7 @@ class WorkScreen extends StatelessWidget {
                       builder: (context, workProvider, child) {
                         return Container(
                           alignment: Alignment.center,
-                          height: h / 15,
+                          height: h / 13,
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
@@ -78,7 +79,7 @@ class WorkScreen extends StatelessWidget {
                       builder: (context, workProvider, child) {
                         return Container(
                           alignment: Alignment.center,
-                          height: h / 15,
+                          height: h / 13,
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
@@ -110,11 +111,11 @@ class WorkScreen extends StatelessWidget {
                 return (workProvider.work?.isSent == true)
                     ? SingleChildScrollView(
                         child: Column(
-                          children: User.workReceived.map((e) {
+                          children: User.workSent.map((e) {
                             return Container(
                               margin: const EdgeInsets.only(
                                   left: 15, right: 15, top: 20),
-                              height: 250,
+                              height: h / 2.5,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 borderRadius:
@@ -179,7 +180,7 @@ class WorkScreen extends StatelessWidget {
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 10,
-                                            itemSize: 16,
+                                            itemSize: 14,
                                             ignoreGestures: true,
                                             itemPadding:
                                                 const EdgeInsets.symmetric(
@@ -202,7 +203,7 @@ class WorkScreen extends StatelessWidget {
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 10,
-                                            itemSize: 16,
+                                            itemSize: 14,
                                             ignoreGestures: true,
                                             itemPadding:
                                                 const EdgeInsets.symmetric(
@@ -213,6 +214,37 @@ class WorkScreen extends StatelessWidget {
                                               color: Colors.amber,
                                             ),
                                             onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async {
+                                              setState(() {
+                                                launchUrl(Uri(
+                                                    scheme: "tel",
+                                                    path: "${e['mobile_no']}"));
+                                              });
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              width: w / 4.5,
+                                              height: h / 25,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.appColor
+                                                      .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              child: const Text(
+                                                "Call",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: 2,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -226,11 +258,11 @@ class WorkScreen extends StatelessWidget {
                       )
                     : SingleChildScrollView(
                         child: Column(
-                          children: User.workSent.map((e) {
+                          children: User.workReceived.map((e) {
                             return Container(
                               margin: const EdgeInsets.only(
                                   left: 15, right: 15, top: 20),
-                              height: 250,
+                              height: h / 2.5,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 borderRadius:
@@ -295,7 +327,7 @@ class WorkScreen extends StatelessWidget {
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 10,
-                                            itemSize: 16,
+                                            itemSize: 14,
                                             ignoreGestures: true,
                                             itemPadding:
                                                 const EdgeInsets.symmetric(
@@ -318,7 +350,7 @@ class WorkScreen extends StatelessWidget {
                                             direction: Axis.horizontal,
                                             allowHalfRating: true,
                                             itemCount: 10,
-                                            itemSize: 16,
+                                            itemSize: 14,
                                             ignoreGestures: true,
                                             itemPadding:
                                                 const EdgeInsets.symmetric(

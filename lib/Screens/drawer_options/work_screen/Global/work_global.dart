@@ -1,5 +1,6 @@
+// work_global.dart
 class WorkGlobal {
-  bool isSent = false;
+  bool isSent;
 
   WorkGlobal({required this.isSent});
 }

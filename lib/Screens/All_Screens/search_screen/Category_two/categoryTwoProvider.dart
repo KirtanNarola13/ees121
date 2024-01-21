@@ -21,7 +21,9 @@ class CategoryTwoProvider extends ChangeNotifier {
   CategoryTwoApi _categoryTwoApi = CategoryTwoApi(data: []);
 
   CategoryTwoProviderState get state => _state;
+
   String get error => _error;
+
   CategoryTwoApi get categoryTwoApi => _categoryTwoApi;
 
   Future<void> getCategoryTwoFromApi() async {
@@ -42,8 +44,6 @@ class CategoryTwoProvider extends ChangeNotifier {
 
           // Check if the parsed data is not null and not empty
           if (_categoryTwoApi != null && _categoryTwoApi.data.isNotEmpty) {
-            log('Category provider data loaded successfully.');
-            log('Parsed Data: ${response.body}');
             _state = CategoryTwoProviderState.Loaded;
           } else {
             log('Error: Parsed data is null or empty.');

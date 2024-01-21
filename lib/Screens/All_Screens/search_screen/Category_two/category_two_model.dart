@@ -33,6 +33,7 @@ class CategoryUser {
   final String company;
   final String userAverageRating;
   final String providerAverageRating;
+  final String userid;
 
   CategoryUser({
     required this.fullname,
@@ -41,6 +42,7 @@ class CategoryUser {
     required this.company,
     required this.userAverageRating,
     required this.providerAverageRating,
+    required this.userid,
   });
 
   factory CategoryUser.fromJson(Map<String, dynamic> json) => CategoryUser(
@@ -56,6 +58,7 @@ class CategoryUser {
         providerAverageRating: (json["provider_avg_rating"] == null)
             ? 0
             : json["provider_avg_rating"],
+        userid: (json["userid"] == null) ? "" : json["userid"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,5 +68,6 @@ class CategoryUser {
         "organization_name": company,
         "user_avg_rating": userAverageRating,
         "provider_avg_rating": providerAverageRating,
+        "userid": userid,
       };
 }

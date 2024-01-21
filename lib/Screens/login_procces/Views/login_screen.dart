@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:cherry_toast/cherry_toast.dart';
 import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -76,31 +77,40 @@ class _LoginPageState extends State<LoginPage> {
             // log(User.notifications.toString());
 
             log("Login");
+            CherryToast.success(
+              title: Text(
+                "Login Successfully",
+                style: TextStyle(color: AppColors.appColor),
+              ),
+            ).show(context);
             Navigator.pushReplacementNamed(context, 'navbar');
           } else {
             log('Login Failed: ${responseData['status']}');
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Invalid phone or password'),
+            CherryToast.error(
+              title: Text(
+                "invalid phone or password",
+                style: TextStyle(color: AppColors.appColor),
               ),
-            );
+            ).show(context);
           }
         } else {
           log('Failed: ${response.statusCode}');
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Invalid phone or password'),
+          CherryToast.error(
+            title: Text(
+              "invalid phone or password",
+              style: TextStyle(color: Colors.red),
             ),
-          );
+          ).show(context);
         }
       } catch (e) {
         log('Error: $e');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: $e'),
+        CherryToast.error(
+          title: Text(
+            "Erro $e",
+            style: TextStyle(color: Colors.red),
           ),
-        );
+        ).show(context);
       } finally {
         Provider.of<PasswordProvider>(context, listen: false).hideLoading();
       }

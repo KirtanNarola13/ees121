@@ -1,3 +1,4 @@
+// nav_bar.dart
 import 'package:ees121/Screens/All_Screens/home_screen/Views/home_screen.dart';
 import 'package:ees121/Screens/All_Screens/profile_screen/Views/profile_screen.dart';
 import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
@@ -8,17 +9,19 @@ import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.
 import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  const NavBar({Key? key});
 
   @override
   State<NavBar> createState() => _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
-  @override
   final controller = NavigationController();
+
+  @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;

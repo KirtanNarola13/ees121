@@ -24,6 +24,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
 import 'Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
+import 'Screens/All_Screens/search_screen/Category_two/contactProvider.dart';
 import 'Screens/drawer_options/wallet_screen/Views/wallet_screen.dart';
 
 void main() async {
@@ -56,7 +57,6 @@ void main() async {
           'signup': (context) => const SignUp(),
           'navbar': (context) => const NavBar(),
           // 'category_detail_screen': (context) => const CategoryDetailScreen(),
-          // 'detail_screen': (context) => const DetailScreen(),
           'category_two': (context) => const Categorytwo(),
           'wallet_screen': (context) => const WalletScreen(),
           'team_screen': (context) => const TeamScreen(),

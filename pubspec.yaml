@@ -46,6 +46,7 @@ dependencies:
   shared_preferences:
   flutter_rating_bar:
   share_plus:
+  cherry_toast:
 
 
 dev_dependencies:

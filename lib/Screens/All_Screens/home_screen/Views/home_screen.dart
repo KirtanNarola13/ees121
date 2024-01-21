@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             User.data['fullname'],
-                            style: const TextStyle(fontSize: 22),
+                            style: const TextStyle(fontSize: 18),
                           ),
                           Divider(
                             color: AppColors.appColor.withOpacity(0.5),
@@ -336,23 +336,45 @@ class _HomeScreenState extends State<HomeScreen> {
                 enableInfiniteScroll: true,
               ),
               items: User.offer.map((e) {
-                return Container(
-                  height: h / 4.2,
-                  width: w / 1,
-                  margin: const EdgeInsets.only(right: 15),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.appColor,
-                      width: 2,
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://api2.appsolution.online/files/' +
-                              e['offer_file']),
-                      fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          padding: EdgeInsets.all(10),
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(20)),
+                          ),
+                          child: Image.network(
+                            'https://api2.appsolution.online/files/' +
+                                e['offer_file'],
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Container(
+                    height: h / 4.2,
+                    width: w / 1,
+                    margin: const EdgeInsets.only(right: 15),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.appColor,
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            'https://api2.appsolution.online/files/' +
+                                e['offer_file']),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 );
