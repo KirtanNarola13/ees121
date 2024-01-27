@@ -1,5 +1,6 @@
-import 'package:ees121/Screens/All_Screens/saved_screen/Global/global.dart';
 import 'package:flutter/material.dart';
+
+import '../../saved_screen/Global/global.dart';
 
 class HomeProvider extends ChangeNotifier {
   addToSaved(Map<String, dynamic> service) {

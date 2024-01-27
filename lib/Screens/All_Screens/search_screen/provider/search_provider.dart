@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:ees121/Screens/All_Screens/search_screen/Model/search_model.dart';
+
+import '../Model/search_model.dart';
 
 enum CategoryProviderState { Loading, Loaded, Error }
 

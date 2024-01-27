@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cherry_toast/cherry_toast.dart';
-import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../Colors/colors.dart';
 import '../../../Global/globalUser.dart';
 import '../Global/global.dart';
 import '../provider/passwordProvider.dart';

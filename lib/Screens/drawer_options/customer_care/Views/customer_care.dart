@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:ees121/Global/globalUser.dart';
-import 'package:ees121/Screens/drawer_options/customer_care/Global/customer_care_global.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
+import '../Global/customer_care_global.dart';
 
 class CustomerCare extends StatelessWidget {
   CustomerCare({super.key});

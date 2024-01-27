@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:ees121/Colors/colors.dart';
-import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // API
     // WBP
-    String webp = "https://api2.appsolution.online/files/";
+    String webp = "https://api2.appsolution.online/files/selfi/";
+    String offer = "https://api2.appsolution.online/files/offer/";
 
     // Generate unique random indices for each category
     // List<int> randomIndices = List.generate(
@@ -209,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             right: BorderSide(color: AppColors.appColor)),
                         image: DecorationImage(
                           image: NetworkImage(
-                            webp + User.data['selfifile'],
+                            offer + User.data['selfifile'],
                           ),
                           fit: BoxFit.cover,
                         ),

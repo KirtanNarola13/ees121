@@ -1,6 +1,7 @@
-import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../Colors/colors.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({super.key});

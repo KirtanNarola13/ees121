@@ -1,8 +1,8 @@
-import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key});
@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    String webp = "https://api2.appsolution.online/files/";
+    String webp = "https://api2.appsolution.online/files/selfi/";
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

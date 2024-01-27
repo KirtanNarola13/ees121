@@ -1,7 +1,7 @@
-import 'package:ees121/Screens/All_Screens/saved_screen/Global/global.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
+import '../Global/global.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});

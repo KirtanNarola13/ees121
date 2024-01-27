@@ -1,4 +1,4 @@
-package com.example.ees121
+package com.EES121
 
 import io.flutter.embedding.android.FlutterActivity
 

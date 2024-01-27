@@ -1,14 +1,11 @@
 import 'dart:developer';
-
-import 'package:ees121/Screens/All_Screens/search_screen/Category_two/category_two_model.dart';
-import 'package:ees121/Screens/All_Screens/search_screen/Global/category_global.dart';
-import 'package:ees121/Screens/All_Screens/search_screen/provider/search_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:ees121/Screens/All_Screens/search_screen/Model/search_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Global/globalUser.dart';
+import '../Global/category_global.dart';
+import 'category_two_model.dart';
 
 enum CategoryTwoProviderState { Loading, Loaded, Error }
 

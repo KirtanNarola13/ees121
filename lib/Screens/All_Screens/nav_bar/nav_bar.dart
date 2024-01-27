@@ -1,15 +1,12 @@
 // nav_bar.dart
-import 'package:ees121/Screens/All_Screens/home_screen/Views/home_screen.dart';
-import 'package:ees121/Screens/All_Screens/profile_screen/Views/profile_screen.dart';
-import 'package:ees121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
-import 'package:ees121/Screens/All_Screens/saved_screen/Views/saved_screen.dart';
-import 'package:ees121/Screens/All_Screens/search_screen/Category_two/category_two.dart';
-import 'package:ees121/Screens/All_Screens/search_screen/Views/search_screen.dart';
-import 'package:ees121/Screens/drawer_options/customer_care/Views/customer_care.dart';
-import 'package:ees121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
+
+import '../../drawer_options/customer_care/Views/customer_care.dart';
+import '../../drawer_options/work_screen/Views/work_screen.dart';
+import '../home_screen/Views/home_screen.dart';
+import '../profile_screen/Views/profile_screen.dart';
+import '../search_screen/Views/search_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key});

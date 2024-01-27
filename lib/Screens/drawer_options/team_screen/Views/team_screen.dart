@@ -1,8 +1,8 @@
-import 'package:ees121/Global/globalUser.dart';
-import 'package:ees121/Screens/drawer_options/team_screen/Global/team_global.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
+import '../Global/team_global.dart';
 
 class TeamScreen extends StatelessWidget {
   const TeamScreen({super.key});

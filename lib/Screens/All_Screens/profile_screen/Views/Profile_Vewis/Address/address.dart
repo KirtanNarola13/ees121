@@ -1,6 +1,7 @@
-import 'package:ees121/Colors/colors.dart';
-import 'package:ees121/Global/globalUser.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../Colors/colors.dart';
+import '../../../../../../Global/globalUser.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});

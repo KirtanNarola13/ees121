@@ -1,12 +1,10 @@
-import 'dart:developer';
-
-import 'package:ees121/Colors/colors.dart';
-import 'package:ees121/Screens/login_procces/provider/passwordProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../Colors/colors.dart';
 import '../Global/global.dart';
+import '../provider/passwordProvider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

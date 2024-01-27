@@ -1,10 +1,10 @@
-import 'package:ees121/Colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:ees121/Screens/drawer_options/work_screen/Provider/work_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../Colors/colors.dart';
 import '../../../../Global/globalUser.dart';
+import '../Provider/work_provider.dart';
 
 class WorkScreen extends StatefulWidget {
   const WorkScreen({Key? key});
