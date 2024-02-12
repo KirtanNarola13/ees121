@@ -15,10 +15,10 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Profile",
           style: TextStyle(
-            color: AppColors.appColor,
+            color: Colors.white,
             letterSpacing: 2,
             fontSize: 18,
           ),
@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
             child: Container(
               height: 300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(15),
                 ),
                 image: DecorationImage(
@@ -61,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                 Center(
                   child: Text(
                     User.data['fullname'],
-                    style: const TextStyle(fontSize: 22),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 Center(

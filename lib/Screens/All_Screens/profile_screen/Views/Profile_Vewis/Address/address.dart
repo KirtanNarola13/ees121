@@ -32,12 +32,12 @@ class AddressScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: Container(
               height: h / 4,
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.only(bottom: 20, left: 10, right: 10),
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
@@ -48,13 +48,10 @@ class AddressScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: h / 40,
-                  ),
                   const Text(
                     "Permanent Address :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -66,7 +63,7 @@ class AddressScreen extends StatelessWidget {
                   Text(
                     User.data['address'],
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
                   ),
                 ],
               ),
@@ -77,6 +74,7 @@ class AddressScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              margin: EdgeInsets.only(left: 10, right: 10),
               padding: EdgeInsets.all(20),
               height: h / 4,
               decoration: BoxDecoration(
@@ -86,15 +84,13 @@ class AddressScreen extends StatelessWidget {
                 border: Border.all(color: AppColors.appColor),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: h / 40,
-                  ),
                   const Text(
                     "Current Address :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 18,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -106,7 +102,7 @@ class AddressScreen extends StatelessWidget {
                   Text(
                     "${User.data['cur_address']}, ${User.data['cur_pincode']}, ${User.data['cur_state']}",
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
                   ),
                 ],
               ),

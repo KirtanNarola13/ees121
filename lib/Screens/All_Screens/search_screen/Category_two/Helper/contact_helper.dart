@@ -21,6 +21,7 @@ class ContactHelper {
     //
     log("${response.statusCode}");
     if (response.statusCode == 200) {
+      log("$response");
       log("${jsonDecode(response.body)}");
       statusCode = response.statusCode;
     } else {

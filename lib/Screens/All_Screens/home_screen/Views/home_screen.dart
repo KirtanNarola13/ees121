@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iconsax/iconsax.dart';
@@ -85,11 +86,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 300,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      webp + User.data['selfifile'],
-                    ),
-                  ),
+                  // image: DecorationImage(
+                  //   image: NetworkImage(
+                  //     webp + User.data['selfifile'],
+                  //   ),
+                  // ),
+                ),
+                child: Image.network(
+                  webp + User.data['selfifile'],
                 ),
               ),
             ),
@@ -191,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               margin: const EdgeInsets.all(10),
-              height: h / 3,
+              height: h / 2.8,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(15),
@@ -203,17 +207,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     flex: 3,
                     child: Container(
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
                         ),
                         border: Border(
                             right: BorderSide(color: AppColors.appColor)),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            offer + User.data['selfifile'],
-                          ),
+                        // image: DecorationImage(
+                        //   image: NetworkImage(
+                        //     offer + User.data['selfifile'],
+                        //   ),
+                        //   fit: BoxFit.cover,
+                        // ),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Image.network(
+                          webp + User.data['selfifile'],
                           fit: BoxFit.cover,
+                          height: h / 3.5,
                         ),
                       ),
                     ),
@@ -228,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             User.data['fullname'],
-                            style: const TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           Divider(
                             color: AppColors.appColor.withOpacity(0.5),
@@ -246,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 10,
-                                itemSize: 16,
+                                itemSize: 12,
                                 ignoreGestures: true,
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 1.5),
@@ -274,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 10,
-                                itemSize: 16,
+                                itemSize: 12,
                                 ignoreGestures: true,
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 1.5),
@@ -351,8 +366,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 BorderRadius.vertical(top: Radius.circular(20)),
                           ),
                           child: Image.network(
-                            'https://api2.appsolution.online/files/' +
-                                e['offer_file'],
+                            offer + e['offer_file'],
                             fit: BoxFit.cover,
                           ),
                         );
@@ -371,12 +385,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://api2.appsolution.online/files/' +
-                                e['offer_file']),
-                        fit: BoxFit.cover,
-                      ),
+                    ),
+                    child: Image.network(
+                      offer + e['offer_file'],
                     ),
                   ),
                 );

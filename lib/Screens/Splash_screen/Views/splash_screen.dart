@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,10 +29,11 @@ class SplashScreen extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                      'lib/Screens/Splash_screen/Assets/splash_screen.gif'),
+                    'lib/Screens/Splash_screen/Assets/splash_screen.gif',
+                  ),
                 ),
               ),
             ),

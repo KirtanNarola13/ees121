@@ -165,23 +165,19 @@ class _CategorytwoState extends State<Categorytwo> {
                                         ? Text("You already contacted")
                                         : GestureDetector(
                                             onTap: () async {
-                                              if (ContactHelper.statusCode ==
-                                                  200) {
-                                                await ContactHelper
-                                                    .contactHelper
-                                                    .contactProvider(
-                                                        User.data['userid'],
-                                                        user.userid);
-                                                Navigator.pop(context);
-                                                CherryToast.success(
-                                                  title: Text(
-                                                    "Requested Successfully",
-                                                    style: TextStyle(
-                                                        color:
-                                                            AppColors.appColor),
-                                                  ),
-                                                ).show(context);
-                                              }
+                                              await ContactHelper.contactHelper
+                                                  .contactProvider(
+                                                      User.data['userid'],
+                                                      user.userid);
+                                              Navigator.pop(context);
+                                              CherryToast.success(
+                                                title: Text(
+                                                  "Requested Successfully",
+                                                  style: TextStyle(
+                                                      color:
+                                                          AppColors.appColor),
+                                                ),
+                                              ).show(context);
 
                                               // After the contact request, fetch the updated data
                                             },
@@ -252,21 +248,33 @@ class _CategorytwoState extends State<Categorytwo> {
                               children: [
                                 Text(
                                   user.fullname,
-                                  style: const TextStyle(fontSize: 12),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 Divider(
-                                  color: AppColors.appColor.withOpacity(0.5),
+                                  color: AppColors.appColor.withOpacity(
+                                    0.5,
+                                  ),
                                 ),
                                 Text(
                                   user.category,
-                                  style: const TextStyle(fontSize: 12),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
                                 Divider(
-                                  color: AppColors.appColor.withOpacity(0.5),
+                                  color: AppColors.appColor.withOpacity(
+                                    0.5,
+                                  ),
                                 ),
                                 Text(
                                   user.company,
-                                  style: const TextStyle(fontSize: 12),
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                                 Divider(
                                   color: AppColors.appColor.withOpacity(0.5),
@@ -284,7 +292,7 @@ class _CategorytwoState extends State<Categorytwo> {
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
                                       itemCount: 10,
-                                      itemSize: 16,
+                                      itemSize: 14,
                                       ignoreGestures: true,
                                       itemPadding: const EdgeInsets.symmetric(
                                           horizontal: 1.5),
@@ -312,7 +320,7 @@ class _CategorytwoState extends State<Categorytwo> {
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
                                       itemCount: 10,
-                                      itemSize: 16,
+                                      itemSize: 14,
                                       ignoreGestures: true,
                                       itemPadding: const EdgeInsets.symmetric(
                                           horizontal: 1.5),

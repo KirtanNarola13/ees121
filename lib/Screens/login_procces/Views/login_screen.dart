@@ -61,9 +61,9 @@ class _LoginPageState extends State<LoginPage> {
               User.contactSupport = userData['contactsupport'];
             }
 
-            User.workSent = userData['worksent'];
+            // User.workSent = userData['worksent'];
 
-            User.workReceived = userData['workreceived'];
+            // User.workReceived = userData['workreceived'];
 
             User.notifications = userData['notifications'];
 

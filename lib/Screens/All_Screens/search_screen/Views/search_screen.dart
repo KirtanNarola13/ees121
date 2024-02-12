@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../Colors/colors.dart';
 import '../Model/search_model.dart';
 import '../provider/search_provider.dart';
@@ -17,13 +16,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   @override
   Widget build(BuildContext context) {
-    //
-
-    //
     Provider.of<CategoryProvider>(context).getCategoryFromApi();
-    //
-
-//
 
     return Scaffold(body: Consumer<CategoryProvider>(
       builder: (context, provider, _) {
@@ -116,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         width: 1,
                       ),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(15),
+                        Radius.circular(10),
                       ),
                     ),
                     child: Column(
