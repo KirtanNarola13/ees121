@@ -43,7 +43,7 @@ class _ReferralScreenState extends State<ReferralScreen> {
           Expanded(
             flex: 2,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
                     'lib/Screens/All_Screens/referral_screen/Assets/earn_share.png',
@@ -52,16 +52,17 @@ class _ReferralScreenState extends State<ReferralScreen> {
               ),
             ),
           ),
-          Text(
+          const Text(
             "Share And Earn",
             style: TextStyle(
               fontSize: 22,
             ),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Text(
               referralLink + User.data['userid'],
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
                 color: AppColors.appColor,
@@ -98,7 +99,7 @@ class _ReferralScreenState extends State<ReferralScreen> {
               ),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: SizedBox(),
           ),
         ],

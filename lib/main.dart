@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Screens/All_Screens/home_screen/Provider/home_provider.dart';
 import 'Screens/All_Screens/nav_bar/nav_bar.dart';
 import 'Screens/All_Screens/nonotification_screen/Views/notification_screen.dart';
 import 'Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/address.dart';
@@ -14,7 +13,6 @@ import 'Screens/All_Screens/profile_screen/Views/profile_screen.dart';
 import 'Screens/All_Screens/referral_screen/Views/referral_screen.dart';
 import 'Screens/All_Screens/search_screen/Category_two/categoryTwoProvider.dart';
 import 'Screens/All_Screens/search_screen/Category_two/category_two.dart';
-import 'Screens/All_Screens/search_screen/Category_two/contactProvider.dart';
 import 'Screens/All_Screens/search_screen/provider/search_provider.dart';
 import 'Screens/Splash_screen/Views/splash_screen.dart';
 import 'Screens/drawer_options/customer_care/Views/customer_care.dart';
@@ -35,7 +33,6 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ListenableProvider<HomeProvider>(create: (context) => HomeProvider()),
         ListenableProvider<WorkProvider>(create: (context) => WorkProvider()),
         ListenableProvider<CategoryProvider>(
             create: (context) => CategoryProvider()),

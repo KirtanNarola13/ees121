@@ -1,7 +1,7 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 import '../../../../Global/globalUser.dart';
 import '../Global/category_global.dart';
@@ -10,7 +10,7 @@ import 'category_two_model.dart';
 enum CategoryTwoProviderState { Loading, Loaded, Error }
 
 class CategoryTwoProvider extends ChangeNotifier {
-  static const imgPoint = 'https://api2.appsolution.online/files/';
+  static const imgPoint = 'https://ees121.com/panel/files/';
 
   CategoryTwoProviderState _state = CategoryTwoProviderState.Loading;
   String _error = '';
@@ -28,7 +28,7 @@ class CategoryTwoProvider extends ChangeNotifier {
       if (Name.name != null) {
         log('Fetching category data for ${Name.name}...');
         final http.Response response = await http.get(Uri.parse(
-            'https://adminpanel.appsolution.online/ees121/api/categoryuser?category=${Name.name?.replaceAll(' ', '%20')}&city=${User.data['cur_city']}'));
+            'https://panel.ees121.com/api/categoryuser?category=${Name.name?.replaceAll(' ', '%20')}&city=${User.data['cur_city']}'));
         log('API Response Status Code: ${response.statusCode}');
 
         if (response.statusCode == 200) {
@@ -38,6 +38,7 @@ class CategoryTwoProvider extends ChangeNotifier {
           _categoryTwoApi.data.clear();
           // Parse the response body into CategoryTwoApi model
           _categoryTwoApi = categoryTwoApiFromJson(response.body);
+          log(response.body);
 
           // Check if the parsed data is not null and not empty
           if (_categoryTwoApi != null && _categoryTwoApi.data.isNotEmpty) {

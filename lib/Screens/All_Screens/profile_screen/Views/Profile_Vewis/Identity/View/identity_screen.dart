@@ -37,7 +37,7 @@ class IdentityScreen extends StatelessWidget {
             alignment: Alignment.center,
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.all(10),
-            height: h / 3.5,
+            height: h / 4,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(15),
@@ -58,7 +58,7 @@ class IdentityScreen extends StatelessWidget {
                       const Text(
                         "Member ID :",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3),
                       ),
@@ -70,7 +70,7 @@ class IdentityScreen extends StatelessWidget {
                       Text(
                         User.data['userid'],
                         style: const TextStyle(
-                            fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                            fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                       ),
                       const SizedBox(
                         height: 10,
@@ -92,7 +92,7 @@ class IdentityScreen extends StatelessWidget {
                       const Text(
                         "Renewal Date :",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3),
                       ),
@@ -104,7 +104,7 @@ class IdentityScreen extends StatelessWidget {
                       Text(
                         User.data['joindate'],
                         style: const TextStyle(
-                            fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                            fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                       ),
                       const SizedBox(
                         height: 10,
@@ -119,7 +119,7 @@ class IdentityScreen extends StatelessWidget {
             alignment: Alignment.center,
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.all(10),
-            height: h / 2,
+            height: h / 2.5,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(15),
@@ -140,7 +140,7 @@ class IdentityScreen extends StatelessWidget {
                       const Text(
                         "Name :",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3),
                       ),
@@ -152,7 +152,7 @@ class IdentityScreen extends StatelessWidget {
                       Text(
                         User.data['fullname'],
                         style: const TextStyle(
-                            fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                            fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                       ),
                       const SizedBox(
                         height: 10,
@@ -174,7 +174,7 @@ class IdentityScreen extends StatelessWidget {
                       const Text(
                         "Email :",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3),
                       ),
@@ -186,7 +186,7 @@ class IdentityScreen extends StatelessWidget {
                       Text(
                         User.data['email'],
                         style: const TextStyle(
-                            fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                            fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                       ),
                       const SizedBox(
                         height: 10,
@@ -208,7 +208,7 @@ class IdentityScreen extends StatelessWidget {
                       const Text(
                         "Mobile no :",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 3),
                       ),
@@ -220,7 +220,7 @@ class IdentityScreen extends StatelessWidget {
                       Text(
                         User.data['mobile_no'],
                         style: const TextStyle(
-                            fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                            fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                       ),
                       const SizedBox(
                         height: 10,

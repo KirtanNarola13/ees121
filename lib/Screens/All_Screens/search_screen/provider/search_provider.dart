@@ -8,10 +8,8 @@ import '../Model/search_model.dart';
 enum CategoryProviderState { Loading, Loaded, Error }
 
 class CategoryProvider extends ChangeNotifier {
-  static const apiEndpoint =
-      'https://adminpanel.appsolution.online/ees121/api/categorylist';
-  static const imgPoint =
-      'https://adminpanel.appsolution.online/ees121/files/categoryimages/';
+  static const apiEndpoint = 'https://panel.ees121.com/api/category';
+  static const imgPoint = 'https://ees121.com/panel/files/category/';
 
   CategoryProviderState _state = CategoryProviderState.Loading;
   String _error = '';

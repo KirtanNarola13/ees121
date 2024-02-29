@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         Provider.of<PasswordProvider>(context, listen: false).showLoading();
 
         http.Response response = await http.post(
-          Uri.parse('https://adminpanel.appsolution.online/ees121/api/user'),
+          Uri.parse('https://panel.ees121.com/api/user'),
           body: {'loginid': id, 'loginpass': password},
         );
 
@@ -47,13 +47,32 @@ class _LoginPageState extends State<LoginPage> {
           if (responseData['status'] == 'SUCCESS') {
             Map userData = responseData['data'];
 
-            User.data = userData['loginuser'];
+            if (userData['loginuser'] == "") {
+              log(userData['loginuser']);
+            } else {
+              User.data = userData['loginuser'];
+            }
 
-            User.offer = userData['offers'];
+            // User.offer = userData['offers'];
+            if (userData['offers'] == "") {
+              log(userData['offers']);
+            } else {
+              User.offer = userData['offers'];
+            }
 
-            User.myOffers = userData['myoffers'];
+            // User.myOffers = userData['myoffers'];
+            if (userData['myoffers'] == "") {
+              log(userData['myoffers']);
+            } else {
+              User.myOffers = userData['myoffers'];
+            }
 
             User.team = userData['team'];
+            if (userData['team'] == "") {
+              log(userData['team']);
+            } else {
+              User.team = userData['team'];
+            }
 
             if (userData['contactsupport'] == "") {
               log(userData['contactsupport']);
@@ -61,11 +80,22 @@ class _LoginPageState extends State<LoginPage> {
               User.contactSupport = userData['contactsupport'];
             }
 
-            // User.workSent = userData['worksent'];
+            User.workSent = userData['worksent'];
+            if (userData['worksent'] == "") {
+              log(userData['worksent']);
+            } else {
+              User.workSent = userData['worksent'];
+            }
 
             // User.workReceived = userData['workreceived'];
 
-            User.notifications = userData['notifications'];
+            // User.notifications = userData['notifications'];
+            User.workSent = userData['notifications'];
+            if (userData['notifications'] == "") {
+              log(userData['notifications']);
+            } else {
+              User.notifications = userData['notifications'];
+            }
 
             // log(User.offer.toString());
             // log(User.myOffers.toString());

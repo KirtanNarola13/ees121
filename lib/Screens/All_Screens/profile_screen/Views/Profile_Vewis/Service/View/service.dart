@@ -35,7 +35,7 @@ class ServiceScreen extends StatelessWidget {
         alignment: Alignment.center,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
-        height: h / 1.8,
+        height: h / 2,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(
             Radius.circular(15),
@@ -56,7 +56,7 @@ class ServiceScreen extends StatelessWidget {
                   const Text(
                     "Main Service :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -68,7 +68,7 @@ class ServiceScreen extends StatelessWidget {
                   Text(
                     User.data['category'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -90,7 +90,7 @@ class ServiceScreen extends StatelessWidget {
                   const Text(
                     "Service details :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -102,7 +102,7 @@ class ServiceScreen extends StatelessWidget {
                   Text(
                     User.data['service_details'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -124,7 +124,7 @@ class ServiceScreen extends StatelessWidget {
                   const Text(
                     "Company :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -136,7 +136,7 @@ class ServiceScreen extends StatelessWidget {
                   Text(
                     User.data['organization_name'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -158,7 +158,7 @@ class ServiceScreen extends StatelessWidget {
                   const Text(
                     "Designation :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -170,7 +170,7 @@ class ServiceScreen extends StatelessWidget {
                   Text(
                     User.data['designation'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,

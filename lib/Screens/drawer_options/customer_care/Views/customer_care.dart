@@ -27,8 +27,7 @@ class CustomerCare extends StatelessWidget {
     ) async {
       try {
         http.Response response = await http.post(
-          Uri.parse(
-              'https://adminpanel.appsolution.online/ees121/api/contactpage'),
+          Uri.parse('https://ees121.com/api/contactpage'),
           body: {
             'contact_name': contactName,
             'contact_email': contactEmail,
@@ -88,7 +87,7 @@ class CustomerCare extends StatelessWidget {
                         height: h / 30,
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 10, right: 5),
+                        margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TextFormField(
                           onSaved: (String? val) {
                             CustomerCareGlobal.customerName.text = val!;

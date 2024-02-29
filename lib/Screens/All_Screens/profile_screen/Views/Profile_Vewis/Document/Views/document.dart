@@ -35,7 +35,7 @@ class DocumentScreen extends StatelessWidget {
         alignment: Alignment.center,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
-        height: h / 1.8,
+        height: h / 2,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(
             Radius.circular(15),
@@ -56,7 +56,7 @@ class DocumentScreen extends StatelessWidget {
                   const Text(
                     "KYC Status :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -68,7 +68,7 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['kycstatus'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -90,7 +90,7 @@ class DocumentScreen extends StatelessWidget {
                   const Text(
                     "Aadhar ID :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -102,7 +102,7 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['adharno'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -124,7 +124,7 @@ class DocumentScreen extends StatelessWidget {
                   const Text(
                     "Joining Date :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -136,7 +136,7 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['joindate'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,
@@ -158,7 +158,7 @@ class DocumentScreen extends StatelessWidget {
                   const Text(
                     "Payment Status :",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 21,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -170,7 +170,7 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['paymentstatus'],
                     style: const TextStyle(
-                        fontSize: 14, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
                   ),
                   SizedBox(
                     height: 10,

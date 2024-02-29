@@ -1,8 +1,8 @@
 // nav_bar.dart
+import 'package:EES121/Screens/All_Screens/referral_screen/Views/referral_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../drawer_options/customer_care/Views/customer_care.dart';
 import '../../drawer_options/work_screen/Views/work_screen.dart';
 import '../home_screen/Views/home_screen.dart';
 import '../profile_screen/Views/profile_screen.dart';
@@ -36,8 +36,7 @@ class _NavBarState extends State<NavBar> {
           NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
           NavigationDestination(
               icon: Icon(Iconsax.search_normal_1), label: 'Category'),
-          NavigationDestination(
-              icon: Icon(Icons.help_center_outlined), label: 'Support'),
+          NavigationDestination(icon: Icon(Iconsax.share), label: 'Referral'),
           NavigationDestination(
               icon: Icon(Icons.work_outline_sharp), label: 'Work'),
           NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
@@ -54,7 +53,7 @@ class NavigationController {
   final screens = [
     const HomeScreen(),
     const SearchScreen(),
-    CustomerCare(),
+    const ReferralScreen(),
     const WorkScreen(),
     const ProfileScreen(),
   ];
