@@ -1,14 +1,14 @@
+import 'package:EES121/Screens/All_Screens/search_screen/Category_two/category_two_model.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../../drawer_options/work_screen/Provider/work_provider.dart';
+import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 import '../Global/category_global.dart';
 import 'Helper/contact_helper.dart';
 import 'categoryTwoProvider.dart';
-import '../../../../Colors/colors.dart';
-import '../../../../Global/globalUser.dart';
 
 class Categorytwo extends StatefulWidget {
   const Categorytwo({Key? key}) : super(key: key);
@@ -69,10 +69,16 @@ class _CategorytwoState extends State<Categorytwo> {
               ),
             );
           } else {
+            List<CategoryUser> users = provider.categoryTwoApi.data;
+
+            // Sort the users based on user average rating in descending order
+            users.sort((a, b) => double.parse(b.providerAverageRating)
+                .compareTo(double.parse(a.providerAverageRating)));
+
             return ListView.builder(
-              itemCount: provider.categoryTwoApi.data.length,
+              itemCount: users.length,
               itemBuilder: (context, index) {
-                final user = provider.categoryTwoApi.data[index];
+                final user = users[index];
                 int workSentIndex = index < User.workSent.length ? index : -1;
                 bool alreadyContacted = workSentIndex != -1 &&
                     User.workSent[workSentIndex]['userid'] == user.userid;

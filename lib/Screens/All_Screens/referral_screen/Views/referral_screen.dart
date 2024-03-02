@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../Colors/colors.dart';
@@ -59,6 +60,16 @@ class _ReferralScreenState extends State<ReferralScreen> {
             ),
           ),
           Container(
+            padding: EdgeInsets.all(10),
+            child: const Text(
+              "Invite your friends and family for earn more",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+          Container(
             padding: const EdgeInsets.all(10),
             child: Text(
               referralLink + User.data['userid'],
@@ -69,6 +80,14 @@ class _ReferralScreenState extends State<ReferralScreen> {
                 decoration: TextDecoration.underline,
                 decorationColor: AppColors.appColor,
               ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              _copyToClipboard(referralLink + User.data['userid']);
+            },
+            icon: const Icon(
+              Icons.copy,
             ),
           ),
           SizedBox(
@@ -103,6 +122,16 @@ class _ReferralScreenState extends State<ReferralScreen> {
             child: SizedBox(),
           ),
         ],
+      ),
+    );
+  }
+
+  void _copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    // Optionally, you can show a snackbar or toast to indicate that the text has been copied
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Link copied to clipboard"),
       ),
     );
   }

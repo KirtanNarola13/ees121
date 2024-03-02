@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../Colors/colors.dart';
 import '../../../../Global/globalUser.dart';
@@ -76,20 +75,34 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: const BoxDecoration(),
-              child: Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      webp + User.data['selfifile'],
+              child: Column(
+                children: [
+                  Container(
+                    height: h / 8.5,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          webp + User.data['selfifile'],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Text(
+                    User.data['fullname'],
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    User.data['userid'],
+                    style: const TextStyle(
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
               ),
             ),
             ListTile(
@@ -329,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       context: context,
                       builder: (context) {
                         return Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           alignment: Alignment.center,
                           decoration: const BoxDecoration(
                             borderRadius:

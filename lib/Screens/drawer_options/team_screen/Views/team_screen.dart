@@ -2,15 +2,26 @@ import 'package:flutter/material.dart';
 
 import '../../../../Colors/colors.dart';
 import '../../../../Global/globalUser.dart';
-import '../Global/team_global.dart';
 
-class TeamScreen extends StatelessWidget {
-  const TeamScreen({super.key});
+class TeamScreen extends StatefulWidget {
+  const TeamScreen({Key? key}) : super(key: key);
 
+  @override
+  State<TeamScreen> createState() => _TeamScreenState();
+}
+
+class _TeamScreenState extends State<TeamScreen> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    // Sort User.team based on 'Pending', 'Submitted', 'Verified'
+    User.team.sort((a, b) {
+      Map<String, int> orderMap = {'Pending': 1, 'Submitted': 2, 'Verified': 3};
+      return orderMap[a['kycstatus']]! - orderMap[b['kycstatus']]!;
+    });
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -35,101 +46,55 @@ class TeamScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: h / 18,
-              padding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(color: AppColors.appColor),
-                  bottom: BorderSide(color: AppColors.appColor),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Date",
-                        style: TeamGlobal.semiTitleStyle,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Name",
-                        style: TeamGlobal.semiTitleStyle,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Status",
-                        style: TeamGlobal.semiTitleStyle,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             ...User.team.map(
-              (e) => Container(
-                margin:
-                    EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 15),
-                padding: EdgeInsets.only(
-                  left: 10,
-                  right: 10,
-                ),
-                height: h / 12,
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.appColor),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+              (e) => Card(
+                child: ListTile(
+                  onTap: () {
+                    showDialog(
+                      useSafeArea: true,
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: Container(
+                            height: h / 3, // Set your desired height
+
+                            child: AlertDialog(
+                              title: Center(
+                                child: Text(
+                                  "${e['fullname']}",
+                                  style: const TextStyle(
+                                    fontSize: 26,
+                                    letterSpacing: 2,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              content: Column(
+                                children: [
+                                  SizedBox(
+                                    height: h / 25,
+                                  ),
+                                  Text(
+                                    e['joindate'],
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                  Text(
+                                    e['kycstatus'],
+                                    style: const TextStyle(fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              alignment: Alignment.center,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  title: Text(
+                    "${e['fullname']}",
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "${e['joindate']}",
-                          style: TeamGlobal.stateStyle,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 7,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "${e['fullname']}",
-                          style: TeamGlobal.stateStyle,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "${e['kycstatus']}",
-                          style: TeamGlobal.stateStyle,
-                        ),
-                      ),
-                    ),
-                  ],
+                  subtitle: Text("${e['kycstatus']}"),
                 ),
               ),
             ),
