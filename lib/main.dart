@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,10 +28,17 @@ import 'Screens/login_procces/Views/login_screen.dart';
 import 'Screens/login_procces/Views/signup_screen.dart';
 import 'Screens/login_procces/provider/passwordProvider.dart';
 import 'Utils/theme.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  log("FCMToken $fcmToken");
+
   SharedPreferences preferences = await SharedPreferences.getInstance();
   //
   runApp(
