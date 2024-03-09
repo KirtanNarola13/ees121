@@ -37,7 +37,7 @@ class WorkProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
-        log('Decoded JSON: $jsonResponse');
+        log('Decoded JSON: ${response.body}');
 
         if (jsonResponse["status"] == "FAIL") {
           _error = jsonResponse["message"] ?? "Unknown error";

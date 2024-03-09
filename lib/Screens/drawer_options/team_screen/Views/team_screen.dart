@@ -18,7 +18,7 @@ class _TeamScreenState extends State<TeamScreen> {
 
     // Sort User.team based on 'Pending', 'Submitted', 'Verified'
     User.team.sort((a, b) {
-      Map<String, int> orderMap = {'Pending': 1, 'Submitted': 2, 'Verified': 3};
+      Map<String, int> orderMap = {'pending': 1, 'submitted': 2, 'VERIFIED': 3};
       return orderMap[a['kycstatus']]! - orderMap[b['kycstatus']]!;
     });
 

@@ -45,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
           final Map responseData = json.decode(response.body);
 
           if (responseData['status'] == 'SUCCESS') {
-            Map userData = responseData['data'];
 
+            Map userData = responseData['data'];
             if (userData['loginuser'] == "") {
               log(userData['loginuser']);
             } else {
@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
               User.myOffers = userData['myoffers'];
             }
 
-            User.team = userData['team'];
             if (userData['team'] == "") {
               log(userData['team']);
             } else {
