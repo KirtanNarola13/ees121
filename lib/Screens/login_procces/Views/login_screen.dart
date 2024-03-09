@@ -80,23 +80,6 @@ class _LoginPageState extends State<LoginPage> {
               User.contactSupport = userData['contactsupport'];
             }
 
-            User.workSent = userData['worksent'];
-            if (userData['worksent'] == "") {
-              log(userData['worksent']);
-            } else {
-              User.workSent = userData['worksent'];
-            }
-
-            // User.workReceived = userData['workreceived'];
-
-            // User.notifications = userData['notifications'];
-            User.workSent = userData['notifications'];
-            if (userData['notifications'] == "") {
-              log(userData['notifications']);
-            } else {
-              User.notifications = userData['notifications'];
-            }
-
             // log(User.offer.toString());
             // log(User.myOffers.toString());
             log(User.data.toString());

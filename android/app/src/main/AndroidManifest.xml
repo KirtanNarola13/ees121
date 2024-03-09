@@ -4,6 +4,7 @@
         android:label="EES121"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        android:enableOnBackInvokedCallback="true">
         <activity
             android:name="com.EES121.MainActivity"
             android:exported="true"

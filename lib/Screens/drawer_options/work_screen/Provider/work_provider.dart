@@ -1,10 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:EES121/Screens/drawer_options/work_screen/model/work_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../Global/globalUser.dart';
 import '../Global/work_global.dart';
 
 enum CategoryProviderState { Loading, Loaded, Error }
@@ -22,21 +22,34 @@ class WorkProvider extends ChangeNotifier {
 
   CategoryProviderState _state = CategoryProviderState.Loading;
   String _error = '';
-  late WorkApi _workApi = WorkApi(data: []);
+  late WorkApi _workApi = WorkApi(workReceived: [], workSent: []);
 
   CategoryProviderState get state => _state;
   String get error => _error;
   WorkApi get workApi => _workApi;
-
-  Future<void> getWork() async {
+  Future<void> getWork({required String id, required String password}) async {
     try {
       // log('Fetching category data...');
-      final http.Response response = await http.get(Uri.parse(apiEndpoint));
+      http.Response response = await http.post(
+        Uri.parse('https://panel.ees121.com/api/workreq'),
+        body: {'loginid': id, 'loginpass': password},
+      );
 
       if (response.statusCode == 200) {
-        _workApi = WorkApiFromJson(response.body);
-        User.workReceived = _workApi.data;
-        _state = CategoryProviderState.Loaded;
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+        log('Decoded JSON: $jsonResponse');
+
+        if (jsonResponse["status"] == "FAIL") {
+          _error = jsonResponse["message"] ?? "Unknown error";
+          _state = CategoryProviderState.Error;
+          log('Error loading category data: $_error');
+          log('Response Body: ${response.body}');
+          log('Status Code: ${response.statusCode}');
+        } else {
+          _workApi = WorkApi.fromJson(jsonResponse);
+
+          _state = CategoryProviderState.Loaded;
+        }
       } else {
         _error = response.statusCode.toString();
         _state = CategoryProviderState.Error;

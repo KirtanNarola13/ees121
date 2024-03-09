@@ -79,9 +79,6 @@ class _CategorytwoState extends State<Categorytwo> {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 final user = users[index];
-                int workSentIndex = index < User.workSent.length ? index : -1;
-                bool alreadyContacted = workSentIndex != -1 &&
-                    User.workSent[workSentIndex]['userid'] == user.userid;
 
                 return GestureDetector(
                   onTap: () {
@@ -164,52 +161,43 @@ class _CategorytwoState extends State<Categorytwo> {
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    (workSentIndex != -1 &&
-                                            User.workSent[workSentIndex]
-                                                    ['userid'] ==
-                                                user.userid)
-                                        ? Text("You already contacted")
-                                        : GestureDetector(
-                                            onTap: () async {
-                                              if (ContactHelper.statusCode ==
-                                                  200) {
-                                                await ContactHelper
-                                                    .contactHelper
-                                                    .contactProvider(
-                                                        User.data['userid'],
-                                                        user.userid);
-                                                Navigator.pop(context);
-                                                CherryToast.success(
-                                                  title: Text(
-                                                    "Requested Successfully",
-                                                    style: TextStyle(
-                                                        color:
-                                                            AppColors.appColor),
-                                                  ),
-                                                ).show(context);
-                                              }
-
-                                              // After the contact request, fetch the updated data
-                                            },
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              width: w / 4,
-                                              height: h / 20,
-                                              decoration: BoxDecoration(
-                                                  color: AppColors.appColor
-                                                      .withOpacity(0.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                              child: const Text(
-                                                "contact",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  letterSpacing: 2,
-                                                ),
-                                              ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        if (ContactHelper.statusCode == 200) {
+                                          await ContactHelper.contactHelper
+                                              .contactProvider(
+                                                  User.data['userid'],
+                                                  user.userid);
+                                          Navigator.pop(context);
+                                          CherryToast.success(
+                                            title: Text(
+                                              "Requested Successfully",
+                                              style: TextStyle(
+                                                  color: AppColors.appColor),
                                             ),
+                                          ).show(context);
+                                        }
+
+                                        // After the contact request, fetch the updated data
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: w / 4,
+                                        height: h / 20,
+                                        decoration: BoxDecoration(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        child: const Text(
+                                          "contact",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 2,
                                           ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
