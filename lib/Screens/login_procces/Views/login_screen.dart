@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:EES121/Screens/login_procces/Views/helpers/user-count-helper.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -45,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
           final Map responseData = json.decode(response.body);
 
           if (responseData['status'] == 'SUCCESS') {
-
             Map userData = responseData['data'];
             if (userData['loginuser'] == "") {
               log(userData['loginuser']);
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           log('Failed: ${response.statusCode}');
           CherryToast.error(
-            title: Text(
+            title: const Text(
               "invalid phone or password",
               style: TextStyle(color: Colors.red),
             ),
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
         CherryToast.error(
           title: Text(
             "Erro $e",
-            style: TextStyle(color: Colors.red),
+            style: const TextStyle(color: Colors.red),
           ),
         ).show(context);
       } finally {
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       SizedBox(
-                        height: h / 35,
+                        height: h / 30,
                       ),
                       TextFormField(
                         onSaved: (String? val) {
@@ -275,7 +275,7 @@ class _LoginPageState extends State<LoginPage> {
                                 .obscureText,
                       ),
                       SizedBox(
-                        height: h / 35,
+                        height: h / 30,
                       ),
                       GestureDetector(
                         onTap: () async {
@@ -326,38 +326,55 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Don\'t have an account? ',
+            SizedBox(
+              height: h / 30,
+            ),
+            FutureBuilder(
+              future: UserCountHelper.userCountHelper.getUserCount(),
+              builder: (context, snapshot) {
+                return Center(
+                  child: Text(
+                    "Users : ${snapshot.data?['users']} +",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              height: h / 4,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Don\'t have an account? ',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Assuming 'launchUrl' is a function to handle URL launching
+                    // Make sure to implement or replace this function with the correct one
+                    launchUrl(
+                        Uri.parse('https://ees121.com/join/EES1655090049348'),
+                        mode: LaunchMode.inAppWebView);
+                  },
+                  child: Text(
+                    'Sign up',
                     style: TextStyle(
                       fontSize: 16,
+                      color: AppColors.appColor, // Change to your desired color
+                      decoration: TextDecoration.underline,
+                      decorationColor:
+                          AppColors.appColor, // Change to your desired color
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      // Assuming 'launchUrl' is a function to handle URL launching
-                      // Make sure to implement or replace this function with the correct one
-                      launchUrl(
-                          Uri.parse('https://ees121.com/join/EES1655090049348'),
-                          mode: LaunchMode.inAppWebView);
-                    },
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color:
-                            AppColors.appColor, // Change to your desired color
-                        decoration: TextDecoration.underline,
-                        decorationColor:
-                            AppColors.appColor, // Change to your desired color
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

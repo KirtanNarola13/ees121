@@ -81,14 +81,12 @@ flutter:
   assets:
     - lib/Screens/login_procces/Assets/
     - lib/Screens/All_Screens/Assets/
-    - lib/Screens/All_Screens/home_screen/Assets/
-    - lib/Screens/All_Screens/Assets/service_category/
-    - lib/Screens/All_Screens/Assets/services/
     - android/app/src/main/res/
     - lib/Screens/All_Screens/referral_screen/Assets/
     - lib/Screens/Splash_screen/Assets/
     - lib/Screens/All_Screens/profile_screen/Views/Profile_Vewis/change_password/Assets/
     - lib/Screens/drawer_options/customer_care/Assets/
+    - lib/Screens/All_Screens/home_screen/Assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

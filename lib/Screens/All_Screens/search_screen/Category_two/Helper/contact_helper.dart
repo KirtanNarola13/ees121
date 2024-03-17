@@ -10,9 +10,9 @@ class ContactHelper {
   static int? statusCode;
 
   //
-  contactProvider(String user, String provider) async {
+  Future<void> contactProvider(String user, String provider) async {
     String apiPoint =
-        "https://adminpanel.appsolution.online/ees121/api/callreq?user=$user&provider=$provider";
+        "https://panel.ees121.com/api/callreq?user=$user&provider=$provider";
     //
     http.Response response = await http.post(
       Uri.parse(apiPoint),
@@ -22,9 +22,8 @@ class ContactHelper {
     log("${response.statusCode}");
     if (response.statusCode == 200) {
       log("${jsonDecode(response.body)}");
-      statusCode = response.statusCode;
     } else {
-      return null;
+      log('error');
     }
   }
 }

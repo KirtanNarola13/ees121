@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Colors/colors.dart';
 import '../../../../Global/globalUser.dart';
@@ -56,7 +57,7 @@ class _TeamScreenState extends State<TeamScreen> {
                       builder: (context) {
                         return Center(
                           child: Container(
-                            height: h / 3, // Set your desired height
+                            height: h / 2.8, // Set your desired height
 
                             child: AlertDialog(
                               title: Center(
@@ -72,7 +73,7 @@ class _TeamScreenState extends State<TeamScreen> {
                               content: Column(
                                 children: [
                                   SizedBox(
-                                    height: h / 25,
+                                    height: h / 50,
                                   ),
                                   Text(
                                     e['joindate'],
@@ -81,6 +82,36 @@ class _TeamScreenState extends State<TeamScreen> {
                                   Text(
                                     e['kycstatus'],
                                     style: const TextStyle(fontSize: 18),
+                                  ),
+                                  SizedBox(
+                                    height: h / 50,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      launchUrl(
+                                        Uri(
+                                          scheme: "tel",
+                                          path: e['mobile_no'],
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: w / 4.5,
+                                      height: h / 25,
+                                      decoration: BoxDecoration(
+                                          color: AppColors.appColor
+                                              .withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: const Text(
+                                        "Call",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),

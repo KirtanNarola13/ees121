@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:EES121/Screens/All_Screens/home_screen/helpers/available-helper.dart';
+import 'package:EES121/Screens/All_Screens/home_screen/helpers/offer-helper.dart';
+import 'package:EES121/Screens/login_procces/Global/global.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -22,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // API
     // WBP
     String webp = "https://ees121.com/panel/files/";
-
+    bool availabilityStatus = (User.data['isavailable'] == 0) ? true : false;
     // Generate unique random indices for each category
     // List<int> randomIndices = List.generate(
     //   provider.categoryApi.data.length,
@@ -293,16 +298,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               Transform.scale(
                                 scale: 0.6,
                                 child: Switch(
-                                  value: (User.data['isavailable'] == 1)
-                                      ? true
-                                      : false,
-                                  onChanged: (val) {},
+                                  value: User.data['isavailable'] == '1',
+                                  onChanged: (bool value) async {
+                                    try {
+                                      // Update availability status locally before API call
+                                      User.data['isavailable'] =
+                                          value ? '1' : '0';
+
+                                      // Assume mobileNumber and switchValue are obtained from your UI
+                                      await AvailableHelper.availableHelper
+                                          .updateSwitch(value);
+                                      log("User.data['isavailable']: ${User.data['isavailable']} $value");
+                                    } catch (e) {
+                                      log('Error updating switch: $e');
+                                      // Rollback local change if API call fails
+                                      User.data['isavailable'] =
+                                          value ? '0' : '1';
+                                    }
+                                  },
                                 ),
                               ),
                               Text(
-                                (User.data['isavailable'] == 1)
-                                    ? 'Available'
-                                    : 'Not Available',
+                                User.data['isavailable'] == '0'
+                                    ? "Not Available"
+                                    : "Available",
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -338,23 +357,8 @@ class _HomeScreenState extends State<HomeScreen> {
               items: User.offer.map((e) {
                 return GestureDetector(
                   onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          padding: const EdgeInsets.all(10),
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          child: Image.network(
-                            webp + e['offer_file'],
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                    );
+                    Navigator.pushNamed(context, 'offer',
+                        arguments: e['provider']);
                   },
                   child: Container(
                     height: h / 4.2,

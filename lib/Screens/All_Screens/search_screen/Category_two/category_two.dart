@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:EES121/Screens/All_Screens/search_screen/Category_two/category_two_model.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/material.dart';
@@ -82,134 +84,17 @@ class _CategorytwoState extends State<Categorytwo> {
 
                 return GestureDetector(
                   onTap: () {
-                    showModalBottomSheet(
-                      enableDrag: true,
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          height: h / 3,
-                          alignment: Alignment.center,
-                          padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Container(
-                                  width: w / 10,
-                                  child: Image(
-                                    image: NetworkImage(
-                                      CategoryTwoProvider.imgPoint +
-                                          user.selfifile,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: w / 30,
-                              ),
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text('Full Name',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 2,
-                                        )),
-                                    Text(
-                                      user.fullname,
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text(
-                                      'Service',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        letterSpacing: 2,
-                                      ),
-                                    ),
-                                    Text(
-                                      user.category,
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text(
-                                      'Company',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        letterSpacing: 2,
-                                      ),
-                                    ),
-                                    Text(
-                                      user.company,
-                                      style: const TextStyle(fontSize: 12),
-                                    ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        if (ContactHelper.statusCode == 200) {
-                                          await ContactHelper.contactHelper
-                                              .contactProvider(
-                                                  User.data['userid'],
-                                                  user.userid);
-                                          Navigator.pop(context);
-                                          CherryToast.success(
-                                            title: Text(
-                                              "Requested Successfully",
-                                              style: TextStyle(
-                                                  color: AppColors.appColor),
-                                            ),
-                                          ).show(context);
-                                        }
-
-                                        // After the contact request, fetch the updated data
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: w / 4,
-                                        height: h / 20,
-                                        decoration: BoxDecoration(
-                                            color: AppColors.appColor
-                                                .withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: const Text(
-                                          "contact",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            letterSpacing: 2,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                    Navigator.of(context)
+                        .pushNamed('provider_detail', arguments: user);
                   },
                   child: Container(
-                    margin: const EdgeInsets.all(10),
-                    height: h / 3,
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 10,
+                      bottom: 10,
+                    ),
+                    height: h / 5.5,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(15),
@@ -219,19 +104,21 @@ class _CategorytwoState extends State<Categorytwo> {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              border: Border(
-                                  right: BorderSide(color: AppColors.appColor)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  CategoryTwoProvider.imgPoint + user.selfifile,
+                            padding: const EdgeInsets.all(10),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(5),
                                 ),
-                                fit: BoxFit.cover,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    CategoryTwoProvider.imgPoint +
+                                        user.selfifile,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -246,20 +133,6 @@ class _CategorytwoState extends State<Categorytwo> {
                               children: [
                                 Text(
                                   user.fullname,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                Divider(
-                                  color: AppColors.appColor.withOpacity(0.5),
-                                ),
-                                Text(
-                                  user.category,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                Divider(
-                                  color: AppColors.appColor.withOpacity(0.5),
-                                ),
-                                Text(
-                                  user.company,
                                   style: const TextStyle(fontSize: 12),
                                 ),
                                 Divider(
@@ -287,34 +160,6 @@ class _CategorytwoState extends State<Categorytwo> {
                                         color: Colors.amber,
                                       ),
                                       onRatingUpdate: (double value) {},
-                                    ),
-                                  ],
-                                ),
-                                Divider(
-                                  color: AppColors.appColor.withOpacity(0.5),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'User Rating',
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                    RatingBar.builder(
-                                      initialRating:
-                                          double.parse(user.userAverageRating),
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 10,
-                                      itemSize: 16,
-                                      ignoreGestures: true,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 1.5),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {},
                                     ),
                                   ],
                                 ),

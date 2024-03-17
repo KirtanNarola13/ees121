@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Colors/colors.dart';
 import '../Provider/work_provider.dart';
@@ -29,6 +30,10 @@ class _WorkScreenState extends State<WorkScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Work's"),
+      ),
       body: Consumer<WorkProvider>(
         builder: (context, provider, _) {
           if (provider.state == CategoryProviderState.Error) {
@@ -71,9 +76,6 @@ getUi(WorkApi workApi, BuildContext context) {
   String webp = "https://ees121.com/panel/files/";
   return Column(
     children: [
-      SizedBox(
-        height: h / 30,
-      ),
       Expanded(
         child: Row(
           children: [
@@ -149,6 +151,9 @@ getUi(WorkApi workApi, BuildContext context) {
           ],
         ),
       ),
+      SizedBox(
+        height: h / 50,
+      ),
       Expanded(
         flex: 10,
         child: Consumer<WorkProvider>(
@@ -213,7 +218,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text('User rating'),
+                                    const Text('User rating'),
                                     RatingBar.builder(
                                       initialRating: double.parse(
                                           workApi.workSent[i].userAvgRating),
@@ -234,7 +239,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text('Provider rating'),
+                                    const Text('Provider rating'),
                                     RatingBar.builder(
                                       initialRating: double.parse(workApi
                                           .workSent[i].providerAvgRating),
@@ -256,7 +261,12 @@ getUi(WorkApi workApi, BuildContext context) {
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
                                     GestureDetector(
-                                      onTap: () async {},
+                                      onTap: () {
+                                        launchUrl(Uri(
+                                            scheme: "tel",
+                                            path:
+                                                workApi.workSent[i].mobileNo));
+                                      },
                                       child: Container(
                                         alignment: Alignment.center,
                                         width: w / 4.5,
@@ -310,8 +320,8 @@ getUi(WorkApi workApi, BuildContext context) {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(15)),
                                   image: DecorationImage(
-                                    image: NetworkImage(
-                                        webp + workApi.workSent[i].selfiFile),
+                                    image: NetworkImage(webp +
+                                        workApi.workReceived[i].selfiFile),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -329,25 +339,26 @@ getUi(WorkApi workApi, BuildContext context) {
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(workApi.workSent[i].fullname),
+                                    Text(workApi.workReceived[i].fullname),
                                     Divider(
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text(workApi.workSent[i].category),
+                                    Text(workApi.workReceived[i].category),
                                     Divider(
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text(workApi.workSent[i].organizationName),
+                                    Text(workApi
+                                        .workReceived[i].organizationName),
                                     Divider(
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text('User rating'),
+                                    const Text('User rating'),
                                     RatingBar.builder(
-                                      initialRating: double.parse(
-                                          workApi.workSent[i].userAvgRating),
+                                      initialRating: double.parse(workApi
+                                          .workReceived[i].userAvgRating),
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
                                       itemCount: 10,
@@ -365,10 +376,10 @@ getUi(WorkApi workApi, BuildContext context) {
                                       color:
                                           AppColors.appColor.withOpacity(0.5),
                                     ),
-                                    Text('Provider rating'),
+                                    const Text('Provider rating'),
                                     RatingBar.builder(
                                       initialRating: double.parse(workApi
-                                          .workSent[i].providerAvgRating),
+                                          .workReceived[i].providerAvgRating),
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
                                       itemCount: 10,

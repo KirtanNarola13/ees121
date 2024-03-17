@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:EES121/Screens/All_Screens/home_screen/components/offer-screen.dart';
+import 'package:EES121/Screens/All_Screens/search_screen/Category_two/components/provider-detail.dart';
+import 'package:EES121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +67,7 @@ void main() async {
           'login': (context) => const LoginPage(),
           'signup': (context) => const SignUp(),
           'navbar': (context) => const NavBar(),
+          'work': (context) => const WorkScreen(),
           // 'category_detail_screen': (context) => const CategoryDetailScreen(),
           'category_two': (context) => const Categorytwo(),
           'wallet_screen': (context) => const WalletScreen(),
@@ -77,6 +81,8 @@ void main() async {
           'service_screen': (context) => const ServiceScreen(),
           'identity_screen': (context) => const IdentityScreen(),
           'notification_screen': (context) => const NotificationScreen(),
+          'offer': (context) => const OfferScreen(),
+          'provider_detail': (context) => const ProviderDetail(),
         },
       ),
     ),

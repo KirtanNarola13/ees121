@@ -10,7 +10,7 @@ import '../Global/work_global.dart';
 enum CategoryProviderState { Loading, Loaded, Error }
 
 class WorkProvider extends ChangeNotifier {
-  WorkGlobal? work = WorkGlobal(isSent: false);
+  WorkGlobal? work = WorkGlobal(isSent: true);
 
   void changeRequest() async {
     work?.isSent = !work!.isSent; // Toggle the value

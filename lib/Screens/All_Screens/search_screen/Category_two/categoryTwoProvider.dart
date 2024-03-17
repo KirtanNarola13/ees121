@@ -38,6 +38,7 @@ class CategoryTwoProvider extends ChangeNotifier {
           _categoryTwoApi.data.clear();
           // Parse the response body into CategoryTwoApi model
           _categoryTwoApi = categoryTwoApiFromJson(response.body);
+          log(response.body.toString());
           log(response.body);
 
           // Check if the parsed data is not null and not empty
