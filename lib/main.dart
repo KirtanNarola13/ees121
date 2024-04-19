@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:EES121/Screens/All_Screens/home_screen/components/all-offer-screen.dart';
 import 'package:EES121/Screens/All_Screens/home_screen/components/offer-screen.dart';
 import 'package:EES121/Screens/All_Screens/search_screen/Category_two/components/provider-detail.dart';
 import 'package:EES121/Screens/drawer_options/work_screen/Views/work_screen.dart';
@@ -8,7 +8,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Screens/All_Screens/nav_bar/nav_bar.dart';
 import 'Screens/All_Screens/nonotification_screen/Views/notification_screen.dart';
 import 'Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/address.dart';
@@ -82,6 +81,7 @@ void main() async {
           'identity_screen': (context) => const IdentityScreen(),
           'notification_screen': (context) => const NotificationScreen(),
           'offer': (context) => const OfferScreen(),
+          'allOffer': (context) => const AllOffer(),
           'provider_detail': (context) => const ProviderDetail(),
         },
       ),

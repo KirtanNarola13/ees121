@@ -77,6 +77,11 @@ class _LoginPageState extends State<LoginPage> {
               log(userData['contactsupport']);
             } else {
               User.contactSupport = userData['contactsupport'];
+            }if (userData['notifications'] == "") {
+              log(userData['notifications']);
+            } else {
+              User.notifications = userData['notifications'];
+              log("${User.notifications}");
             }
 
             // log(User.offer.toString());
@@ -344,7 +349,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             SizedBox(
-              height: h / 4,
+              height: h / 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

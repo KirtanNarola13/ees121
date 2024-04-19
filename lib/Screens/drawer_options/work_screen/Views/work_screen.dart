@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Colors/colors.dart';
+import '../../../../Global/globalUser.dart';
 import '../Provider/work_provider.dart';
 
 class WorkScreen extends StatefulWidget {
@@ -162,244 +163,351 @@ getUi(WorkApi workApi, BuildContext context) {
                 ? ListView.builder(
                     itemCount: workApi.workSent.length,
                     itemBuilder: (context, i) {
-                      return Container(
-                        margin: const EdgeInsets.only(
-                            left: 15, right: 15, bottom: 20),
-                        height: h / 2.5,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(15)),
-                          border: Border.all(color: AppColors.appColor),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.appColor),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(15)),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        webp + workApi.workSent[i].selfiFile),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                      return (User.data['userid'] == workApi.workSent[i].userid)
+                          ? Container()
+                          : Container(
+                              margin: const EdgeInsets.only(
+                                  left: 15, right: 15, bottom: 20),
+                              height: h / 2,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                border: Border.all(color: AppColors.appColor),
                               ),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                    top: 5, bottom: 5, right: 10, left: 10),
-                                height: double.infinity,
-                                width: double.infinity,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(workApi.workSent[i].fullname),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    Text(workApi.workSent[i].category),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    Text(workApi.workSent[i].organizationName),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text('User rating'),
-                                    RatingBar.builder(
-                                      initialRating: double.parse(
-                                          workApi.workSent[i].userAvgRating),
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 10,
-                                      itemSize: 14,
-                                      ignoreGestures: true,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 1.5),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {},
-                                    ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text('Provider rating'),
-                                    RatingBar.builder(
-                                      initialRating: double.parse(workApi
-                                          .workSent[i].providerAvgRating),
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 10,
-                                      itemSize: 14,
-                                      ignoreGestures: true,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 1.5),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {},
-                                    ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        launchUrl(Uri(
-                                            scheme: "tel",
-                                            path:
-                                                workApi.workSent[i].mobileNo));
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: w / 4.5,
-                                        height: h / 25,
-                                        decoration: BoxDecoration(
-                                            color: AppColors.appColor
-                                                .withOpacity(0.5),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: const Text(
-                                          "Call",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            letterSpacing: 2,
-                                          ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.appColor),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        image: DecorationImage(
+                                          image: NetworkImage(webp +
+                                              workApi.workSent[i].selfiFile),
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 5,
+                                          right: 10,
+                                          left: 10),
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            workApi.workSent[i].fullname,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi.workSent[i].category,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi
+                                                .workSent[i].organizationName,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi.workSent[i].address,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          const Text(
+                                            'User rating',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(workApi
+                                                .workSent[i].userAvgRating),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 12,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          const Text(
+                                            'Provider rating',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(workApi
+                                                .workSent[i].providerAvgRating),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 12,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              launchUrl(Uri(
+                                                  scheme: "tel",
+                                                  path: workApi
+                                                      .workSent[i].mobileNo));
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              width: w / 4.5,
+                                              height: h / 25,
+                                              decoration: BoxDecoration(
+                                                  color: AppColors.appColor
+                                                      .withOpacity(0.5),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              child: const Text(
+                                                "Call",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: 2,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      );
+                            );
                     },
                   )
                 : ListView.builder(
                     itemCount: workApi.workReceived.length,
                     itemBuilder: (context, i) {
-                      var work = workApi.workReceived[i];
-                      return Container(
-                        margin:
-                            const EdgeInsets.only(left: 15, right: 15, top: 20),
-                        height: h / 2.5,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(15)),
-                          border: Border.all(color: AppColors.appColor),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.appColor),
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(15)),
-                                  image: DecorationImage(
-                                    image: NetworkImage(webp +
-                                        workApi.workReceived[i].selfiFile),
-                                    fit: BoxFit.cover,
+                      return (User.data['userid'] == workApi.workSent[i].userid)
+                          ? Container()
+                          : Container(
+                              margin: const EdgeInsets.only(
+                                  left: 15, right: 15, top: 20),
+                              height: h / 2.5,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                border: Border.all(color: AppColors.appColor),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.appColor),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        image: DecorationImage(
+                                          image: NetworkImage(webp +
+                                              workApi
+                                                  .workReceived[i].selfiFile),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                    top: 5, bottom: 5, right: 10, left: 10),
-                                height: double.infinity,
-                                width: double.infinity,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(workApi.workReceived[i].fullname),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    Text(workApi.workReceived[i].category),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    Text(workApi
-                                        .workReceived[i].organizationName),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text('User rating'),
-                                    RatingBar.builder(
-                                      initialRating: double.parse(workApi
-                                          .workReceived[i].userAvgRating),
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 10,
-                                      itemSize: 14,
-                                      ignoreGestures: true,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 1.5),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 5,
+                                          right: 10,
+                                          left: 10),
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            workApi.workReceived[i].fullname,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi.workReceived[i].category,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi.workReceived[i]
+                                                .organizationName,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          Text(
+                                            workApi.workReceived[i].address,
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          const Text(
+                                            'User rating',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(workApi
+                                                .workReceived[i].userAvgRating),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 12,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                          Divider(
+                                            color: AppColors.appColor
+                                                .withOpacity(0.5),
+                                          ),
+                                          const Text(
+                                            'Provider rating',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          RatingBar.builder(
+                                            initialRating: double.parse(workApi
+                                                .workReceived[i]
+                                                .providerAvgRating),
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 10,
+                                            itemSize: 12,
+                                            ignoreGestures: true,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.5),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                        ],
                                       ),
-                                      onRatingUpdate: (rating) {},
                                     ),
-                                    Divider(
-                                      color:
-                                          AppColors.appColor.withOpacity(0.5),
-                                    ),
-                                    const Text('Provider rating'),
-                                    RatingBar.builder(
-                                      initialRating: double.parse(workApi
-                                          .workReceived[i].providerAvgRating),
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 10,
-                                      itemSize: 14,
-                                      ignoreGestures: true,
-                                      itemPadding: const EdgeInsets.symmetric(
-                                          horizontal: 1.5),
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {},
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      );
+                            );
                     },
                   );
           },

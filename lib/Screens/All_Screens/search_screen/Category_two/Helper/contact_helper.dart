@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:http/http.dart' as http;
 
 class ContactHelper {
@@ -21,7 +20,7 @@ class ContactHelper {
     //
     log("${response.statusCode}");
     if (response.statusCode == 200) {
-      log("${jsonDecode(response.body)}");
+      log("Contacted");
     } else {
       log('error');
     }

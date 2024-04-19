@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:EES121/Screens/All_Screens/home_screen/helpers/available-helper.dart';
-import 'package:EES121/Screens/All_Screens/home_screen/helpers/offer-helper.dart';
-import 'package:EES121/Screens/login_procces/Global/global.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -194,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               margin: const EdgeInsets.all(10),
-              height: h / 3,
+              height: h / 2.8,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(
                   Radius.circular(15),
@@ -231,7 +229,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             User.data['fullname'],
-                            style: const TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 14),
+                            textAlign: TextAlign.center,
                           ),
                           Divider(
                             color: AppColors.appColor.withOpacity(0.5),
@@ -249,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 10,
-                                itemSize: 16,
+                                itemSize: 13,
                                 ignoreGestures: true,
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 1.5),
@@ -277,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 direction: Axis.horizontal,
                                 allowHalfRating: true,
                                 itemCount: 10,
-                                itemSize: 16,
+                                itemSize: 13,
                                 ignoreGestures: true,
                                 itemPadding:
                                     const EdgeInsets.symmetric(horizontal: 1.5),
@@ -336,11 +335,23 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: h / 20,
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(
-                'Popular Offers',
-                style: TextStyle(fontSize: 22, letterSpacing: 1),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Popular Offers',
+                    style: TextStyle(fontSize: 22, letterSpacing: 1),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('allOffer');
+                    },
+                    child: const Text('see all'),
+                  ),
+                ],
               ),
             ),
             SizedBox(

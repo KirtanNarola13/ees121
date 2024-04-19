@@ -80,7 +80,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - lib/Screens/login_procces/Assets/
-    - lib/Screens/All_Screens/Assets/
     - android/app/src/main/res/
     - lib/Screens/All_Screens/referral_screen/Assets/
     - lib/Screens/Splash_screen/Assets/
