@@ -47,7 +47,9 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_messaging: ^14.7.10
-
+  assets_audio_player: ^3.1.1
+  top_bottom_sheet_flutter: ^0.0.2
+  permission_handler: ^11.3.1
 
 
 
@@ -86,6 +88,7 @@ flutter:
     - lib/Screens/All_Screens/profile_screen/Views/Profile_Vewis/change_password/Assets/
     - lib/Screens/drawer_options/customer_care/Assets/
     - lib/Screens/All_Screens/home_screen/Assets/
+    - assets/sound/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

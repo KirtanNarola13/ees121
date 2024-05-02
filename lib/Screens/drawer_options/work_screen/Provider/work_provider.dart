@@ -27,7 +27,8 @@ class WorkProvider extends ChangeNotifier {
   CategoryProviderState get state => _state;
   String get error => _error;
   WorkApi get workApi => _workApi;
-  Future<void> getWork({required String id, required String password}) async {
+
+  Future<void> getWork({required String id, required int password}) async {
     try {
       // log('Fetching category data...');
       http.Response response = await http.post(
@@ -37,17 +38,19 @@ class WorkProvider extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
-        log('Decoded JSON: ${response.body}');
 
         if (jsonResponse["status"] == "FAIL") {
           _error = jsonResponse["message"] ?? "Unknown error";
           _state = CategoryProviderState.Error;
           log('Error loading category data: $_error');
-          log('Response Body: ${response.body}');
+          // log('Response Body: ${response.body}');
           log('Status Code: ${response.statusCode}');
         } else {
+          // Clear existing data before updating
+          _workApi.workReceived.clear();
+          _workApi.workSent.clear();
+          // _state = CategoryProviderState.Loading;
           _workApi = WorkApi.fromJson(jsonResponse);
-
           _state = CategoryProviderState.Loaded;
         }
       } else {

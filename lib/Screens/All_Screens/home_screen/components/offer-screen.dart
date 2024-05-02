@@ -196,6 +196,7 @@ class _OfferScreenState extends State<OfferScreen> {
                   ],
                 ),
                 Container(
+                  padding: EdgeInsets.all(10),
                   height: h / 2.2,
                   decoration: BoxDecoration(
                       color: Colors.white,

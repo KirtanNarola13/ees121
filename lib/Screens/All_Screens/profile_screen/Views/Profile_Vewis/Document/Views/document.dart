@@ -35,7 +35,7 @@ class DocumentScreen extends StatelessWidget {
         alignment: Alignment.center,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
-        height: h / 2,
+        height: h / 1.3,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(
             Radius.circular(15),
@@ -50,13 +50,13 @@ class DocumentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   const Text(
                     "KYC Status :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -68,9 +68,9 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['kycstatus'],
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -84,13 +84,13 @@ class DocumentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   const Text(
                     "Aadhar ID :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -102,9 +102,9 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['adharno'],
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -118,13 +118,13 @@ class DocumentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   const Text(
-                    "Joining Date :",
+                    "Pancard No :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -134,11 +134,11 @@ class DocumentScreen extends StatelessWidget {
                     endIndent: 200,
                   ),
                   Text(
-                    User.data['joindate'],
+                    User.data['pan_no'],
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -152,13 +152,13 @@ class DocumentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   const Text(
                     "Payment Status :",
                     style: TextStyle(
-                        fontSize: 21,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 3),
                   ),
@@ -170,9 +170,77 @@ class DocumentScreen extends StatelessWidget {
                   Text(
                     User.data['paymentstatus'],
                     style: const TextStyle(
-                        fontSize: 16, letterSpacing: 2, wordSpacing: 1),
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
                   ),
-                  SizedBox(
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: AppColors.appColor.withOpacity(0.5),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Payment Ref No :",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 3),
+                  ),
+                  Divider(
+                    color: AppColors.appColor.withOpacity(0.3),
+                    indent: 0,
+                    endIndent: 200,
+                  ),
+                  Text(
+                    User.data['paymentrefno'],
+                    style: const TextStyle(
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: AppColors.appColor.withOpacity(0.5),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Payment Date :",
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 3),
+                  ),
+                  Divider(
+                    color: AppColors.appColor.withOpacity(0.3),
+                    indent: 0,
+                    endIndent: 200,
+                  ),
+                  Text(
+                    User.data['paymentdate'],
+                    style: const TextStyle(
+                        fontSize: 12, letterSpacing: 2, wordSpacing: 1),
+                  ),
+                  const SizedBox(
                     height: 10,
                   ),
                 ],

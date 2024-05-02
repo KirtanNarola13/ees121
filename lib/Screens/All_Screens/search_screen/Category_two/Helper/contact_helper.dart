@@ -18,11 +18,11 @@ class ContactHelper {
       body: {'user': user, 'provider': provider},
     );
     //
-    log("${response.statusCode}");
     if (response.statusCode == 200) {
+      log("Contact Detail${response.body}");
       log("Contacted");
     } else {
-      log('error');
+      log('Contact error');
     }
   }
 }

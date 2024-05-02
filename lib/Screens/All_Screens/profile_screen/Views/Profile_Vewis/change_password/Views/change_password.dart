@@ -14,8 +14,7 @@ class ChangePassword extends StatelessWidget {
   void changePassword(String id, String conformPassword) async {
     try {
       http.Response response = await http.post(
-        Uri.parse(
-            'https://adminpanel.appsolution.online/ees121/api/updatepassword'),
+        Uri.parse('https://panel.ees121.com/api/updatepassword'),
         body: {'loginid': id, 'loginpass': conformPassword},
       );
 

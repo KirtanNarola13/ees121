@@ -31,17 +31,11 @@ class ProfileScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              height: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    webp + User.data['selfifile'],
-                  ),
-                ),
+            child: CircleAvatar(
+              radius: 100,
+              backgroundColor: Colors.transparent,
+              backgroundImage: NetworkImage(
+                webp + User.data['selfifile'],
               ),
             ),
           ),

@@ -35,7 +35,7 @@ class _NavBarState extends State<NavBar> {
         destinations: const [
           NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
           NavigationDestination(
-              icon: Icon(Iconsax.search_normal_1), label: 'Category'),
+              icon: Icon(Iconsax.search_normal_1), label: 'Services'),
           NavigationDestination(icon: Icon(Iconsax.share), label: 'Referral'),
           NavigationDestination(
               icon: Icon(Icons.work_outline_sharp), label: 'Work'),

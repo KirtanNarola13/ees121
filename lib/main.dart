@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'package:EES121/Screens/All_Screens/home_screen/components/all-offer-screen.dart';
 import 'package:EES121/Screens/All_Screens/home_screen/components/offer-screen.dart';
+import 'package:EES121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/components/change_address.dart';
 import 'package:EES121/Screens/All_Screens/search_screen/Category_two/components/provider-detail.dart';
+import 'package:EES121/Screens/drawer_options/wallet_screen/provider/wallet_provider.dart';
 import 'package:EES121/Screens/drawer_options/work_screen/Views/work_screen.dart';
+import 'package:EES121/Screens/drawer_options/work_screen/components/work_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart'; // Import permission_handler
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/All_Screens/nav_bar/nav_bar.dart';
@@ -37,12 +41,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+
+  // Request notification permissions when the app is first run
+  await _requestPermissions();
+
   final fcmToken = await FirebaseMessaging.instance.getToken();
   log("FCMToken $fcmToken");
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //
+
   runApp(
     MultiProvider(
       providers: [
@@ -53,12 +60,13 @@ void main() async {
             create: (context) => PasswordProvider()),
         ListenableProvider<CategoryTwoProvider>(
             create: (context) => CategoryTwoProvider()),
+        ListenableProvider<WalletProvider>(
+            create: (context) => WalletProvider()),
       ],
       child: MaterialApp(
         title: "EES121",
         theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => const SplashScreen(),
@@ -75,7 +83,8 @@ void main() async {
           'customer_care_screen': (context) => CustomerCare(),
           'profile_screen': (context) => const ProfileScreen(),
           'change_password': (context) => ChangePassword(),
-          'address_screen': (context) => const AddressScreen(),
+          'address_screen': (context) => AddressScreen(),
+          'change_address': (context) => ChangeAddress(),
           'document_screen': (context) => const DocumentScreen(),
           'service_screen': (context) => const ServiceScreen(),
           'identity_screen': (context) => const IdentityScreen(),
@@ -83,8 +92,19 @@ void main() async {
           'offer': (context) => const OfferScreen(),
           'allOffer': (context) => const AllOffer(),
           'provider_detail': (context) => const ProviderDetail(),
+          'work_detail': (context) => const WorkDetail(),
         },
       ),
     ),
   );
+}
+
+Future<void> _requestPermissions() async {
+  // Request notification permission
+  PermissionStatus permission = await Permission.notification.request();
+  if (permission != PermissionStatus.granted) {
+    // Handle permission denied
+    // You may want to show a dialog or message to the user
+    // explaining that the app needs notification permissions
+  }
 }

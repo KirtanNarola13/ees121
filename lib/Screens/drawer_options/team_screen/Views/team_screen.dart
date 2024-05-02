@@ -48,84 +48,124 @@ class _TeamScreenState extends State<TeamScreen> {
         child: Column(
           children: [
             ...User.team.map(
-              (e) => Card(
-                child: ListTile(
-                  onTap: () {
-                    showDialog(
-                      useSafeArea: true,
-                      context: context,
-                      builder: (context) {
-                        return Center(
-                          child: Container(
-                            height: h / 2.8, // Set your desired height
-
-                            child: AlertDialog(
-                              title: Center(
-                                child: Text(
-                                  "${e['fullname']}",
-                                  style: const TextStyle(
-                                    fontSize: 26,
-                                    letterSpacing: 2,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+              (e) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  child: Theme(
+                    data:
+                        ThemeData().copyWith(dividerColor: Colors.transparent),
+                    child: ExpansionTile(
+                      dense: true,
+                      title: Text(
+                        "${e['fullname']}",
+                      ),
+                      subtitle: Text(
+                        "${e['kycstatus']}",
+                      ),
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20.0, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${e['joindate']}",
                               ),
-                              content: Column(
-                                children: [
-                                  SizedBox(
-                                    height: h / 50,
-                                  ),
-                                  Text(
-                                    e['joindate'],
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                  Text(
-                                    e['kycstatus'],
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
-                                  SizedBox(
-                                    height: h / 50,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      launchUrl(
-                                        Uri(
-                                          scheme: "tel",
-                                          path: e['mobile_no'],
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: w / 4.5,
-                                      height: h / 25,
-                                      decoration: BoxDecoration(
-                                          color: AppColors.appColor
-                                              .withOpacity(0.5),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      child: const Text(
-                                        "Call",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: 2,
-                                        ),
-                                      ),
+                              TextButton(
+                                onPressed: () {
+                                  launchUrl(
+                                    Uri(
+                                      scheme: "tel",
+                                      path: e['mobile_no'],
                                     ),
-                                  ),
-                                ],
+                                  );
+                                },
+                                child: Text("call"),
                               ),
-                              alignment: Alignment.center,
-                            ),
+                            ],
                           ),
-                        );
-                      },
-                    );
-                  },
-                  title: Text(
-                    "${e['fullname']}",
+                        ),
+                      ],
+                    ),
                   ),
-                  subtitle: Text("${e['kycstatus']}"),
+                  // child: ListTile(
+                  //   onTap: () {
+                  //     showDialog(
+                  //       useSafeArea: true,
+                  //       context: context,
+                  //       builder: (context) {
+                  //         return Center(
+                  //           child: Container(
+                  //             height: h / 2.8, // Set your desired height
+                  //
+                  //             child: AlertDialog(
+                  //               title: Center(
+                  //                 child: Text(
+                  //                   "${e['fullname']}",
+                  //                   style: const TextStyle(
+                  //                     fontSize: 26,
+                  //                     letterSpacing: 2,
+                  //                   ),
+                  //                   textAlign: TextAlign.center,
+                  //                 ),
+                  //               ),
+                  //               content: Column(
+                  //                 children: [
+                  //                   SizedBox(
+                  //                     height: h / 50,
+                  //                   ),
+                  //                   Text(
+                  //                     e['joindate'],
+                  //                     style: const TextStyle(fontSize: 18),
+                  //                   ),
+                  //                   Text(
+                  //                     e['kycstatus'],
+                  //                     style: const TextStyle(fontSize: 18),
+                  //                   ),
+                  //                   SizedBox(
+                  //                     height: h / 50,
+                  //                   ),
+                  //                   GestureDetector(
+                  //                     onTap: () {
+                  //                       launchUrl(
+                  //                         Uri(
+                  //                           scheme: "tel",
+                  //                           path: e['mobile_no'],
+                  //                         ),
+                  //                       );
+                  //                     },
+                  //                     child: Container(
+                  //                       alignment: Alignment.center,
+                  //                       width: w / 4.5,
+                  //                       height: h / 25,
+                  //                       decoration: BoxDecoration(
+                  //                           color: AppColors.appColor
+                  //                               .withOpacity(0.5),
+                  //                           borderRadius:
+                  //                               BorderRadius.circular(15)),
+                  //                       child: const Text(
+                  //                         "Call",
+                  //                         style: TextStyle(
+                  //                           fontWeight: FontWeight.w500,
+                  //                           letterSpacing: 2,
+                  //                         ),
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //               alignment: Alignment.center,
+                  //             ),
+                  //           ),
+                  //         );
+                  //       },
+                  //     );
+                  //   },
+                  //   title: Text(
+                  //     "${e['fullname']}",
+                  //   ),
+                  //   subtitle: Text("${e['kycstatus']}"),
+                  // ),
                 ),
               ),
             ),
