@@ -9,7 +9,7 @@ class MyOfferHelper {
 
   static final MyOfferHelper myOfferHelper = MyOfferHelper._();
   static String myOffer = "";
-  Future<void> getOffer(String provider) async {
+  Future<MyOfferModel?> getOffer(String provider) async {
     String url = "https://panel.ees121.com/api/userofferdetail";
     http.Response response = await http.post(
       Uri.parse(url),
@@ -20,9 +20,11 @@ class MyOfferHelper {
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);
       Map<String, dynamic> decodedData = jsonResponse['data'];
+      log(decodedData.toString());
       MyOfferModel myOfferModel = MyOfferModel.fromJson(decodedData['offer']);
-      myOffer = myOfferModel.offerFile!;
-      log(myOffer);
-    } else {}
+      return myOfferModel;
+    } else {
+      return null;
+    }
   }
 }

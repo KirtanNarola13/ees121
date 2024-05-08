@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:EES121/Screens/All_Screens/home_screen/helpers/available-helper.dart';
 import 'package:EES121/Screens/All_Screens/home_screen/helpers/myoffer_helper.dart';
+import 'package:EES121/Screens/All_Screens/home_screen/model/myOffer_model.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,26 +20,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    MyOfferHelper.myOfferHelper.getOffer(User.data['userid']);
-  }
-
-  @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+
+    TextScaler text = MediaQuery.of(context).textScaler;
     var scaffoldKey = GlobalKey<ScaffoldState>();
-    // API
-    // WBP
     String webp = "https://ees121.com/panel/files/";
     bool availabilityStatus = (User.data['isavailable'] == 0) ? true : false;
-    // Generate unique random indices for each category
-    // List<int> randomIndices = List.generate(
-    //   provider.categoryApi.data.length,
-    //   (index) => Random().nextInt(provider.categoryApi.data.length),
-    // );
 
     return Scaffold(
         key: scaffoldKey,
@@ -103,14 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text(
                       User.data['fullname'],
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: text.scale(12),
                       ),
                     ),
                     Text(
                       User.data['userid'],
-                      style: const TextStyle(
-                        fontSize: 12,
+                      style: TextStyle(
+                        fontSize: text.scale(10),
                       ),
                     ),
                   ],
@@ -215,13 +204,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: [
                               Expanded(
-                                  flex: 4,
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                      webp + User.data['selfifile'],
+                                flex: 4,
+                                child: Container(
+                                  width: w / 4.5,
+                                  margin: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        webp + User.data['selfifile'],
+                                      ),
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center,
                                     ),
-                                    radius: 50,
-                                  )),
+                                  ),
+                                ),
+                              ),
                               Expanded(
                                 child: Transform.scale(
                                   scale: 0.6,
@@ -235,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                         // Assume mobileNumber and switchValue are obtained from your UI
                                         await AvailableHelper.availableHelper
-                                            .updateSwitch(value);
+                                            .updateSwitch(value, context);
                                         log("User.data['isavailable']: ${User.data['isavailable']} $value");
                                       } catch (e) {
                                         log('Error updating switch: $e');
@@ -332,47 +329,149 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                 flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 15.0),
-                      child: Text(
-                        "My Offer",
-                        style: TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            height: h / 6,
-                            width: w / 6,
-                            margin: const EdgeInsets.only(right: 15),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.appColor,
-                                width: 2,
-                              ),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                              color: AppColors.appColor,
-                            ),
+                          Text(
+                            "My Offer",
+                            style: TextStyle(
+                                fontSize: text.scale(13),
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: h / 100,
+                          ),
+                          FutureBuilder(
+                            future: MyOfferHelper.myOfferHelper
+                                .getOffer(User.data['userid']),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                MyOfferModel? myOfferModel = snapshot.data;
+                                return (myOfferModel!.offerFile == null)
+                                    ? Container(
+                                        margin: EdgeInsets.all(10),
+                                        height: h / 6,
+                                        width: w / 3,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: AppColors.appColor,
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(15),
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.add,
+                                          size: 25,
+                                          color: AppColors.appColor,
+                                        ),
+                                      )
+                                    : Container(
+                                        margin: EdgeInsets.all(10),
+                                        height: h / 6,
+                                        width: w / 3,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(webp +
+                                                  myOfferModel.offerFile!),
+                                              fit: BoxFit.cover),
+                                          border: Border.all(
+                                            color: AppColors.appColor,
+                                            width: 2,
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(15),
+                                          ),
+                                        ),
+                                      );
+                              }
+                              return Container(
+                                margin: EdgeInsets.all(10),
+                                height: h / 6,
+                                width: w / 3,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.appColor,
+                                    width: 2,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            },
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      Column(
+                        children: [
+                          Text(
+                            "My Current Address",
+                            style: TextStyle(
+                                fontSize: text.scale(14),
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: h / 100,
+                          ),
+                          Stack(
+                            alignment: Alignment(0.9, -1),
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                height: h / 6,
+                                width: w / 2.3,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.appColor,
+                                    width: 2,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                child: Text(
+                                  "${User.data['cur_address']}, ${User.data['cur_pincode']}, ${User.data['cur_city']}, ${User.data['cur_state']}",
+                                  style: TextStyle(
+                                      fontSize: text.scale(12),
+                                      letterSpacing: 2,
+                                      wordSpacing: 1),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    'change_address',
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.edit,
+                                  size: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Row(
@@ -418,41 +517,46 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 flex: 6,
                 child: CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 1.0,
-                    height: h / 4,
-                    enlargeCenterPage: true,
-                    enableInfiniteScroll: true,
-                  ),
-                  items: User.offer.map((e) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, 'offer',
-                            arguments: e['provider']);
-                      },
-                      child: Container(
-                        height: h / 5,
-                        width: w / 1.6,
-                        margin: const EdgeInsets.only(right: 15),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppColors.appColor,
-                            width: 2,
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              webp + e['offer_file'],
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 2.0,
+                      height: h / 4,
+                      enlargeCenterPage: true,
+                      enableInfiniteScroll: true,
+                      autoPlayCurve: Curves.easeInOutCubic,
+                    ),
+                    items: User.offer
+                        .where((e) => e['provider'] != User.data['userid'])
+                        .map((e) {
+                      return Visibility(
+                        visible: true,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, 'offer',
+                                arguments: e['provider']);
+                          },
+                          child: Container(
+                            height: h / 5,
+                            width: w / 1.6,
+                            margin: const EdgeInsets.only(right: 15),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.appColor,
+                                width: 2,
+                              ),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  webp + e['offer_file'],
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                ),
+                      );
+                    }).toList()),
               ),
               const Spacer(),
             ],

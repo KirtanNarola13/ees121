@@ -28,7 +28,7 @@ class WorkProvider extends ChangeNotifier {
   String get error => _error;
   WorkApi get workApi => _workApi;
 
-  Future<void> getWork({required String id, required int password}) async {
+  Future<void> getWork({required String id, required String password}) async {
     try {
       // log('Fetching category data...');
       http.Response response = await http.post(

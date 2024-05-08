@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:EES121/Screens/login_procces/Views/helpers/user-count-helper.dart';
+import 'package:EES121/helper/db_helper.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../Colors/colors.dart';
 import '../../../Global/globalUser.dart';
+import '../../All_Screens/home_screen/helpers/myoffer_helper.dart';
+import '../../All_Screens/search_screen/provider/search_provider.dart';
 import '../Global/global.dart';
 import '../provider/passwordProvider.dart';
 
@@ -48,53 +51,56 @@ class _LoginPageState extends State<LoginPage> {
           final Map responseData = json.decode(response.body);
 
           if (responseData['status'] == 'SUCCESS') {
-            Map userData = responseData['data'];
-            if (userData['loginuser'] == "") {
-              log(userData['loginuser']);
+            User.UserData = responseData['data'];
+            if (User.UserData['loginuser'] == "") {
+              log(User.UserData['loginuser']);
+              log('userdata data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.UserData = {};
             } else {
-              User.data = userData['loginuser'];
+              User.data = User.UserData['loginuser'];
             }
 
             // User.offer = userData['offers'];
-            if (userData['offers'] == "") {
-              log(userData['offers']);
+            if (User.UserData['offers'] == "") {
+              log('offer data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.offer = [];
             } else {
-              User.offer = userData['offers'];
+              User.offer = User.UserData['offers'];
             }
 
             // User.myOffers = userData['myoffers'];
-            if (userData['myoffers'] == "") {
-              log(userData['myoffers']);
+            if (User.UserData['myoffers'] == "") {
+              log('myoffer data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.myOffers = [];
             } else {
-              User.myOffers = userData['myoffers'];
+              User.myOffers = User.UserData['myoffers'];
             }
 
-            // if (userData['team'] == "") {
-            //   log(userData['team']);
-            // } else {
-            //   User.team = userData['team'];
-            // }
-
-            if (userData['contactsupport'] == "") {
-              log(userData['contactsupport']);
+            if (User.UserData['team'] == null) {
+              log('Team data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.team = []; // For example, setting it to an empty list
             } else {
-              User.contactSupport = userData['contactsupport'];
+              User.team = User.UserData['team'];
             }
-            if (userData['notifications'] == "") {
-              log(userData['notifications']);
+            if (User.UserData['contactsupport'] == "") {
+              log('ContactSupport data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.contactSupport = [];
             } else {
-              User.notifications = userData['notifications'];
+              User.contactSupport = User.UserData['contactsupport'];
+            }
+            if (User.UserData['notifications'] == "") {
+              log('notification data is null');
+              // Handle the absence of team data here, you can set it to an empty list or handle it as you need
+              User.notifications = [];
+            } else {
+              User.notifications = User.UserData['notifications'];
             }
 
-            // log(User.offer.toString());
-            // log(User.myOffers.toString());
-            // log(User.team.toString());
-            // log(User.contactSupport.toString());
-            // log(User.workSent.toString());
-            // log(User.workReceived.toString());
-            // log(User.notifications.toString());
-
-            log("Login");
             CherryToast.success(
               title: Text(
                 "Login Successfully",

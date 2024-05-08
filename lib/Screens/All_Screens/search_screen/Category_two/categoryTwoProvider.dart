@@ -30,7 +30,7 @@ class CategoryTwoProvider extends ChangeNotifier {
         final http.Response response = await http.get(Uri.parse(
             'https://panel.ees121.com/api/categoryuser?category=${Name.name?.replaceAll(' ', '%20')}&city=${User.data['cur_city']}'));
         log('API Response Status Code: ${response.statusCode}');
-
+        log("${'https://panel.ees121.com/api/categoryuser?category=${Name.name?.replaceAll(' ', '%20')}&city=${User.data['cur_city']}'}");
         if (response.statusCode == 200) {
           log('Fetching statusCode 200...');
 

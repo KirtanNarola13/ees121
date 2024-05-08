@@ -20,15 +20,6 @@ class _ReferralScreenState extends State<ReferralScreen> {
     String referralLink = "https://ees121.com/join/";
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.keyboard_backspace,
-            color: AppColors.appColor,
-          ),
-        ),
         centerTitle: true,
         title: Text(
           "Referral",

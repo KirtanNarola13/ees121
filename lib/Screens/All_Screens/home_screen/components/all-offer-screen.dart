@@ -63,15 +63,21 @@ class AllOffer extends StatelessWidget {
                                       offerData.serviceDetails,
                                       style: const TextStyle(fontSize: 14),
                                     ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        ContactHelper.contactHelper
-                                            .contactProvider(
-                                                User.data['userid'],
-                                                offerData.userId);
-                                        Navigator.pushNamed(context, 'work');
-                                      },
-                                      child: const Text("contact"),
+                                    Visibility(
+                                      visible: (offerData.userId ==
+                                              User.data['userid'])
+                                          ? false
+                                          : true,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          ContactHelper.contactHelper
+                                              .contactProvider(
+                                                  User.data['userid'],
+                                                  offerData.userId);
+                                          Navigator.pushNamed(context, 'work');
+                                        },
+                                        child: const Text("contact"),
+                                      ),
                                     ),
                                   ],
                                 ),

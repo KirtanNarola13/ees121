@@ -43,9 +43,9 @@ class _WorkScreenState extends State<WorkScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int password = int.parse(LoginSinUp.passwordController.text);
-    Provider.of<WorkProvider>(context, listen: false)
-        .getWork(id: LoginSinUp.numberController.text, password: password);
+    Provider.of<WorkProvider>(context, listen: false).getWork(
+        id: LoginSinUp.numberController.text,
+        password: LoginSinUp.passwordController.text);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -281,7 +281,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                               Text(
                                                 workApi.workSent[i].fullname,
                                                 style: const TextStyle(
-                                                    fontSize: 12),
+                                                    fontSize: 10),
                                                 textAlign: TextAlign.center,
                                               ),
                                               Divider(
@@ -295,7 +295,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                   const Text(
                                                     'Provider Rating',
                                                     style:
-                                                        TextStyle(fontSize: 12),
+                                                        TextStyle(fontSize: 10),
                                                   ),
                                                   RatingBar.builder(
                                                     initialRating: double.parse(
@@ -304,7 +304,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                     direction: Axis.horizontal,
                                                     allowHalfRating: true,
                                                     itemCount: 10,
-                                                    itemSize: 16,
+                                                    itemSize: 14,
                                                     ignoreGestures: true,
                                                     itemPadding:
                                                         const EdgeInsets
@@ -331,7 +331,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                   const Text(
                                                     'User Rating',
                                                     style:
-                                                        TextStyle(fontSize: 12),
+                                                        TextStyle(fontSize: 10),
                                                   ),
                                                   RatingBar.builder(
                                                     initialRating: double.parse(
@@ -362,7 +362,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                     workApi.workSent[i]
                                                         .callRequestStatus,
                                                     style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 12,
                                                       color: (workApi
                                                                   .workSent[i]
                                                                   .callRequestStatus ==
@@ -493,7 +493,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                             Text(
                                               workApi.workReceived[i].fullname,
                                               style:
-                                                  const TextStyle(fontSize: 12),
+                                                  const TextStyle(fontSize: 10),
                                             ),
                                             Divider(
                                               color: AppColors.appColor
@@ -506,7 +506,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                 const Text(
                                                   'Provider Rating',
                                                   style:
-                                                      TextStyle(fontSize: 12),
+                                                      TextStyle(fontSize: 10),
                                                 ),
                                                 RatingBar.builder(
                                                   initialRating: double.parse(
@@ -541,7 +541,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                                 const Text(
                                                   'User Rating',
                                                   style:
-                                                      TextStyle(fontSize: 12),
+                                                      TextStyle(fontSize: 10),
                                                 ),
                                                 RatingBar.builder(
                                                   initialRating: double.parse(
@@ -573,7 +573,7 @@ getUi(WorkApi workApi, BuildContext context) {
                                               workApi.workReceived[i]
                                                   .callRequestStatus,
                                               style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 color: (workApi.workReceived[i]
                                                             .callRequestStatus ==
                                                         "open")

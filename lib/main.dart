@@ -3,6 +3,7 @@ import 'package:EES121/Screens/All_Screens/home_screen/components/all-offer-scre
 import 'package:EES121/Screens/All_Screens/home_screen/components/offer-screen.dart';
 import 'package:EES121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/components/change_address.dart';
 import 'package:EES121/Screens/All_Screens/search_screen/Category_two/components/provider-detail.dart';
+import 'package:EES121/Screens/All_Screens/search_screen/provider/search_from_db.dart';
 import 'package:EES121/Screens/drawer_options/wallet_screen/provider/wallet_provider.dart';
 import 'package:EES121/Screens/drawer_options/work_screen/Views/work_screen.dart';
 import 'package:EES121/Screens/drawer_options/work_screen/components/work_detail.dart';
@@ -35,6 +36,7 @@ import 'Screens/login_procces/Views/signup_screen.dart';
 import 'Screens/login_procces/provider/passwordProvider.dart';
 import 'Utils/theme.dart';
 import 'firebase_options.dart';
+import 'helper/db_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +51,7 @@ void main() async {
   log("FCMToken $fcmToken");
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
-
+  await DBHelper.dbHelper.insertCategory(); // Populate the database with data
   runApp(
     MultiProvider(
       providers: [
@@ -62,6 +64,8 @@ void main() async {
             create: (context) => CategoryTwoProvider()),
         ListenableProvider<WalletProvider>(
             create: (context) => WalletProvider()),
+        ListenableProvider<SearchDataBase>(
+            create: (context) => SearchDataBase()),
       ],
       child: MaterialApp(
         title: "EES121",

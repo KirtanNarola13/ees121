@@ -1,20 +1,28 @@
+import 'dart:developer';
+
 import 'package:EES121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/components/change_address_global.dart';
 import 'package:EES121/Screens/All_Screens/profile_screen/Views/Profile_Vewis/Address/helper/change_address_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../Colors/colors.dart';
+import '../../../../../../../Global/globalUser.dart';
 
 class ChangeAddress extends StatelessWidget {
   final _addressKey = GlobalKey<FormState>();
   ChangeAddress({super.key});
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    TextEditingController addressController = TextEditingController();
+    TextEditingController areaController = TextEditingController();
+    TextEditingController pinCodeController = TextEditingController();
+    TextEditingController cityController = TextEditingController();
+    TextEditingController stateController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("CHange Address"),
+        title: const Text("Change Address"),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -37,7 +45,7 @@ class ChangeAddress extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     onChanged: (String? val) {
-                      ChangeAddressGlobal.addressController.text = val!;
+                      addressController.text = val!;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -45,7 +53,7 @@ class ChangeAddress extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: ChangeAddressGlobal.addressController,
+                    controller: addressController,
                     decoration: InputDecoration(
                       labelText: 'Address',
                       labelStyle: TextStyle(
@@ -68,7 +76,7 @@ class ChangeAddress extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     onChanged: (String? val) {
-                      ChangeAddressGlobal.areaController.text = val!;
+                      areaController.text = val!;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -76,7 +84,7 @@ class ChangeAddress extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: ChangeAddressGlobal.areaController,
+                    controller: areaController,
                     decoration: InputDecoration(
                       labelText: 'Area',
                       labelStyle: TextStyle(
@@ -100,7 +108,7 @@ class ChangeAddress extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     onChanged: (String? val) {
-                      ChangeAddressGlobal.pinCodeController.text = val!;
+                      pinCodeController.text = val!;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -108,7 +116,7 @@ class ChangeAddress extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: ChangeAddressGlobal.pinCodeController,
+                    controller: pinCodeController,
                     decoration: InputDecoration(
                       labelText: 'Pin code',
                       labelStyle: TextStyle(
@@ -132,7 +140,7 @@ class ChangeAddress extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     onChanged: (String? val) {
-                      ChangeAddressGlobal.cityController.text = val!;
+                      cityController.text = val!;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -140,7 +148,7 @@ class ChangeAddress extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: ChangeAddressGlobal.cityController,
+                    controller: cityController,
                     decoration: InputDecoration(
                       labelText: 'City',
                       labelStyle: TextStyle(
@@ -164,7 +172,7 @@ class ChangeAddress extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     onChanged: (String? val) {
-                      ChangeAddressGlobal.stateController.text = val!;
+                      stateController.text = val!;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -172,7 +180,7 @@ class ChangeAddress extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: ChangeAddressGlobal.stateController,
+                    controller: stateController,
                     decoration: InputDecoration(
                       labelText: 'State',
                       labelStyle: TextStyle(
@@ -197,11 +205,11 @@ class ChangeAddress extends StatelessWidget {
                     FocusScope.of(context).unfocus();
                     if (_addressKey.currentState!.validate()) {
                       ChangeAddressHelper.changeAddressHelper.changeAddress(
-                        cur_address: ChangeAddressGlobal.addressController.text,
-                        cur_area: ChangeAddressGlobal.areaController.text,
-                        cur_pincode: ChangeAddressGlobal.pinCodeController.text,
-                        cur_city: ChangeAddressGlobal.cityController.text,
-                        cur_state: ChangeAddressGlobal.stateController.text,
+                        cur_address: addressController.text,
+                        cur_area: areaController.text,
+                        cur_pincode: pinCodeController.text,
+                        cur_city: cityController.text,
+                        cur_state: stateController.text,
                       );
                       Navigator.pop(context);
                     } else {

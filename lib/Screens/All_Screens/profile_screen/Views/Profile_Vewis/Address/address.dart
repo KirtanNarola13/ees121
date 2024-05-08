@@ -114,7 +114,13 @@ class AddressScreen extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'change_address');
+                              Navigator.pushNamed(context, 'change_address',
+                                  arguments: [
+                                    User.data['cur_address'],
+                                    User.data['cur_pincode'],
+                                    User.data['cur_city'],
+                                    User.data['cur_state'],
+                                  ]);
                             },
                             icon: const Icon(
                               Icons.edit,
